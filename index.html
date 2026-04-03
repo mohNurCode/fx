@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,60 +41,65 @@
       pointer-events: none;
     }
 
-    /* animated grid + noise */
     .grid-overlay {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background-image: linear-gradient(rgba(0, 255, 255, 0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 255, 255, 0.04) 1px, transparent 1px);
+      background-image: linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
       background-size: 55px 55px;
       pointer-events: none;
       z-index: -1;
     }
 
-    ::-webkit-scrollbar {
-      width: 5px;
-    }
-    ::-webkit-scrollbar-track {
-      background: #0A0E1A;
-    }
-    ::-webkit-scrollbar-thumb {
-      background: #2DD4BF;
-      border-radius: 10px;
-    }
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: #0A0E1A; }
+    ::-webkit-scrollbar-thumb { background: #2DD4BF; border-radius: 10px; }
 
     .container {
       max-width: 1400px;
       margin: 0 auto;
-      padding: 0 40px;
+      padding: 0 5%;
+      width: 100%;
     }
 
-    /* language switcher + navbar */
+    /* === FULLY RESPONSIVE NAVBAR === */
     .navbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 28px 0;
+      padding: 24px 0;
       flex-wrap: wrap;
       gap: 20px;
       border-bottom: 1px solid rgba(45, 212, 191, 0.25);
       backdrop-filter: blur(4px);
     }
     .logo {
-      font-size: 2rem;
+      font-size: clamp(1.5rem, 6vw, 2rem);
       font-weight: 800;
       background: linear-gradient(130deg, #FFFFFF, #2DD4BF, #A5F3E8);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
-      letter-spacing: -0.3px;
     }
     .nav-links {
       display: flex;
-      gap: 38px;
+      flex-wrap: wrap;
       align-items: center;
+      gap: 20px;
+      justify-content: center;
+    }
+    @media (max-width: 860px) {
+      .navbar { flex-direction: column; text-align: center; }
+      .nav-links { justify-content: center; gap: 18px; }
+    }
+    @media (max-width: 640px) {
+      .nav-links { gap: 12px; }
+      .nav-links a { font-size: 0.85rem; }
+      .lang-switch { padding: 3px 8px; }
+      .lang-btn { padding: 4px 10px; font-size: 0.75rem; }
+      .btn-outline-glow { padding: 6px 18px; font-size: 0.8rem; }
     }
     .nav-links a {
       text-decoration: none;
@@ -103,11 +107,15 @@
       font-weight: 500;
       transition: 0.2s;
       font-size: 0.95rem;
+      white-space: nowrap;
+    }
+    @media (max-width: 550px) {
+      .nav-links a { white-space: normal; font-size: 0.8rem; }
     }
     .nav-links a:hover { color: #2DD4BF; text-shadow: 0 0 5px #2DD4BF40; }
     .lang-switch {
       display: flex;
-      gap: 8px;
+      gap: 6px;
       background: rgba(20, 30, 55, 0.7);
       backdrop-filter: blur(8px);
       padding: 5px 12px;
@@ -119,229 +127,184 @@
       border: none;
       color: #94A3B8;
       font-weight: 600;
-      font-size: 0.85rem;
-      padding: 6px 14px;
+      font-size: 0.8rem;
+      padding: 5px 12px;
       border-radius: 40px;
       cursor: pointer;
       transition: 0.2s;
-      font-family: 'Inter', monospace;
     }
     .lang-btn.active {
       background: #2DD4BF;
       color: #0B0F1C;
-      box-shadow: 0 0 10px #2DD4BF;
+      box-shadow: 0 0 8px #2DD4BF;
     }
     .btn-outline-glow {
       background: transparent;
       border: 1px solid #2DD4BF;
-      padding: 8px 26px;
+      padding: 7px 22px;
       border-radius: 40px;
       color: #2DD4BF;
       font-weight: 600;
       transition: 0.25s;
-    }
-    .btn-outline-glow:hover {
-      background: rgba(45,212,191,0.15);
-      box-shadow: 0 0 15px rgba(45,212,191,0.4);
-      transform: scale(1.02);
+      white-space: nowrap;
     }
 
-    /* hero section enhanced */
+    /* === HERO RESPONSIVE === */
     .hero {
-      padding: 90px 0 70px;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-      gap: 50px;
-    }
-    .hero-content {
-      flex: 1.2;
-    }
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(45,212,191,0.12);
-      backdrop-filter: blur(4px);
-      padding: 8px 20px;
-      border-radius: 60px;
-      font-size: 0.85rem;
-      font-weight: 500;
-      color: #2DD4BF;
-      margin-bottom: 28px;
-      border: 1px solid rgba(45,212,191,0.3);
-    }
-    .hero-content h1 {
-      font-size: 4rem;
-      font-weight: 800;
-      line-height: 1.2;
-      margin-bottom: 24px;
-      background: linear-gradient(135deg, #FFFFFF, #B0F3E8, #2DD4BF);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-    .hero-content p {
-      font-size: 1.15rem;
-      color: #A0B2D0;
-      max-width: 550px;
-      margin-bottom: 36px;
-      line-height: 1.5;
-    }
-    .hero-stats {
-      display: flex;
-      gap: 45px;
-      margin: 32px 0 20px;
-    }
-    .stat-item h3 {
-      font-size: 2.2rem;
-      font-weight: 800;
-      background: linear-gradient(145deg, #2DD4BF, #6EE7DE);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-    .btn-group {
-      display: flex;
-      gap: 24px;
-      flex-wrap: wrap;
-    }
-    .btn-primary {
-      background: linear-gradient(105deg, #2DD4BF, #1A9F8C);
-      border: none;
-      padding: 15px 40px;
-      border-radius: 50px;
-      font-weight: 700;
-      font-size: 1rem;
-      color: #0A0E1A;
-      cursor: pointer;
-      transition: all 0.25s;
-      box-shadow: 0 8px 24px rgba(45,212,191,0.25);
-    }
-    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 18px 32px rgba(45,212,191,0.4);}
-    .btn-secondary {
-      background: rgba(255,255,255,0.02);
-      border: 1px solid #334155;
-      padding: 15px 34px;
-      border-radius: 50px;
-      font-weight: 600;
-      transition: 0.2s;
-    }
-    .btn-secondary:hover { border-color: #2DD4BF; background: rgba(45,212,191,0.07);}
-    .hero-visual { flex: 1; position: relative; }
-    .chart-card {
-      background: rgba(8, 14, 26, 0.75);
-      backdrop-filter: blur(16px);
-      border-radius: 48px;
-      padding: 28px;
-      border: 1px solid rgba(45,212,191,0.4);
-      box-shadow: 0 35px 55px -20px black;
-    }
-    .candlestick {
-      display: flex;
-      gap: 12px;
-      justify-content: center;
-      align-items: flex-end;
-      height: 200px;
-    }
-    .candle {
-      width: 32px;
-      background: #2DD4BF;
-      border-radius: 6px;
-      transition: all 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-      position: relative;
-    }
-    .candle.red { background: #F43F5E; box-shadow: 0 0 6px #F43F5E;}
-
-    /* premium features */
-    .section {
-      padding: 100px 0 70px;
-    }
-    .section-title {
-      text-align: center;
-      font-size: 2.8rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-    }
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
-      gap: 38px;
-      margin-top: 50px;
-    }
-    .feature-card {
-      background: rgba(12, 20, 35, 0.65);
-      backdrop-filter: blur(12px);
-      border-radius: 36px;
-      padding: 38px 28px;
-      border: 1px solid rgba(45,212,191,0.2);
-      transition: all 0.35s;
-    }
-    .feature-card:hover { border-color: #2DD4BF; transform: translateY(-8px); background: rgba(22, 35, 58, 0.85);}
-    .feature-icon { font-size: 2.7rem; color: #2DD4BF; margin-bottom: 22px;}
-
-    /* dashboard premium */
-    .dashboard-preview {
-      background: linear-gradient(125deg, #0C1228, #050914);
-      border-radius: 56px;
-      padding: 44px;
-      margin: 30px 0;
-      border: 1px solid #2DD4BF40;
-    }
-    .trade-row {
-      display: flex;
-      justify-content: space-between;
-      padding: 18px 0;
-      border-bottom: 1px solid #1E2A44;
-      font-weight: 500;
-    }
-
-    /* Ethiopia spotlight premium */
-    .ethiopia-spotlight {
-      background: radial-gradient(ellipse at 20% 40%, #0E162F, #03050C);
-      border-radius: 60px;
-      padding: 55px 48px;
+      padding: 60px 0 50px;
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
       gap: 40px;
     }
-    .local-badge {
-      background: #2DD4BF20;
-      padding: 14px 32px;
-      border-radius: 80px;
-      font-weight: 600;
+    .hero-content { flex: 1.2; min-width: 260px; }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(45,212,191,0.12);
       backdrop-filter: blur(4px);
+      padding: 6px 16px;
+      border-radius: 60px;
+      font-size: 0.75rem;
+      margin-bottom: 24px;
+    }
+    .hero-content h1 {
+      font-size: clamp(2rem, 7vw, 4rem);
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, #FFFFFF, #B0F3E8, #2DD4BF);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .hero-content p {
+      font-size: clamp(0.9rem, 4vw, 1.15rem);
+      color: #A0B2D0;
+      max-width: 550px;
+      margin-bottom: 28px;
+    }
+    .hero-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      margin: 25px 0 20px;
+    }
+    .stat-item h3 { font-size: clamp(1.5rem, 5vw, 2.2rem); }
+    .btn-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .btn-primary, .btn-secondary {
+      padding: 12px 28px;
+      font-size: 0.9rem;
+      white-space: nowrap;
+    }
+    @media (max-width: 550px) {
+      .btn-primary, .btn-secondary { padding: 10px 20px; font-size: 0.8rem; white-space: normal; }
+      .hero-stats { gap: 20px; justify-content: space-between; }
+    }
+    .hero-visual { flex: 1; min-width: 260px; }
+    .chart-card {
+      background: rgba(8, 14, 26, 0.75);
+      backdrop-filter: blur(16px);
+      border-radius: 32px;
+      padding: 20px;
+    }
+    .candlestick {
+      display: flex;
+      gap: 6px;
+      justify-content: center;
+      align-items: flex-end;
+      height: 160px;
+    }
+    @media (max-width: 550px) {
+      .candlestick { gap: 4px; height: 140px; }
+      .candle { width: 22px !important; }
+    }
+    .candle {
+      width: 28px;
+      background: #2DD4BF;
+      border-radius: 6px;
+      transition: all 0.2s;
+    }
+    .candle.red { background: #F43F5E; box-shadow: 0 0 6px #F43F5E; }
+
+    /* Features grid responsive */
+    .section { padding: 70px 0 50px; }
+    .section-title { font-size: clamp(1.8rem, 6vw, 2.8rem); text-align: center; }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 30px;
+      margin-top: 45px;
+    }
+    .feature-card { padding: 28px 20px; border-radius: 28px; }
+    .feature-icon { font-size: 2.2rem; }
+
+    /* dashboard table responsive */
+    .dashboard-preview {
+      padding: 30px 20px;
+      border-radius: 40px;
+      overflow-x: auto;
+    }
+    .trade-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px 0;
+    }
+    @media (max-width: 550px) {
+      .trade-row { font-size: 0.8rem; }
+      .dashboard-preview h3 { font-size: 1.3rem; }
     }
 
-    /* CTA super */
+    /* Ethiopia spotlight responsive */
+    .ethiopia-spotlight {
+      padding: 40px 28px;
+      border-radius: 48px;
+      flex-direction: row;
+    }
+    @media (max-width: 780px) {
+      .ethiopia-spotlight { flex-direction: column; text-align: center; }
+      .eth-text p { margin: 0 auto; }
+    }
+    .local-badge { padding: 10px 20px; font-size: 0.85rem; white-space: nowrap; }
+    @media (max-width: 500px) {
+      .local-badge { white-space: normal; text-align: center; }
+    }
+
+    /* CTA responsive */
     .cta-section {
-      text-align: center;
-      background: radial-gradient(circle at 70% 20%, #102a30, #03060e);
-      border-radius: 70px;
-      padding: 85px 40px;
-      margin: 60px 0;
+      padding: 50px 20px;
+      border-radius: 48px;
+      margin: 40px 0;
     }
+    .cta-section h2 { font-size: clamp(1.5rem, 6vw, 2.5rem); }
     footer {
-      border-top: 1px solid #1E2A3A;
-      padding: 50px 0 40px;
-      display: flex;
-      justify-content: space-between;
+      flex-direction: row;
       flex-wrap: wrap;
+      justify-content: space-between;
+      text-align: center;
+      gap: 16px;
+      font-size: 0.8rem;
     }
-    @media (max-width: 900px) {
-      .hero h1 { font-size: 2.6rem; }
-      .container { padding: 0 24px; }
-      .navbar { flex-direction: column; }
+    @media (max-width: 600px) {
+      footer { flex-direction: column; align-items: center; }
+      .social-links i { margin: 0 12px; }
+      .container { padding: 0 20px; }
     }
     @keyframes floatNeon {
       0% { transform: translateY(0px); }
-      100% { transform: translateY(-10px);}
+      100% { transform: translateY(-8px);}
     }
     .chart-card { animation: floatNeon 5s infinite alternate ease-in-out; }
     [data-translate] { transition: all 0.2s; }
+    .live-badge { font-size: 0.7rem; background: #F43F5E20; padding: 4px 12px; border-radius: 20px; }
   </style>
 </head>
 <body>
@@ -349,9 +312,9 @@
 <div class="grid-overlay"></div>
 
 <div class="container">
-  <!-- Navigation with language switcher -->
+  <!-- Navigation -->
   <div class="navbar">
-    <div class="logo">FX<span style="color:#2DD4BF;">Prime</span> <span style="font-size:1.4rem;">🇪🇹</span></div>
+    <div class="logo">FX<span style="color:#2DD4BF;">Prime</span> <span style="font-size:1.2rem;">🇪🇹</span></div>
     <div class="nav-links">
       <a href="#" data-translate="markets">Markets</a>
       <a href="#" data-translate="tools">Trading Tools</a>
@@ -385,12 +348,12 @@
     </div>
     <div class="hero-visual">
       <div class="chart-card">
-        <div class="chart-header" style="display:flex; justify-content:space-between;">
+        <div style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px; margin-bottom:15px;">
           <span>USD/ETB synthetic <i class="fas fa-circle" style="font-size: 8px; color:#2DD4BF;"></i> LIVE</span>
           <span class="live-badge" id="livePercentBadge">+0.34%</span>
         </div>
         <div class="candlestick" id="candleChart"></div>
-        <div style="margin-top: 20px; display: flex; justify-content: space-between;">
+        <div style="margin-top: 20px; display: flex; justify-content: space-between; flex-wrap:wrap; gap:12px;">
           <div><span style="color:#94A3B8;">Bid</span> <strong id="bidVal" style="color:#2DD4BF;">53.8742</strong></div>
           <div><span style="color:#94A3B8;">Ask</span> <strong id="askVal" style="color:#F97316;">53.8921</strong></div>
           <div><i class="fas fa-arrow-up" id="trendIcon"></i> <span id="changePercent">+0.12%</span></div>
@@ -399,10 +362,10 @@
     </div>
   </div>
 
-  <!-- Advanced Features -->
+  <!-- Features -->
   <div class="section">
     <h2 class="section-title"><span data-translate="features_title1">Elite Execution</span>, <span style="color:#2DD4BF;" data-translate="features_title2">Infinite Possibilities</span></h2>
-    <div class="section-sub" style="text-align:center; color:#9AA9C1;" data-translate="features_desc">Advanced tools, AI analytics, deep liquidity — built for Ethiopian forex pioneers.</div>
+    <div style="text-align:center; color:#9AA9C1; margin-top: 12px; margin-bottom: 30px; padding:0 10px;" data-translate="features_desc">Advanced tools, AI analytics, deep liquidity — built for Ethiopian forex pioneers.</div>
     <div class="features-grid">
       <div class="feature-card"><div class="feature-icon"><i class="fas fa-microchip"></i></div><h3 data-translate="feat1_title">Sub‑Millisecond Execution</h3><p data-translate="feat1_desc">Ultra-low latency DMA, fills instantly even during high-impact news.</p></div>
       <div class="feature-card"><div class="feature-icon"><i class="fas fa-robot"></i></div><h3 data-translate="feat2_title">AI Sentiment Suite</h3><p data-translate="feat2_desc">Machine-learning sentiment + real-time signals for major FX pairs.</p></div>
@@ -413,12 +376,12 @@
 
   <!-- Live Dashboard -->
   <div class="dashboard-preview">
-    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap:wrap;">
-      <h3 style="font-size: 1.8rem;"><i class="fas fa-fire-flame"></i> <span data-translate="dashboard_title">Live Forex Snapshot</span></h3>
-      <span style="background:#2DD4BF20; padding:6px 14px; border-radius: 40px;"><i class="fas fa-sync-alt"></i> real-time</span>
+    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap:wrap; gap: 12px; margin-bottom: 20px;">
+      <h3 style="font-size: clamp(1.3rem, 5vw, 1.8rem);"><i class="fas fa-fire-flame"></i> <span data-translate="dashboard_title">Live Forex Snapshot</span></h3>
+      <span style="background:#2DD4BF20; padding:5px 12px; border-radius: 40px; font-size:0.75rem;"><i class="fas fa-sync-alt"></i> real-time</span>
     </div>
     <div id="liveForexTable"></div>
-    <div style="margin-top: 30px; text-align: right;"><button class="btn-secondary" data-translate="view_all">View all 60+ pairs →</button></div>
+    <div style="margin-top: 28px; text-align: right;"><button class="btn-secondary" style="padding: 8px 18px;" data-translate="view_all">View all 60+ pairs →</button></div>
   </div>
 
   <!-- Ethiopia Local Edge -->
@@ -426,18 +389,18 @@
     <div class="eth-text">
       <h3><i class="fas fa-map-marker-alt" style="color:#2DD4BF;"></i> <span data-translate="eth_title">Built for Ethiopian Traders</span></h3>
       <p data-translate="eth_desc">Local currency deposits via TeleBirr & bank transfers, Amharic support, and dedicated account managers. Global forex with local advantages.</p>
-      <div style="margin-top: 25px; display: flex; gap: 15px; flex-wrap: wrap;">
+      <div style="margin-top: 25px; display: flex; gap: 15px; flex-wrap: wrap; justify-content: center;">
         <span class="local-badge"><i class="fas fa-wallet"></i> <span data-translate="telebirr">TeleBirr integration</span></span>
         <span class="local-badge"><i class="fas fa-headset"></i> <span data-translate="support247">24/7 Amharic helpdesk</span></span>
       </div>
     </div>
-    <div><i class="fas fa-charging-station" style="font-size: 4.5rem; color:#2DD4BF; opacity:0.8;"></i></div>
+    <div><i class="fas fa-charging-station" style="font-size: 3.5rem; color:#2DD4BF; opacity:0.8;"></i></div>
   </div>
 
   <!-- CTA -->
   <div class="cta-section">
     <h2 data-translate="cta_title">Ready to master the forex market?</h2>
-    <p style="margin: 20px auto; max-width: 550px;" data-translate="cta_desc">Join over 15,000 Ethiopian traders who trust FXPrime for advanced tools and fast withdrawals.</p>
+    <p style="margin: 18px auto; max-width: 550px; padding:0 12px;" data-translate="cta_desc">Join over 15,000 Ethiopian traders who trust FXPrime for advanced tools and fast withdrawals.</p>
     <button class="btn-primary" style="background: white; color:#0B0F1C;" data-translate="cta_btn">Create Free Account <i class="fas fa-user-plus"></i></button>
   </div>
 
@@ -448,7 +411,7 @@
 </div>
 
 <script>
-  // ---------- Bilingual Dictionary (English + Amharic) ----------
+  // Bilingual Dictionary
   const translations = {
     en: {
       markets: "Markets", tools: "Trading Tools", edu: "Education", partner: "Partner", open_acc: "Open Account",
@@ -490,45 +453,36 @@
     }
   };
 
-  let currentLang = 'en';
   function applyLanguage(lang) {
     const dict = translations[lang];
     document.querySelectorAll('[data-translate]').forEach(el => {
       const key = el.getAttribute('data-translate');
-      if (dict[key]) {
-        if (el.tagName === 'INPUT' || el.isContentEditable) el.value = dict[key];
-        else el.innerText = dict[key];
-      }
+      if (dict[key]) el.innerText = dict[key];
     });
     document.querySelectorAll('.lang-btn').forEach(btn => {
       if (btn.getAttribute('data-lang') === lang) btn.classList.add('active');
       else btn.classList.remove('active');
     });
-    currentLang = lang;
   }
 
   document.querySelectorAll('.lang-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const lang = btn.getAttribute('data-lang');
-      applyLanguage(lang);
-    });
+    btn.addEventListener('click', () => applyLanguage(btn.getAttribute('data-lang')));
   });
   applyLanguage('en');
 
-  // ---------- ADVANCED DYNAMICS: Candles + Live Forex Prices ----------
+  // Dynamic candles & live forex
   function generateCandles() {
     const container = document.getElementById('candleChart');
     if (!container) return;
-    const heights = [72, 48, 95, 62, 78, 110, 42, 68, 92, 54];
+    const heights = [68, 52, 88, 60, 78, 105, 44, 70, 94, 58];
     const colors = ['#2DD4BF', '#2DD4BF', '#F43F5E', '#2DD4BF', '#F43F5E', '#2DD4BF', '#F43F5E', '#2DD4BF', '#2DD4BF', '#F43F5E'];
     container.innerHTML = '';
     heights.forEach((h, idx) => {
       const candle = document.createElement('div');
       candle.className = `candle ${colors[idx] === '#F43F5E' ? 'red' : ''}`;
       candle.style.height = `${h}px`;
-      candle.style.backgroundColor = colors[idx];
-      candle.style.width = '30px';
-      candle.style.margin = '0 3px';
+      candle.style.width = `clamp(18px, 5vw, 30px)`;
+      candle.style.margin = '0 2px';
       container.appendChild(candle);
     });
   }
@@ -567,7 +521,7 @@
     candles.forEach(candle => {
       let cur = parseInt(candle.style.height);
       let delta = (Math.random() - 0.5) * 8;
-      let newH = Math.min(150, Math.max(30, cur + delta));
+      let newH = Math.min(145, Math.max(28, cur + delta));
       candle.style.height = `${newH}px`;
       const isRed = candle.classList.contains('red');
       if (delta > 2 && isRed) { candle.classList.remove('red'); candle.style.backgroundColor = '#2DD4BF'; }
@@ -575,22 +529,24 @@
     });
   }
 
+  // Buttons
   document.querySelectorAll('.btn-primary, .btn-secondary, .btn-outline-glow').forEach(btn => {
     btn.addEventListener('click', (e) => {
-      if(btn.innerText.includes('Start') || btn.innerText.includes('Open') || btn.innerText.includes('Create') || btn.innerText.includes('ንግድ ጀምር') || btn.innerText.includes('አካውንት ክፈት')) {
+      const text = btn.innerText;
+      if (text.includes('Start') || text.includes('Open') || text.includes('Create') || text.includes('ንግድ') || text.includes('አካውንት')) {
         e.preventDefault(); alert("🚀 FXPrime Ethiopia: Our team will contact you within 24h.");
-      } else if(btn.innerText.includes('Demo') || btn.innerText.includes('ማሳያ')) {
+      } else if (text.includes('Demo') || text.includes('ማሳያ')) {
         e.preventDefault(); alert("📈 Demo activated! Virtual $100,000 to practice.");
-      } else if(btn.tagName === 'A' && !btn.innerText.includes('Open')) e.preventDefault();
+      } else if (btn.tagName === 'A' && !text.includes('Open')) e.preventDefault();
     });
   });
 
   generateCandles();
   updateLivePrices();
-  setInterval(updateLivePrices, 2700);
-  setInterval(animateCandlesRandom, 1900);
-  window.addEventListener('load', () => { generateCandles(); updateLivePrices(); setInterval(() => { if(Math.random()>0.7) generateCandles(); }, 7000); });
+  setInterval(updateLivePrices, 2800);
+  setInterval(animateCandlesRandom, 2000);
+  window.addEventListener('load', () => { generateCandles(); updateLivePrices(); setInterval(() => { if(Math.random()>0.7) generateCandles(); }, 8000); });
+  window.addEventListener('resize', () => generateCandles());
 </script>
 </body>
 </html>
-```
