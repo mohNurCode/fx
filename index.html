@@ -1,552 +1,660 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>ብልጥ የውጭ ምንዛሪ ንግድ | FXPrime Ethiopia – Advanced Forex</title>
-  <!-- Google Fonts + Icons -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Abebe - Ethiopian Forex Company NFC Card</title>
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    body {
-      font-family: 'Inter', sans-serif;
-      background: #05070F;
-      color: #EFF3FC;
-      overflow-x: hidden;
-      scroll-behavior: smooth;
-    }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0c4a6e 0%, #082f49 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            position: relative;
+            overflow-x: hidden;
+        }
 
-    /* advanced dynamic gradient background */
-    .gradient-bg {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -2;
-      background: radial-gradient(circle at 30% 10%, #0A0F2A, #010103);
-    }
-    .gradient-bg::after {
-      content: "";
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background: repeating-linear-gradient(45deg, rgba(45,212,191,0.02) 0px, rgba(45,212,191,0.02) 2px, transparent 2px, transparent 8px);
-      pointer-events: none;
-    }
+        /* Animated background */
+        body::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.08) 1px, transparent 1px);
+            background-size: 40px 40px;
+            animation: shift 20s linear infinite;
+            opacity: 0.3;
+        }
 
-    .grid-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
-      background-size: 55px 55px;
-      pointer-events: none;
-      z-index: -1;
-    }
+        @keyframes shift {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(40px, 40px); }
+        }
 
-    ::-webkit-scrollbar { width: 5px; }
-    ::-webkit-scrollbar-track { background: #0A0E1A; }
-    ::-webkit-scrollbar-thumb { background: #2DD4BF; border-radius: 10px; }
+        /* NFC Card Container */
+        .nfc-container {
+            max-width: 500px;
+            width: 100%;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
 
-    .container {
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 0 5%;
-      width: 100%;
-    }
+        /* Main Card */
+        .nfc-card {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            border-radius: 3rem;
+            overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
 
-    /* === FULLY RESPONSIVE NAVBAR === */
-    .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 24px 0;
-      flex-wrap: wrap;
-      gap: 20px;
-      border-bottom: 1px solid rgba(45, 212, 191, 0.25);
-      backdrop-filter: blur(4px);
-    }
-    .logo {
-      font-size: clamp(1.5rem, 6vw, 2rem);
-      font-weight: 800;
-      background: linear-gradient(130deg, #FFFFFF, #2DD4BF, #A5F3E8);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-    .nav-links {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 20px;
-      justify-content: center;
-    }
-    @media (max-width: 860px) {
-      .navbar { flex-direction: column; text-align: center; }
-      .nav-links { justify-content: center; gap: 18px; }
-    }
-    @media (max-width: 640px) {
-      .nav-links { gap: 12px; }
-      .nav-links a { font-size: 0.85rem; }
-      .lang-switch { padding: 3px 8px; }
-      .lang-btn { padding: 4px 10px; font-size: 0.75rem; }
-      .btn-outline-glow { padding: 6px 18px; font-size: 0.8rem; }
-    }
-    .nav-links a {
-      text-decoration: none;
-      color: #CBD5E1;
-      font-weight: 500;
-      transition: 0.2s;
-      font-size: 0.95rem;
-      white-space: nowrap;
-    }
-    @media (max-width: 550px) {
-      .nav-links a { white-space: normal; font-size: 0.8rem; }
-    }
-    .nav-links a:hover { color: #2DD4BF; text-shadow: 0 0 5px #2DD4BF40; }
-    .lang-switch {
-      display: flex;
-      gap: 6px;
-      background: rgba(20, 30, 55, 0.7);
-      backdrop-filter: blur(8px);
-      padding: 5px 12px;
-      border-radius: 50px;
-      border: 1px solid rgba(45,212,191,0.4);
-    }
-    .lang-btn {
-      background: transparent;
-      border: none;
-      color: #94A3B8;
-      font-weight: 600;
-      font-size: 0.8rem;
-      padding: 5px 12px;
-      border-radius: 40px;
-      cursor: pointer;
-      transition: 0.2s;
-    }
-    .lang-btn.active {
-      background: #2DD4BF;
-      color: #0B0F1C;
-      box-shadow: 0 0 8px #2DD4BF;
-    }
-    .btn-outline-glow {
-      background: transparent;
-      border: 1px solid #2DD4BF;
-      padding: 7px 22px;
-      border-radius: 40px;
-      color: #2DD4BF;
-      font-weight: 600;
-      transition: 0.25s;
-      white-space: nowrap;
-    }
+        .nfc-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 40px 70px rgba(0, 0, 0, 0.4);
+        }
 
-    /* === HERO RESPONSIVE === */
-    .hero {
-      padding: 60px 0 50px;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-      gap: 40px;
-    }
-    .hero-content { flex: 1.2; min-width: 260px; }
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(45,212,191,0.12);
-      backdrop-filter: blur(4px);
-      padding: 6px 16px;
-      border-radius: 60px;
-      font-size: 0.75rem;
-      margin-bottom: 24px;
-    }
-    .hero-content h1 {
-      font-size: clamp(2rem, 7vw, 4rem);
-      font-weight: 800;
-      line-height: 1.2;
-      margin-bottom: 20px;
-      background: linear-gradient(135deg, #FFFFFF, #B0F3E8, #2DD4BF);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-    .hero-content p {
-      font-size: clamp(0.9rem, 4vw, 1.15rem);
-      color: #A0B2D0;
-      max-width: 550px;
-      margin-bottom: 28px;
-    }
-    .hero-stats {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 30px;
-      margin: 25px 0 20px;
-    }
-    .stat-item h3 { font-size: clamp(1.5rem, 5vw, 2.2rem); }
-    .btn-group {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px;
-    }
-    .btn-primary, .btn-secondary {
-      padding: 12px 28px;
-      font-size: 0.9rem;
-      white-space: nowrap;
-    }
-    @media (max-width: 550px) {
-      .btn-primary, .btn-secondary { padding: 10px 20px; font-size: 0.8rem; white-space: normal; }
-      .hero-stats { gap: 20px; justify-content: space-between; }
-    }
-    .hero-visual { flex: 1; min-width: 260px; }
-    .chart-card {
-      background: rgba(8, 14, 26, 0.75);
-      backdrop-filter: blur(16px);
-      border-radius: 32px;
-      padding: 20px;
-    }
-    .candlestick {
-      display: flex;
-      gap: 6px;
-      justify-content: center;
-      align-items: flex-end;
-      height: 160px;
-    }
-    @media (max-width: 550px) {
-      .candlestick { gap: 4px; height: 140px; }
-      .candle { width: 22px !important; }
-    }
-    .candle {
-      width: 28px;
-      background: #2DD4BF;
-      border-radius: 6px;
-      transition: all 0.2s;
-    }
-    .candle.red { background: #F43F5E; box-shadow: 0 0 6px #F43F5E; }
+        /* Card Header with Chip */
+        .card-header {
+            background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+            padding: 2rem 1.5rem 1.5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
 
-    /* Features grid responsive */
-    .section { padding: 70px 0 50px; }
-    .section-title { font-size: clamp(1.8rem, 6vw, 2.8rem); text-align: center; }
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 30px;
-      margin-top: 45px;
-    }
-    .feature-card { padding: 28px 20px; border-radius: 28px; }
-    .feature-icon { font-size: 2.2rem; }
+        .card-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
 
-    /* dashboard table responsive */
-    .dashboard-preview {
-      padding: 30px 20px;
-      border-radius: 40px;
-      overflow-x: auto;
-    }
-    .trade-row {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 14px 0;
-    }
-    @media (max-width: 550px) {
-      .trade-row { font-size: 0.8rem; }
-      .dashboard-preview h3 { font-size: 1.3rem; }
-    }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
 
-    /* Ethiopia spotlight responsive */
-    .ethiopia-spotlight {
-      padding: 40px 28px;
-      border-radius: 48px;
-      flex-direction: row;
-    }
-    @media (max-width: 780px) {
-      .ethiopia-spotlight { flex-direction: column; text-align: center; }
-      .eth-text p { margin: 0 auto; }
-    }
-    .local-badge { padding: 10px 20px; font-size: 0.85rem; white-space: nowrap; }
-    @media (max-width: 500px) {
-      .local-badge { white-space: normal; text-align: center; }
-    }
+        .nfc-chip-icon {
+            background: rgba(255, 255, 255, 0.2);
+            width: 80px;
+            height: 80px;
+            border-radius: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 2.5rem;
+            color: white;
+            backdrop-filter: blur(4px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+            z-index: 1;
+        }
 
-    /* CTA responsive */
-    .cta-section {
-      padding: 50px 20px;
-      border-radius: 48px;
-      margin: 40px 0;
-    }
-    .cta-section h2 { font-size: clamp(1.5rem, 6vw, 2.5rem); }
-    footer {
-      flex-direction: row;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      text-align: center;
-      gap: 16px;
-      font-size: 0.8rem;
-    }
-    @media (max-width: 600px) {
-      footer { flex-direction: column; align-items: center; }
-      .social-links i { margin: 0 12px; }
-      .container { padding: 0 20px; }
-    }
-    @keyframes floatNeon {
-      0% { transform: translateY(0px); }
-      100% { transform: translateY(-8px);}
-    }
-    .chart-card { animation: floatNeon 5s infinite alternate ease-in-out; }
-    [data-translate] { transition: all 0.2s; }
-    .live-badge { font-size: 0.7rem; background: #F43F5E20; padding: 4px 12px; border-radius: 20px; }
-  </style>
+        .card-header h1 {
+            color: white;
+            font-size: 1.6rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-header .title {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.85rem;
+            margin-top: 0.3rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nfc-wave {
+            position: absolute;
+            bottom: -20px;
+            left: 0;
+            right: 0;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 50% 50% 0 0;
+            z-index: 1;
+        }
+
+        /* Profile Section */
+        .profile-section {
+            padding: 2rem 1.5rem 1rem;
+            text-align: center;
+            background: white;
+        }
+
+        .avatar {
+            background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: -3rem auto 1rem;
+            font-size: 3.2rem;
+            color: white;
+            border: 4px solid white;
+            box-shadow: 0 10px 30px rgba(2, 132, 199, 0.3);
+            position: relative;
+            z-index: 2;
+        }
+
+        .profile-section h2 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #1e293b;
+            margin-top: 0.5rem;
+        }
+
+        .profile-section .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: linear-gradient(135deg, #0284c715, #0369a115);
+            color: #0284c7;
+            padding: 0.4rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-top: 0.5rem;
+        }
+
+        .company {
+            color: #64748b;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        /* Contact Buttons Grid */
+        .contact-grid {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            background: white;
+        }
+
+        .contact-btn {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 1.2rem;
+            background: #f8fafc;
+            border-radius: 1.2rem;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid #e2e8f0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .contact-btn:hover::before {
+            left: 100%;
+        }
+
+        .contact-btn i {
+            width: 36px;
+            font-size: 1.6rem;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .contact-btn:hover i {
+            transform: scale(1.1);
+        }
+
+        .contact-btn .btn-info {
+            flex: 1;
+        }
+
+        .contact-btn .btn-label {
+            font-size: 0.7rem;
+            color: #94a3b8;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+
+        .contact-btn .btn-value {
+            font-weight: 700;
+            color: #1e293b;
+            font-size: 0.95rem;
+        }
+
+        .contact-btn .arrow {
+            color: #0284c7;
+            font-size: 1rem;
+            opacity: 0.6;
+            transition: transform 0.3s;
+        }
+
+        .contact-btn:hover .arrow {
+            transform: translateX(5px);
+            opacity: 1;
+        }
+
+        /* Individual button hover colors */
+        .contact-btn.whatsapp:hover {
+            background: #25D36610;
+            border-color: #25D366;
+        }
+        .contact-btn.whatsapp:hover i { color: #25D366; }
+        .contact-btn.email:hover {
+            background: #EA433510;
+            border-color: #EA4335;
+        }
+        .contact-btn.email:hover i { color: #EA4335; }
+        .contact-btn.phone:hover {
+            background: #34B7F110;
+            border-color: #34B7F1;
+        }
+        .contact-btn.phone:hover i { color: #34B7F1; }
+        .contact-btn.web:hover {
+            background: #0284c715;
+            border-color: #0284c7;
+        }
+        .contact-btn.web:hover i { color: #0284c7; }
+
+        /* Social Links */
+        .social-links {
+            padding: 1.2rem 1.5rem 1.8rem;
+            border-top: 1px solid #e2e8f0;
+            text-align: center;
+            background: white;
+        }
+
+        .social-links p {
+            font-size: 0.85rem;
+            color: #64748b;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1.2rem;
+            flex-wrap: wrap;
+        }
+
+        .social-icons a {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: #0284c7;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .social-icons a:hover {
+            background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+            color: white;
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 10px 20px rgba(2, 132, 199, 0.3);
+        }
+
+        .tap-hint {
+            text-align: center;
+            padding: 1rem 1rem 1.2rem;
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 50px;
+            margin-top: 1rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .tap-hint i {
+            font-size: 0.9rem;
+            animation: bounce 1s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-3px); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 640px) {
+            body {
+                padding: 0.8rem;
+            }
+
+            .nfc-container {
+                max-width: 100%;
+            }
+
+            .card-header h1 {
+                font-size: 1.3rem;
+            }
+
+            .nfc-chip-icon {
+                width: 65px;
+                height: 65px;
+                font-size: 2rem;
+            }
+
+            .avatar {
+                width: 85px;
+                height: 85px;
+                font-size: 2.8rem;
+                margin-top: -2.5rem;
+            }
+
+            .profile-section h2 {
+                font-size: 1.5rem;
+            }
+
+            .contact-btn {
+                padding: 0.8rem 1rem;
+                gap: 0.8rem;
+            }
+
+            .contact-btn i {
+                width: 28px;
+                font-size: 1.3rem;
+            }
+
+            .contact-btn .btn-value {
+                font-size: 0.85rem;
+            }
+
+            .contact-btn .btn-label {
+                font-size: 0.65rem;
+            }
+
+            .social-icons a {
+                width: 42px;
+                height: 42px;
+                font-size: 1.3rem;
+            }
+
+            .tap-hint {
+                font-size: 0.6rem;
+                padding: 0.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .contact-grid {
+                padding: 1rem;
+                gap: 0.8rem;
+            }
+
+            .contact-btn {
+                padding: 0.7rem 0.9rem;
+            }
+
+            .contact-btn .btn-value {
+                font-size: 0.8rem;
+            }
+
+            .social-links {
+                padding: 1rem;
+            }
+
+            .social-icons {
+                gap: 0.8rem;
+            }
+
+            .social-icons a {
+                width: 38px;
+                height: 38px;
+                font-size: 1.2rem;
+            }
+        }
+
+        /* Landscape mode */
+        @media (max-width: 768px) and (orientation: landscape) {
+            body {
+                padding: 0.5rem;
+            }
+
+            .nfc-container {
+                max-width: 450px;
+            }
+
+            .contact-grid {
+                gap: 0.6rem;
+            }
+
+            .contact-btn {
+                padding: 0.6rem 0.9rem;
+            }
+        }
+
+        /* Touch device optimizations */
+        @media (hover: none) and (pointer: coarse) {
+            .contact-btn:active {
+                transform: scale(0.98);
+            }
+
+            .social-icons a:active {
+                transform: scale(0.95);
+            }
+        }
+
+        /* Smooth scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+            border-radius: 10px;
+        }
+    </style>
 </head>
 <body>
-<div class="gradient-bg"></div>
-<div class="grid-overlay"></div>
+    <div class="nfc-container">
+        <div class="nfc-card">
+            <div class="card-header">
+                <div class="nfc-chip-icon">
+                    <i class="fas fa-microchip"></i>
+                </div>
+                <h1>Ethiopian Forex Company</h1>
+                <div class="title">digital business card</div>
+                <div class="nfc-wave"></div>
+            </div>
 
-<div class="container">
-  <!-- Navigation -->
-  <div class="navbar">
-    <div class="logo">FX<span style="color:#2DD4BF;">Prime</span> <span style="font-size:1.2rem;">🇪🇹</span></div>
-    <div class="nav-links">
-      <a href="#" data-translate="markets">Markets</a>
-      <a href="#" data-translate="tools">Trading Tools</a>
-      <a href="#" data-translate="edu">Education</a>
-      <a href="#" data-translate="partner">Partner</a>
-      <div class="lang-switch">
-        <button class="lang-btn active" data-lang="en">EN</button>
-        <button class="lang-btn" data-lang="am">አማርኛ</button>
-      </div>
-      <a href="#" class="btn-outline-glow" data-translate="open_acc">Open Account</a>
-    </div>
-  </div>
+            <div class="profile-section">
+                <div class="avatar">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h2>Abebe <i class="fas fa-check-circle" style="color:#0284c7; font-size:1.2rem;"></i></h2>
+                <div class="badge">
+                    <i class="fas fa-user-tie"></i> General Manager
+                </div>
+                <div class="company">
+                    <i class="fas fa-globe-africa"></i> Ethiopian Forex Company
+                </div>
+            </div>
 
-  <!-- Hero Section -->
-  <div class="hero">
-    <div class="hero-content">
-      <div class="hero-badge">
-        <i class="fas fa-chart-line"></i> <span data-translate="badge_text">Ethiopia's #1 Regulated FX Broker</span>
-      </div>
-      <h1><span data-translate="hero_title1">Trade Forex Like a</span> <span class="glow-text" data-translate="hero_title2">Market Titan</span><br> <span data-translate="hero_title3">from Addis to Global</span></h1>
-      <p data-translate="hero_desc">Leverage institutional-grade spreads, AI analytics, and local Ethiopian support — Zero slippage on major pairs, lightning execution.</p>
-      <div class="btn-group">
-        <button class="btn-primary" data-translate="start_btn">Start Trading <i class="fas fa-arrow-right"></i></button>
-        <button class="btn-secondary" data-translate="demo_btn">Demo Account</button>
-      </div>
-      <div class="hero-stats">
-        <div class="stat-item"><h3>0.0</h3><p data-translate="stat1">pips spread*</p></div>
-        <div class="stat-item"><h3>1:500</h3><p data-translate="stat2">leverage</p></div>
-        <div class="stat-item"><h3>24/7</h3><p data-translate="stat3">local support</p></div>
-      </div>
-    </div>
-    <div class="hero-visual">
-      <div class="chart-card">
-        <div style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px; margin-bottom:15px;">
-          <span>USD/ETB synthetic <i class="fas fa-circle" style="font-size: 8px; color:#2DD4BF;"></i> LIVE</span>
-          <span class="live-badge" id="livePercentBadge">+0.34%</span>
+            <div class="contact-grid">
+                <!-- WhatsApp -->
+                <a href="#" class="contact-btn whatsapp" id="whatsappBtn">
+                    <i class="fab fa-whatsapp" style="color:#25D366;"></i>
+                    <div class="btn-info">
+                        <div class="btn-label">WHATSAPP</div>
+                        <div class="btn-value">+251 9 12 34 56 78</div>
+                    </div>
+                    <div class="arrow"><i class="fas fa-chevron-right"></i></div>
+                </a>
+
+                <!-- Email -->
+                <a href="#" class="contact-btn email" id="emailBtn">
+                    <i class="fas fa-envelope" style="color:#EA4335;"></i>
+                    <div class="btn-info">
+                        <div class="btn-label">EMAIL</div>
+                        <div class="btn-value">abebe@ethiopianforex.com</div>
+                    </div>
+                    <div class="arrow"><i class="fas fa-chevron-right"></i></div>
+                </a>
+
+                <!-- Phone -->
+                <a href="#" class="contact-btn phone" id="phoneBtn">
+                    <i class="fas fa-phone-alt" style="color:#34B7F1;"></i>
+                    <div class="btn-info">
+                        <div class="btn-label">PHONE</div>
+                        <div class="btn-value">+251 912 345 678</div>
+                    </div>
+                    <div class="arrow"><i class="fas fa-chevron-right"></i></div>
+                </a>
+
+                <!-- Website - Redirects to landing-page.html (display text stays ethiopianforex.com) -->
+                <a href="#" class="contact-btn web" id="websiteBtn">
+                    <i class="fas fa-globe" style="color:#0284c7;"></i>
+                    <div class="btn-info">
+                        <div class="btn-label">WEBSITE</div>
+                        <div class="btn-value">ethiopianforex.com</div>
+                    </div>
+                    <div class="arrow"><i class="fas fa-chevron-right"></i></div>
+                </a>
+            </div>
+
+            <div class="social-links">
+                <p><i class="fas fa-share-alt"></i> Follow Ethiopian Forex Company</p>
+                <div class="social-icons">
+                    <a href="#" id="igLink"><i class="fab fa-instagram"></i></a>
+                    <a href="#" id="tiktokLink"><i class="fab fa-tiktok"></i></a>
+                    <a href="#" id="fbLink"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" id="linkedinLink"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" id="telegramLink"><i class="fab fa-telegram-plane"></i></a>
+                </div>
+            </div>
         </div>
-        <div class="candlestick" id="candleChart"></div>
-        <div style="margin-top: 20px; display: flex; justify-content: space-between; flex-wrap:wrap; gap:12px;">
-          <div><span style="color:#94A3B8;">Bid</span> <strong id="bidVal" style="color:#2DD4BF;">53.8742</strong></div>
-          <div><span style="color:#94A3B8;">Ask</span> <strong id="askVal" style="color:#F97316;">53.8921</strong></div>
-          <div><i class="fas fa-arrow-up" id="trendIcon"></i> <span id="changePercent">+0.12%</span></div>
+        <div class="tap-hint">
+            <i class="fas fa-hand-pointer"></i> NFC enabled — tap your phone to save contact
+            <i class="fas fa-wifi"></i>
         </div>
-      </div>
     </div>
-  </div>
 
-  <!-- Features -->
-  <div class="section">
-    <h2 class="section-title"><span data-translate="features_title1">Elite Execution</span>, <span style="color:#2DD4BF;" data-translate="features_title2">Infinite Possibilities</span></h2>
-    <div style="text-align:center; color:#9AA9C1; margin-top: 12px; margin-bottom: 30px; padding:0 10px;" data-translate="features_desc">Advanced tools, AI analytics, deep liquidity — built for Ethiopian forex pioneers.</div>
-    <div class="features-grid">
-      <div class="feature-card"><div class="feature-icon"><i class="fas fa-microchip"></i></div><h3 data-translate="feat1_title">Sub‑Millisecond Execution</h3><p data-translate="feat1_desc">Ultra-low latency DMA, fills instantly even during high-impact news.</p></div>
-      <div class="feature-card"><div class="feature-icon"><i class="fas fa-robot"></i></div><h3 data-translate="feat2_title">AI Sentiment Suite</h3><p data-translate="feat2_desc">Machine-learning sentiment + real-time signals for major FX pairs.</p></div>
-      <div class="feature-card"><div class="feature-icon"><i class="fas fa-shield-haltered"></i></div><h3 data-translate="feat3_title">Local Regulation + Security</h3><p data-translate="feat3_desc">SSL encryption, segregated accounts, and licensed operations.</p></div>
-      <div class="feature-card"><div class="feature-icon"><i class="fas fa-chart-simple"></i></div><h3 data-translate="feat4_title">Advanced Charting Pro</h3><p data-translate="feat4_desc">50+ indicators, drawing tools, and AI pattern recognition.</p></div>
-    </div>
-  </div>
+    <script>
+        // Contact details for Abebe - Ethiopian Forex Company
+        const contact = {
+            whatsapp: "+251912345678",
+            email: "abebe@ethiopianforex.com",
+            phone: "+251912345678",
+            // Website redirects to local landing-page.html (display text remains ethiopianforex.com)
+            website: "landing-page.html"
+        };
 
-  <!-- Live Dashboard -->
-  <div class="dashboard-preview">
-    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap:wrap; gap: 12px; margin-bottom: 20px;">
-      <h3 style="font-size: clamp(1.3rem, 5vw, 1.8rem);"><i class="fas fa-fire-flame"></i> <span data-translate="dashboard_title">Live Forex Snapshot</span></h3>
-      <span style="background:#2DD4BF20; padding:5px 12px; border-radius: 40px; font-size:0.75rem;"><i class="fas fa-sync-alt"></i> real-time</span>
-    </div>
-    <div id="liveForexTable"></div>
-    <div style="margin-top: 28px; text-align: right;"><button class="btn-secondary" style="padding: 8px 18px;" data-translate="view_all">View all 60+ pairs →</button></div>
-  </div>
+        const social = {
+            instagram: "https://www.instagram.com/ethiopianforex",
+            tiktok: "https://www.tiktok.com/@ethiopianforex",
+            facebook: "https://www.facebook.com/ethiopianforex",
+            linkedin: "https://www.linkedin.com/company/ethiopianforex",
+            telegram: "https://t.me/ethiopianforex"
+        };
 
-  <!-- Ethiopia Local Edge -->
-  <div class="ethiopia-spotlight">
-    <div class="eth-text">
-      <h3><i class="fas fa-map-marker-alt" style="color:#2DD4BF;"></i> <span data-translate="eth_title">Built for Ethiopian Traders</span></h3>
-      <p data-translate="eth_desc">Local currency deposits via TeleBirr & bank transfers, Amharic support, and dedicated account managers. Global forex with local advantages.</p>
-      <div style="margin-top: 25px; display: flex; gap: 15px; flex-wrap: wrap; justify-content: center;">
-        <span class="local-badge"><i class="fas fa-wallet"></i> <span data-translate="telebirr">TeleBirr integration</span></span>
-        <span class="local-badge"><i class="fas fa-headset"></i> <span data-translate="support247">24/7 Amharic helpdesk</span></span>
-      </div>
-    </div>
-    <div><i class="fas fa-charging-station" style="font-size: 3.5rem; color:#2DD4BF; opacity:0.8;"></i></div>
-  </div>
+        // Set links with error checking
+        const whatsappBtn = document.getElementById('whatsappBtn');
+        const emailBtn = document.getElementById('emailBtn');
+        const phoneBtn = document.getElementById('phoneBtn');
+        const websiteBtn = document.getElementById('websiteBtn');
 
-  <!-- CTA -->
-  <div class="cta-section">
-    <h2 data-translate="cta_title">Ready to master the forex market?</h2>
-    <p style="margin: 18px auto; max-width: 550px; padding:0 12px;" data-translate="cta_desc">Join over 15,000 Ethiopian traders who trust FXPrime for advanced tools and fast withdrawals.</p>
-    <button class="btn-primary" style="background: white; color:#0B0F1C;" data-translate="cta_btn">Create Free Account <i class="fas fa-user-plus"></i></button>
-  </div>
+        if (whatsappBtn) {
+            whatsappBtn.setAttribute('href', `https://wa.me/${contact.whatsapp.replace(/[^0-9+]/g, '')}?text=${encodeURIComponent("Hello Abebe, I got your NFC card from Ethiopian Forex Company! I'm interested in forex services.")}`);
+            whatsappBtn.setAttribute('target', '_blank');
+        }
 
-  <footer>
-    <div>© 2025 FXPrime Ethiopia — <span data-translate="footer_text">Advanced Forex Hub</span>. All rights reserved.</div>
-    <div class="social-links"><i class="fab fa-twitter"></i><i class="fab fa-telegram"></i><i class="fab fa-instagram"></i></div>
-  </footer>
-</div>
+        if (emailBtn) {
+            emailBtn.setAttribute('href', `mailto:${contact.email}?subject=NFC%20Card%20-%20Abebe&body=Hi%20Abebe%2C%20I'd%20like%20to%20know%20more%20about%20Ethiopian%20Forex%20Company%20and%20your%20currency%20exchange%20services.`);
+        }
+        
+        if (phoneBtn) {
+            phoneBtn.setAttribute('href', `tel:${contact.phone.replace(/\s/g, '')}`);
+        }
+        
+        if (websiteBtn) {
+            // Redirects to landing-page.html while displaying ethiopianforex.com
+            websiteBtn.setAttribute('href', contact.website);
+            // Opens in same tab for seamless experience
+            // websiteBtn.setAttribute('target', '_blank'); // Commented out - opens in same tab
+        }
 
-<script>
-  // Bilingual Dictionary
-  const translations = {
-    en: {
-      markets: "Markets", tools: "Trading Tools", edu: "Education", partner: "Partner", open_acc: "Open Account",
-      badge_text: "Ethiopia's #1 Regulated FX Broker",
-      hero_title1: "Trade Forex Like a", hero_title2: "Market Titan", hero_title3: "from Addis to Global",
-      hero_desc: "Leverage institutional-grade spreads, AI analytics, and local Ethiopian support — Zero slippage on major pairs, lightning execution.",
-      start_btn: "Start Trading", demo_btn: "Demo Account",
-      stat1: "pips spread*", stat2: "leverage", stat3: "local support",
-      features_title1: "Elite Execution", features_title2: "Infinite Possibilities",
-      features_desc: "Advanced tools, AI analytics, deep liquidity — built for Ethiopian forex pioneers.",
-      feat1_title: "Sub‑Millisecond Execution", feat1_desc: "Ultra-low latency DMA, fills instantly even during high-impact news.",
-      feat2_title: "AI Sentiment Suite", feat2_desc: "Machine-learning sentiment + real-time signals for major FX pairs.",
-      feat3_title: "Local Regulation + Security", feat3_desc: "SSL encryption, segregated accounts, and licensed operations.",
-      feat4_title: "Advanced Charting Pro", feat4_desc: "50+ indicators, drawing tools, and AI pattern recognition.",
-      dashboard_title: "Live Forex Snapshot", view_all: "View all 60+ pairs →",
-      eth_title: "Built for Ethiopian Traders", eth_desc: "Local currency deposits via TeleBirr & bank transfers, Amharic support, and dedicated account managers. Global forex with local advantages.",
-      telebirr: "TeleBirr integration", support247: "24/7 Amharic helpdesk",
-      cta_title: "Ready to master the forex market?", cta_desc: "Join over 15,000 Ethiopian traders who trust FXPrime for advanced tools and fast withdrawals.",
-      cta_btn: "Create Free Account", footer_text: "Advanced Forex Hub"
-    },
-    am: {
-      markets: "ገበያዎች", tools: "የንግድ መሳሪያዎች", edu: "ትምህርት", partner: "አጋር", open_acc: "አካውንት ክፈት",
-      badge_text: "ኢትዮጵያ ቁጥር 1 ቁጥጥር የሚደረግለት የውጭ ምንዛሪ ደላላ",
-      hero_title1: "የውጭ ምንዛሪ ንግድ እንደ", hero_title2: "የገበያ ግዙፍ", hero_title3: "ከአዲስ አበባ ወደ አለም",
-      hero_desc: "ተቋማዊ ስርጭቶችን፣ አርቲፊሻል ኢንተሊጀንስ እና የኢትዮጵያ ድጋፍ ይጠቀሙ — ዜሮ መንሸራተት ፈጣን አፈፃፀም።",
-      start_btn: "ንግድ ጀምር", demo_btn: "ማሳያ አካውንት",
-      stat1: "ፒፕስ ስርጭት*", stat2: "ሌቨሬጅ", stat3: "የሀገር ውስጥ ድጋፍ",
-      features_title1: "ከፍተኛ አፈፃፀም", features_title2: "ማለቂያ የሌላቸው እድሎች",
-      features_desc: "የላቀ መሳሪያዎች፣ AI ትንተና እና ጥልቅ ፈሳሽነት — ለኢትዮጵያ የውጭ ምንዛሪ አቅኚዎች ተሰርቷል።",
-      feat1_title: "ንዑስ ሚሊሰከንድ አፈፃፀም", feat1_desc: "ዝቅተኛ መዘግየት DMA ፈጣን ሙሌት።",
-      feat2_title: "AI ስሜት ስብስብ", feat2_desc: "ማሽን መማር ስሜት + የማጣቀሻ ምልክቶች",
-      feat3_title: "የሀገር ውስጥ ቁጥጥር+ደህንነት", feat3_desc: "SSL ምስጠራ እና ፈቃድ ያለው ክዋኔ",
-      feat4_title: "የላቀ ገበታ ፕሮ", feat4_desc: "ከ50+ አመልካቾች እና AI ቅጦች",
-      dashboard_title: "የቀጥታ ፎሬክስ ቅጽበታዊ", view_all: "ሁሉንም 60+ ጥንዶች ተመልከት →",
-      eth_title: "ለኢትዮጵያ ነጋዴዎች ተገንብቷል", eth_desc: "በቴሌ ብር እና ባንክ ውስጥ ተቀማጭ፣ አማርኛ ድጋፍ እና የተሰጠ አካውንት አስተዳዳሪዎች።",
-      telebirr: "ቴሌ ብር ውህደት", support247: "24/7 አማርኛ ድጋፍ",
-      cta_title: "የውጭ ምንዛሪ ገበያ ለመቆጣጠር ዝግጁ ነዎት?", cta_desc: "ከ15,000+ ኢትዮጵያውያን ነጋዴዎች ጋር ይቀላቀሉ።",
-      cta_btn: "ነጻ አካውንት ፍጠር", footer_text: "የላቀ ፎሬክስ ማዕከል"
-    }
-  };
+        // Social icons
+        const igLink = document.getElementById('igLink');
+        const tiktokLink = document.getElementById('tiktokLink');
+        const fbLink = document.getElementById('fbLink');
+        const linkedinLink = document.getElementById('linkedinLink');
+        const telegramLink = document.getElementById('telegramLink');
 
-  function applyLanguage(lang) {
-    const dict = translations[lang];
-    document.querySelectorAll('[data-translate]').forEach(el => {
-      const key = el.getAttribute('data-translate');
-      if (dict[key]) el.innerText = dict[key];
-    });
-    document.querySelectorAll('.lang-btn').forEach(btn => {
-      if (btn.getAttribute('data-lang') === lang) btn.classList.add('active');
-      else btn.classList.remove('active');
-    });
-  }
-
-  document.querySelectorAll('.lang-btn').forEach(btn => {
-    btn.addEventListener('click', () => applyLanguage(btn.getAttribute('data-lang')));
-  });
-  applyLanguage('en');
-
-  // Dynamic candles & live forex
-  function generateCandles() {
-    const container = document.getElementById('candleChart');
-    if (!container) return;
-    const heights = [68, 52, 88, 60, 78, 105, 44, 70, 94, 58];
-    const colors = ['#2DD4BF', '#2DD4BF', '#F43F5E', '#2DD4BF', '#F43F5E', '#2DD4BF', '#F43F5E', '#2DD4BF', '#2DD4BF', '#F43F5E'];
-    container.innerHTML = '';
-    heights.forEach((h, idx) => {
-      const candle = document.createElement('div');
-      candle.className = `candle ${colors[idx] === '#F43F5E' ? 'red' : ''}`;
-      candle.style.height = `${h}px`;
-      candle.style.width = `clamp(18px, 5vw, 30px)`;
-      candle.style.margin = '0 2px';
-      container.appendChild(candle);
-    });
-  }
-
-  let eurUsd = 1.08742, gbpJpy = 190.823, usdEtb = 53.8742;
-  function updateLivePrices() {
-    eurUsd += (Math.random() - 0.495) * 0.00028;
-    eurUsd = parseFloat(eurUsd.toFixed(5));
-    gbpJpy += (Math.random() - 0.5) * 0.09;
-    gbpJpy = parseFloat(gbpJpy.toFixed(3));
-    usdEtb += (Math.random() - 0.48) * 0.014;
-    usdEtb = parseFloat(usdEtb.toFixed(4));
-
-    const eurChange = ((eurUsd - 1.08742) / 1.08742 * 100).toFixed(2);
-    const gbpChange = ((gbpJpy - 190.823) / 190.823 * 100).toFixed(2);
-    const etbChange = ((usdEtb - 53.8742) / 53.8742 * 100).toFixed(2);
-
-    const tableDiv = document.getElementById('liveForexTable');
-    if (tableDiv) {
-      tableDiv.innerHTML = `
-        <div class="trade-row"><span class="pair">EUR/USD</span><span class="bid">${eurUsd.toFixed(5)}</span><span class="ask">${(eurUsd + 0.00018).toFixed(5)}</span><span style="color:${eurChange >=0 ? '#2DD4BF' : '#F43F5E'};">${eurChange >=0 ? '▲' : '▼'} ${Math.abs(eurChange)}%</span></div>
-        <div class="trade-row"><span class="pair">GBP/JPY</span><span class="bid">${gbpJpy.toFixed(3)}</span><span class="ask">${(gbpJpy + 0.075).toFixed(3)}</span><span style="color:${gbpChange >=0 ? '#2DD4BF' : '#F43F5E'};">${gbpChange >=0 ? '▲' : '▼'} ${Math.abs(gbpChange)}%</span></div>
-        <div class="trade-row"><span class="pair">USD/ETB (FX)</span><span class="bid">${usdEtb.toFixed(4)}</span><span class="ask">${(usdEtb + 0.019).toFixed(4)}</span><span style="color:${etbChange >=0 ? '#2DD4BF' : '#F43F5E'};">${etbChange >=0 ? '▲' : '▼'} ${Math.abs(etbChange)}%</span></div>
-      `;
-    }
-    document.getElementById('bidVal') && (document.getElementById('bidVal').innerText = usdEtb.toFixed(4));
-    document.getElementById('askVal') && (document.getElementById('askVal').innerText = (usdEtb + 0.019).toFixed(4));
-    const percentSpan = document.getElementById('changePercent');
-    const liveBadge = document.getElementById('livePercentBadge');
-    if (percentSpan) { percentSpan.innerText = `${etbChange >=0 ? '+' : ''}${etbChange}%`; percentSpan.style.color = etbChange >=0 ? '#2DD4BF' : '#F43F5E'; }
-    if (liveBadge) { liveBadge.innerHTML = `${etbChange >=0 ? '+' : ''}${etbChange}%`; liveBadge.style.color = etbChange >=0 ? '#2DD4BF' : '#F43F5E'; }
-  }
-
-  function animateCandlesRandom() {
-    const candles = document.querySelectorAll('.candle');
-    candles.forEach(candle => {
-      let cur = parseInt(candle.style.height);
-      let delta = (Math.random() - 0.5) * 8;
-      let newH = Math.min(145, Math.max(28, cur + delta));
-      candle.style.height = `${newH}px`;
-      const isRed = candle.classList.contains('red');
-      if (delta > 2 && isRed) { candle.classList.remove('red'); candle.style.backgroundColor = '#2DD4BF'; }
-      else if (delta < -2 && !isRed) { candle.classList.add('red'); candle.style.backgroundColor = '#F43F5E'; }
-    });
-  }
-
-  // Buttons
-  document.querySelectorAll('.btn-primary, .btn-secondary, .btn-outline-glow').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      const text = btn.innerText;
-      if (text.includes('Start') || text.includes('Open') || text.includes('Create') || text.includes('ንግድ') || text.includes('አካውንት')) {
-        e.preventDefault(); alert("🚀 FXPrime Ethiopia: Our team will contact you within 24h.");
-      } else if (text.includes('Demo') || text.includes('ማሳያ')) {
-        e.preventDefault(); alert("📈 Demo activated! Virtual $100,000 to practice.");
-      } else if (btn.tagName === 'A' && !text.includes('Open')) e.preventDefault();
-    });
-  });
-
-  generateCandles();
-  updateLivePrices();
-  setInterval(updateLivePrices, 2800);
-  setInterval(animateCandlesRandom, 2000);
-  window.addEventListener('load', () => { generateCandles(); updateLivePrices(); setInterval(() => { if(Math.random()>0.7) generateCandles(); }, 8000); });
-  window.addEventListener('resize', () => generateCandles());
-</script>
+        if (igLink) {
+            igLink.setAttribute('href', social.instagram);
+            igLink.setAttribute('target', '_blank');
+        }
+        if (tiktokLink) {
+            tiktokLink.setAttribute('href', social.tiktok);
+            tiktokLink.setAttribute('target', '_blank');
+        }
+        if (fbLink) {
+            fbLink.setAttribute('href', social.facebook);
+            fbLink.setAttribute('target', '_blank');
+        }
+        if (linkedinLink) {
+            linkedinLink.setAttribute('href', social.linkedin);
+            linkedinLink.setAttribute('target', '_blank');
+        }
+        if (telegramLink) {
+            telegramLink.setAttribute('href', social.telegram);
+            telegramLink.setAttribute('target', '_blank');
+        }
+    </script>
 </body>
 </html>
