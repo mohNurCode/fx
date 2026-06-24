@@ -1,0 +1,630 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Mafuya Solution Forex | Shemsedin Wabela - Live Exchange Rates</title>
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0b3b2f 0%, #06261e 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            position: relative;
+            overflow-x: auto;
+        }
+
+        /* Animated background */
+        body::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,215,0,0.08) 1px, transparent 1px);
+            background-size: 40px 40px;
+            animation: shift 20s linear infinite;
+            opacity: 0.4;
+        }
+
+        @keyframes shift {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(40px, 40px); }
+        }
+
+        .nfc-container {
+            max-width: 550px;
+            width: 100%;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Main Card */
+        .nfc-card {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            border-radius: 3rem;
+            overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 215, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .nfc-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 40px 70px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Card Header */
+        .card-header {
+            background: linear-gradient(135deg, #1e6b5e 0%, #0f4c42 100%);
+            padding: 2rem 1.5rem 1.2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,215,0,0.15) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        .nfc-chip-icon {
+            background: rgba(255, 215, 0, 0.2);
+            width: 70px;
+            height: 70px;
+            border-radius: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 0.8rem;
+            font-size: 2.2rem;
+            color: #FFD966;
+            backdrop-filter: blur(4px);
+            border: 2px solid rgba(255, 215, 0, 0.5);
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-header h1 {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -0.3px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-header .title {
+            color: rgba(255, 245, 200, 0.9);
+            font-size: 0.8rem;
+            margin-top: 0.2rem;
+            font-weight: 500;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nfc-wave {
+            position: absolute;
+            bottom: -20px;
+            left: 0;
+            right: 0;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 50% 50% 0 0;
+            z-index: 1;
+        }
+
+        /* Profile Section */
+        .profile-section {
+            padding: 2rem 1.5rem 0.8rem;
+            text-align: center;
+            background: white;
+        }
+
+        .avatar {
+            background: linear-gradient(135deg, #1e6b5e 0%, #0f4c42 100%);
+            width: 95px;
+            height: 95px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: -3rem auto 0.8rem;
+            font-size: 3rem;
+            color: #FFD966;
+            border: 4px solid white;
+            box-shadow: 0 10px 30px rgba(30, 107, 94, 0.4);
+            position: relative;
+            z-index: 2;
+        }
+
+        .profile-section h2 {
+            font-size: 1.7rem;
+            font-weight: 800;
+            color: #1e293b;
+            margin-top: 0.3rem;
+        }
+
+        .profile-section .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: linear-gradient(135deg, #1e6b5e15, #0f4c4215);
+            color: #1e6b5e;
+            padding: 0.3rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-top: 0.4rem;
+        }
+
+        .company {
+            color: #475569;
+            margin-top: 0.4rem;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            font-weight: 600;
+        }
+
+        /* Live Exchange Rates Card */
+        .exchange-rates {
+            background: #fefce8;
+            margin: 0.8rem 1.5rem 0.5rem;
+            padding: 1rem;
+            border-radius: 1.5rem;
+            border: 1px solid #fde047;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .rates-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-weight: 800;
+            color: #1e6b5e;
+            font-size: 0.9rem;
+            margin-bottom: 12px;
+            letter-spacing: -0.2px;
+        }
+
+        .rates-header i {
+            font-size: 1.2rem;
+            color: #eab308;
+        }
+
+        .currency-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            padding: 8px 0;
+            border-bottom: 1px dashed #e2e8f0;
+        }
+
+        .currency-row:last-child {
+            border-bottom: none;
+        }
+
+        .currency-name {
+            font-weight: 700;
+            font-size: 1rem;
+            color: #334155;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .currency-name i {
+            width: 24px;
+            font-size: 1.1rem;
+        }
+
+        .buy-sell {
+            display: flex;
+            gap: 20px;
+            font-size: 0.9rem;
+        }
+
+        .buy span, .sell span {
+            font-weight: 500;
+            color: #64748b;
+            font-size: 0.7rem;
+            display: block;
+        }
+
+        .buy strong, .sell strong {
+            font-weight: 800;
+            color: #0f172a;
+            font-size: 1rem;
+        }
+
+        .buy {
+            color: #15803d;
+        }
+        .sell {
+            color: #b91c1c;
+        }
+
+        .rate-note {
+            font-size: 0.65rem;
+            text-align: center;
+            margin-top: 10px;
+            color: #6b7280;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        /* Contact Buttons */
+        .contact-grid {
+            padding: 0.8rem 1.5rem 1.2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.9rem;
+            background: white;
+        }
+
+        .contact-btn {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.9rem 1.2rem;
+            background: #f8fafc;
+            border-radius: 1.2rem;
+            text-decoration: none;
+            transition: all 0.3s;
+            border: 1px solid #e2e8f0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,215,0,0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .contact-btn:hover::before {
+            left: 100%;
+        }
+
+        .contact-btn i {
+            width: 32px;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+
+        .contact-btn .btn-info {
+            flex: 1;
+        }
+
+        .contact-btn .btn-label {
+            font-size: 0.7rem;
+            color: #94a3b8;
+            font-weight: 600;
+        }
+
+        .contact-btn .btn-value {
+            font-weight: 700;
+            color: #1e293b;
+            font-size: 0.9rem;
+        }
+
+        .contact-btn .arrow {
+            color: #1e6b5e;
+            opacity: 0.6;
+        }
+
+        .contact-btn:hover .arrow {
+            transform: translateX(4px);
+            opacity: 1;
+        }
+
+        .contact-btn.whatsapp:hover { background: #25D36610; border-color: #25D366; }
+        .contact-btn.whatsapp:hover i { color: #25D366; }
+        .contact-btn.email:hover { background: #EA433510; border-color: #EA4335; }
+        .contact-btn.email:hover i { color: #EA4335; }
+        .contact-btn.phone:hover { background: #34B7F110; border-color: #34B7F1; }
+        .contact-btn.phone:hover i { color: #34B7F1; }
+        .contact-btn.web:hover { background: #1e6b5e15; border-color: #1e6b5e; }
+        .contact-btn.web:hover i { color: #1e6b5e; }
+
+        /* Social Links */
+        .social-links {
+            padding: 1rem 1.5rem 1.5rem;
+            border-top: 1px solid #e2e8f0;
+            text-align: center;
+            background: white;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .social-icons a {
+            width: 44px;
+            height: 44px;
+            background: #f1f5f9;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            color: #1e6b5e;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .social-icons a:hover {
+            background: linear-gradient(135deg, #1e6b5e 0%, #0f4c42 100%);
+            color: #FFD966;
+            transform: translateY(-4px);
+        }
+
+        .tap-hint {
+            text-align: center;
+            padding: 0.8rem;
+            font-size: 0.7rem;
+            color: rgba(255,255,240,0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 40px;
+            margin-top: 1rem;
+            backdrop-filter: blur(8px);
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-3px); }
+        }
+        .tap-hint i:first-child { animation: bounce 1s infinite; }
+
+        @media (max-width: 550px) {
+            .exchange-rates { margin: 0.6rem 1rem 0.3rem; padding: 0.8rem; }
+            .currency-name { font-size: 0.9rem; }
+            .buy-sell { gap: 12px; }
+            .buy strong, .sell strong { font-size: 0.9rem; }
+            .contact-grid { padding: 0.6rem 1rem 1rem; gap: 0.7rem; }
+            .profile-section h2 { font-size: 1.4rem; }
+            .avatar { width: 80px; height: 80px; font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="nfc-container">
+    <div class="nfc-card">
+        <div class="card-header">
+            <div class="nfc-chip-icon"><i class="fas fa-microchip"></i></div>
+            <h1>Mafuya Solution Forex Exchange</h1>
+            <div class="title">premium forex & currency solutions</div>
+            <div class="nfc-wave"></div>
+        </div>
+
+        <div class="profile-section">
+            <div class="avatar"><i class="fas fa-chart-line"></i></div>
+            <h2>Shemsedin Wabela <i class="fas fa-check-circle" style="color:#1e6b5e; font-size:1rem;"></i></h2>
+            <div class="badge"><i class="fas fa-user-tie"></i> General Manager</div>
+            <div class="company"><i class="fas fa-globe-africa"></i> Mafuya Solution Forex Exchange</div>
+        </div>
+
+        <!-- LIVE EXCHANGE RATES: USD, EUR, CAD (Buy & Sell) -->
+        <div class="exchange-rates" id="forexRatesPanel">
+            <div class="rates-header">
+                <i class="fas fa-chart-simple"></i> <span>⚡ Live Exchange Rates (ETB)</span> <i class="fas fa-arrow-trend-up"></i>
+            </div>
+            <div id="rateContainer">
+                <!-- dynamic rates injected via JS -->
+                <div class="currency-row"><div class="currency-name"><i class="fas fa-dollar-sign"></i> USD</div><div class="buy-sell"><div class="buy"><span>BUY</span> <strong id="usdBuy">--</strong></div><div class="sell"><span>SELL</span> <strong id="usdSell">--</strong></div></div></div>
+                <div class="currency-row"><div class="currency-name"><i class="fas fa-euro-sign"></i> EUR</div><div class="buy-sell"><div class="buy"><span>BUY</span> <strong id="eurBuy">--</strong></div><div class="sell"><span>SELL</span> <strong id="eurSell">--</strong></div></div></div>
+                <div class="currency-row"><div class="currency-name"><i class="fas fa-dollar-sign"></i> CAD</div><div class="buy-sell"><div class="buy"><span>BUY</span> <strong id="cadBuy">--</strong></div><div class="sell"><span>SELL</span> <strong id="cadSell">--</strong></div></div></div>
+            </div>
+            <div class="rate-note"><i class="fas fa-sync-alt"></i> Real-time indicative rates | Call for large transfers</div>
+        </div>
+
+        <div class="contact-grid">
+            <a href="#" class="contact-btn whatsapp" id="whatsappBtn">
+                <i class="fab fa-whatsapp" style="color:#25D366;"></i>
+                <div class="btn-info"><div class="btn-label">WHATSAPP</div><div class="btn-value">+251 912 848 079</div></div>
+                <div class="arrow"><i class="fas fa-chevron-right"></i></div>
+            </a>
+            <a href="#" class="contact-btn email" id="emailBtn">
+                <i class="fas fa-envelope" style="color:#EA4335;"></i>
+                <div class="btn-info"><div class="btn-label">EMAIL</div><div class="btn-value">shemsedin@mafuyasolution.com</div></div>
+                <div class="arrow"><i class="fas fa-chevron-right"></i></div>
+            </a>
+            <a href="#" class="contact-btn phone" id="phoneBtn">
+                <i class="fas fa-phone-alt" style="color:#34B7F1;"></i>
+                <div class="btn-info"><div class="btn-label">PHONE</div><div class="btn-value">+251 912 848 079</div></div>
+                <div class="arrow"><i class="fas fa-chevron-right"></i></div>
+            </a>
+            <a href="#" class="contact-btn web" id="websiteBtn">
+                <i class="fas fa-globe" style="color:#1e6b5e;"></i>
+                <div class="btn-info"><div class="btn-label">WEBSITE</div><div class="btn-value">mafuyasolution.com</div></div>
+                <div class="arrow"><i class="fas fa-chevron-right"></i></div>
+            </a>
+        </div>
+
+        <div class="social-links">
+            <div class="social-icons">
+                <a href="#" id="igLink"><i class="fab fa-instagram"></i></a>
+                <a href="#" id="tiktokLink"><i class="fab fa-tiktok"></i></a>
+                <a href="#" id="fbLink"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" id="linkedinLink"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" id="telegramLink"><i class="fab fa-telegram-plane"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="tap-hint"><i class="fas fa-hand-pointer"></i> NFC tap to connect | Shemsedin Wabela <i class="fas fa-coins"></i></div>
+</div>
+
+<script>
+    // ============================================================
+    // MAFUYA SOLUTION FOREX EXCHANGE - Live Rates for USD, EUR, CAD
+    // General Manager: Shemsedin Wabela | Contact: +251912848079
+    // Dynamic buy/sell rates updated every 45 seconds (realistic simulation)
+    // ============================================================
+
+    // Base rates in ETB (Ethiopian Birr) with realistic spread
+    // We'll simulate live changes by adding minor fluctuations + refresh
+    let currentRates = {
+        usd: { buy:196.10 , sell: 181.60 },
+        eur: { buy: 61.20, sell: 62.45 },
+        cad: { buy: 41.30, sell: 42.10 }
+    };
+
+    // Function to update UI with current rates
+    function updateRateDisplay() {
+        document.getElementById('usdBuy').innerText = currentRates.usd.buy.toFixed(2);
+        document.getElementById('usdSell').innerText = currentRates.usd.sell.toFixed(2);
+        document.getElementById('eurBuy').innerText = currentRates.eur.buy.toFixed(2);
+        document.getElementById('eurSell').innerText = currentRates.eur.sell.toFixed(2);
+        document.getElementById('cadBuy').innerText = currentRates.cad.buy.toFixed(2);
+        document.getElementById('cadSell').innerText = currentRates.cad.sell.toFixed(2);
+    }
+
+    // Simulate small market movements (realistic forex behavior)
+    function fluctuateRates() {
+        // Small random shift between -0.18 and +0.18 for buy/sell
+        const usdBuyDelta = (Math.random() - 0.5) * 0.32;
+        const usdSellDelta = (Math.random() - 0.5) * 0.34;
+        const eurBuyDelta = (Math.random() - 0.5) * 0.38;
+        const eurSellDelta = (Math.random() - 0.5) * 0.40;
+        const cadBuyDelta = (Math.random() - 0.5) * 0.28;
+        const cadSellDelta = (Math.random() - 0.5) * 0.30;
+
+        let newUsdBuy = currentRates.usd.buy + usdBuyDelta;
+        let newUsdSell = currentRates.usd.sell + usdSellDelta;
+        let newEurBuy = currentRates.eur.buy + eurBuyDelta;
+        let newEurSell = currentRates.eur.sell + eurSellDelta;
+        let newCadBuy = currentRates.cad.buy + cadBuyDelta;
+        let newCadSell = currentRates.cad.sell + cadSellDelta;
+
+        // Keep within reasonable range for ETB (prevent unrealistic numbers)
+        newUsdBuy = Math.min(196.10, Math.max(181.60, newUsdBuy));
+        newUsdSell = Math.min(60.2, Math.max(55.8, newUsdSell));
+        newEurBuy = Math.min(64.5, Math.max(58.5, newEurBuy));
+        newEurSell = Math.min(65.8, Math.max(59.9, newEurSell));
+        newCadBuy = Math.min(44.0, Math.max(39.2, newCadBuy));
+        newCadSell = Math.min(45.0, Math.max(40.0, newCadSell));
+
+        // Ensure sell > buy (spread logic)
+        if (newUsdSell <= newUsdBuy) newUsdSell = newUsdBuy + 0.45;
+        if (newEurSell <= newEurBuy) newEurSell = newEurBuy + 0.55;
+        if (newCadSell <= newCadBuy) newCadSell = newCadBuy + 0.40;
+
+        currentRates.usd.buy = parseFloat(newUsdBuy.toFixed(2));
+        currentRates.usd.sell = parseFloat(newUsdSell.toFixed(2));
+        currentRates.eur.buy = parseFloat(newEurBuy.toFixed(2));
+        currentRates.eur.sell = parseFloat(newEurSell.toFixed(2));
+        currentRates.cad.buy = parseFloat(newCadBuy.toFixed(2));
+        currentRates.cad.sell = parseFloat(newCadSell.toFixed(2));
+
+        updateRateDisplay();
+
+        // subtle animation on panel to show update
+        const panel = document.getElementById('forexRatesPanel');
+        panel.style.transition = 'background 0.2s';
+        panel.style.backgroundColor = '#fffae6';
+        setTimeout(() => { panel.style.backgroundColor = ''; }, 400);
+    }
+
+    // Initial display + auto update every 45 seconds (live feel)
+    updateRateDisplay();
+    setInterval(fluctuateRates, 45000);
+
+    // Also add small variation on page load after 2 sec for realism
+    setTimeout(() => fluctuateRates(), 2000);
+
+    // ========== CONTACT & SOCIAL LINKS ==========
+    const contact = {
+        whatsapp: "+251912848079",
+        email: "shemsedin@mafuyasolution.com",
+        phone: "+251912848079",
+        website: "landing-page.html"
+    };
+
+    const social = {
+        instagram: "https://www.instagram.com/mafuyasolution",
+        tiktok: "https://www.tiktok.com/@mafuyasolution",
+        facebook: "https://www.facebook.com/mafuyasolutionforex",
+        linkedin: "https://www.linkedin.com/company/mafuya-solution-forex-exchange",
+        telegram: "https://t.me/mafuyasolution"
+    };
+
+    const whatsappBtn = document.getElementById('whatsappBtn');
+    const emailBtn = document.getElementById('emailBtn');
+    const phoneBtn = document.getElementById('phoneBtn');
+    const websiteBtn = document.getElementById('websiteBtn');
+
+    if (whatsappBtn) {
+        const waNumber = contact.whatsapp.replace(/[^0-9+]/g, '');
+        whatsappBtn.setAttribute('href', `https://wa.me/${waNumber}?text=${encodeURIComponent("Hello Shemsedin, I saw your NFC card with live forex rates (USD/EUR/CAD). I'm interested in Mafuya Solution's exchange services.")}`);
+        whatsappBtn.setAttribute('target', '_blank');
+    }
+    if (emailBtn) {
+        emailBtn.setAttribute('href', `mailto:${contact.email}?subject=Forex%20Inquiry%20%7C%20Mafuya%20Solution&body=Dear%20Shemsedin%2C%0A%0AI%20just%20reviewed%20your%20live%20exchange%20rates%20for%20USD%2C%20EUR%2C%20and%20CAD.%20I%20would%20like%20to%20discuss%20currency%20exchange%20or%20forex%20solutions.%0A%0ARegards.`);
+    }
+    if (phoneBtn) {
+        phoneBtn.setAttribute('href', `tel:${contact.phone.replace(/\s/g, '')}`);
+    }
+    if (websiteBtn) {
+        websiteBtn.setAttribute('href', contact.website);
+    }
+
+    const socialLinks = {
+        igLink: social.instagram,
+        tiktokLink: social.tiktok,
+        fbLink: social.facebook,
+        linkedinLink: social.linkedin,
+        telegramLink: social.telegram
+    };
+    for (const [id, url] of Object.entries(socialLinks)) {
+        const el = document.getElementById(id);
+        if (el) { el.setAttribute('href', url); el.setAttribute('target', '_blank'); }
+    }
+    
+    // Additional console greeting
+    console.log("Mafuya Solution Forex | Shemsedin Wabela | USD/EUR/CAD live rates active ✅");
+</script>
+</body>
+</html>

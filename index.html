@@ -1,0 +1,1242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mafuya Solution · Forex Exchange</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flag-icons@6.6.6/css/flag-icons.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease;
+    }
+
+    :root {
+      --bg-primary: #0b1a26;
+      --bg-secondary: #132d3f;
+      --bg-card: rgba(11, 26, 38, 0.85);
+      --bg-table: rgba(0,0,0,0.2);
+      --text-primary: #ffffff;
+      --text-secondary: rgba(255,255,255,0.8);
+      --text-muted: rgba(255,255,255,0.5);
+      --border-color: rgba(201,168,76,0.1);
+      --border-light: rgba(255,255,255,0.05);
+      --shadow-color: rgba(0,0,0,0.6);
+      --glass-bg: rgba(255,255,255,0.05);
+      --rate-buy: #4caf84;
+      --rate-sell: #e8745a;
+      --gold: #c9a84c;
+      --gold-light: #f0d080;
+      --card-glow: rgba(201,168,76,0.03);
+      --body-bg: linear-gradient(145deg, #0b1a26, #132d3f, #0b1a26);
+      --particle-color: rgba(201,168,76,0.08);
+      --scrollbar-track: rgba(255,255,255,0.02);
+      --scrollbar-thumb: rgba(201,168,76,0.2);
+      --line-color: rgba(201,168,76,0.3);
+    }
+
+    [data-theme="light"] {
+      --bg-primary: #f0f4f8;
+      --bg-secondary: #dce7f2;
+      --bg-card: rgba(255,255,255,0.85);
+      --bg-table: rgba(255,255,255,0.5);
+      --text-primary: #0b2a3b;
+      --text-secondary: #1a4157;
+      --text-muted: #4a6a7a;
+      --border-color: rgba(201,168,76,0.2);
+      --border-light: rgba(0,0,0,0.05);
+      --shadow-color: rgba(0,0,0,0.15);
+      --glass-bg: rgba(0,0,0,0.03);
+      --rate-buy: #2d7a4a;
+      --rate-sell: #c94a3a;
+      --gold: #c9a84c;
+      --gold-light: #d4b85a;
+      --card-glow: rgba(201,168,76,0.05);
+      --body-bg: linear-gradient(145deg, #f0f4f8, #dce7f2, #f0f4f8);
+      --particle-color: rgba(201,168,76,0.05);
+      --scrollbar-track: rgba(0,0,0,0.02);
+      --scrollbar-thumb: rgba(201,168,76,0.3);
+      --line-color: rgba(201,168,76,0.5);
+    }
+
+    body {
+      background: var(--body-bg);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.8rem;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: 
+        radial-gradient(2px 2px at 20% 30%, var(--particle-color), transparent),
+        radial-gradient(2px 2px at 40% 70%, var(--particle-color), transparent),
+        radial-gradient(2px 2px at 60% 20%, var(--particle-color), transparent),
+        radial-gradient(2px 2px at 80% 80%, var(--particle-color), transparent),
+        radial-gradient(2px 2px at 10% 90%, var(--particle-color), transparent),
+        radial-gradient(2px 2px at 90% 10%, var(--particle-color), transparent);
+      pointer-events: none;
+      z-index: 0;
+      animation: moneyRain 20s linear infinite;
+    }
+
+    @keyframes moneyRain {
+      0% { transform: translateY(-10%) scale(1); opacity: 0.5; }
+      50% { opacity: 1; }
+      100% { transform: translateY(10%) scale(1.1); opacity: 0.5; }
+    }
+
+    .floating-currencies {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .floating-currencies span {
+      position: absolute;
+      font-size: 1.5rem;
+      color: var(--particle-color);
+      font-weight: 700;
+      animation: floatCurrency 20s linear infinite;
+    }
+
+    .floating-currencies span:nth-child(1) { left: 0%; top: 0%; animation-delay: 0s; font-size: 2rem; }
+    .floating-currencies span:nth-child(2) { left: 0%; top: 40%; animation-delay: 3s; font-size: 1.8rem; }
+    .floating-currencies span:nth-child(3) { left: 25%; top: 70%; animation-delay: 6s; }
+    .floating-currencies span:nth-child(4) { left: 35%; top: 20%; animation-delay: 9s; font-size: 2.2rem; }
+    .floating-currencies span:nth-child(5) { left: 45%; top: 55%; animation-delay: 2s; }
+    .floating-currencies span:nth-child(6) { left: 55%; top: 85%; animation-delay: 5s; font-size: 1.8rem; }
+    .floating-currencies span:nth-child(7) { left: 65%; top: 15%; animation-delay: 8s; }
+    .floating-currencies span:nth-child(8) { left: 75%; top: 45%; animation-delay: 1s; font-size: 2rem; }
+    .floating-currencies span:nth-child(9) { left: 85%; top: 75%; animation-delay: 4s; }
+    .floating-currencies span:nth-child(10) { left: 92%; top: 30%; animation-delay: 7s; font-size: 1.8rem; }
+    .floating-currencies span:nth-child(11) { left: 50%; top: 5%; animation-delay: 10s; font-size: 2.5rem; }
+    .floating-currencies span:nth-child(12) { left: 8%; top: 60%; animation-delay: 12s; }
+
+    @keyframes floatCurrency {
+      0% { transform: translateY(0) rotate(0deg) scale(1); opacity: 0.04; }
+      50% { opacity: 0.08; }
+      100% { transform: translateY(-100vh) rotate(720deg) scale(0.5); opacity: 0; }
+    }
+
+    .card {
+      max-width: 1320px;
+      width: 100%;
+      background: var(--bg-card);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 3rem;
+      box-shadow: 0 35px 80px -12px var(--shadow-color), 0 0 0 1px var(--border-color) inset;
+      padding: 2.5rem 2.8rem 2.5rem;
+      border: 1px solid var(--border-color);
+      position: relative;
+      z-index: 1;
+      animation: cardGlow 4s ease-in-out infinite;
+    }
+
+    @keyframes cardGlow {
+      0%, 100% { box-shadow: 0 35px 80px -12px var(--shadow-color), 0 0 0 1px var(--border-color) inset; }
+      50% { box-shadow: 0 35px 80px -12px var(--shadow-color), 0 0 30px var(--card-glow), 0 0 0 1px var(--border-color) inset; }
+    }
+
+    /* ===== BRAND - CENTERED ===== */
+    .brand {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.8rem;
+      padding-bottom: 1.2rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .brand-top {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .logo-globe {
+      position: relative;
+      width: 85px;
+      height: 85px;
+      flex-shrink: 0;
+    }
+
+    .globe-ring {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light), var(--gold));
+      padding: 3px;
+      box-shadow: 0 10px 40px rgba(201, 168, 76, 0.25), 0 0 60px rgba(201,168,76,0.05);
+      animation: floatGlobe 4s ease-in-out infinite;
+    }
+
+    .globe-inner {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #1a4d66, #0b2a3b);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: visible;
+    }
+
+    [data-theme="light"] .globe-inner {
+      background: radial-gradient(circle at 35% 35%, #2d7a9e, #1a4d66);
+    }
+
+    .globe-grid {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      overflow: hidden;
+    }
+
+    .globe-grid .lat {
+      position: absolute;
+      left: 5%;
+      right: 5%;
+      height: 1px;
+      background: rgba(201,168,76,0.12);
+    }
+
+    .globe-grid .lat:nth-child(1) { top: 25%; }
+    .globe-grid .lat:nth-child(2) { top: 50%; }
+    .globe-grid .lat:nth-child(3) { top: 75%; }
+
+    .globe-grid .lon {
+      position: absolute;
+      top: 5%;
+      bottom: 5%;
+      width: 1px;
+      background: rgba(201,168,76,0.08);
+    }
+
+    .globe-grid .lon:nth-child(4) { left: 25%; }
+    .globe-grid .lon:nth-child(5) { left: 50%; }
+    .globe-grid .lon:nth-child(6) { left: 75%; }
+
+    .flag-orbit {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      animation: spinOrbit 12s linear infinite;
+    }
+
+    .flag-orbit .flag-item {
+      position: absolute;
+      width: 28px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      filter: drop-shadow(0 2px 6px rgba(0,0,0,0.3));
+      transition: all 0.3s ease;
+      border-radius: 3px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .flag-orbit .flag-item:hover {
+      transform: scale(1.6) !important;
+      filter: drop-shadow(0 2px 20px rgba(201,168,76,0.6));
+      z-index: 10;
+      border-color: var(--gold);
+    }
+
+    .flag-orbit .flag-item .fi {
+      font-size: 1.4rem;
+      line-height: 1;
+      display: block;
+      width: 100%;
+      height: 100%;
+      border-radius: 2px;
+      object-fit: cover;
+    }
+
+    .flag-orbit .flag-item:nth-child(1) { transform: rotate(0deg) translateX(-52px); }
+    .flag-orbit .flag-item:nth-child(2) { transform: rotate(45deg) translateX(-52px); }
+    .flag-orbit .flag-item:nth-child(3) { transform: rotate(90deg) translateX(-52px); }
+    .flag-orbit .flag-item:nth-child(4) { transform: rotate(135deg) translateX(-52px); }
+    .flag-orbit .flag-item:nth-child(5) { transform: rotate(180deg) translateX(-52px); }
+    .flag-orbit .flag-item:nth-child(6) { transform: rotate(225deg) translateX(-52px); }
+    .flag-orbit .flag-item:nth-child(7) { transform: rotate(270deg) translateX(-52px); }
+    .flag-orbit .flag-item:nth-child(8) { transform: rotate(315deg) translateX(-52px); }
+
+    .rotating-ring {
+      position: absolute;
+      inset: -5px;
+      border-radius: 50%;
+      border: 2px dashed rgba(201,168,76,0.1);
+      animation: spinRing 20s linear infinite;
+    }
+
+    .rotating-ring .dot {
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      background: var(--gold);
+      border-radius: 50%;
+      box-shadow: 0 0 15px rgba(201,168,76,0.3);
+    }
+
+    .rotating-ring .dot:nth-child(1) { top: -2.5px; left: 50%; transform: translateX(-50%); }
+    .rotating-ring .dot:nth-child(2) { top: 50%; right: -2.5px; transform: translateY(-50%); }
+    .rotating-ring .dot:nth-child(3) { bottom: -2.5px; left: 50%; transform: translateX(-50%); }
+    .rotating-ring .dot:nth-child(4) { top: 50%; left: -2.5px; transform: translateY(-50%); }
+
+    .logo-letter-globe {
+      font-size: 2.2rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--gold-light), var(--gold), #a0843a);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      position: relative;
+      z-index: 5;
+      filter: drop-shadow(0 2px 15px rgba(201,168,76,0.15));
+      font-family: 'Inter', sans-serif;
+      letter-spacing: -2px;
+    }
+
+    .currency-orbit {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      animation: spinOrbit 18s linear infinite reverse;
+    }
+
+    .currency-orbit .currency-symbol {
+      position: absolute;
+      font-size: 0.75rem;
+      color: rgba(201,168,76,0.15);
+      font-weight: 700;
+      font-family: 'Inter', sans-serif;
+      transition: all 0.3s ease;
+    }
+
+    .currency-orbit .currency-symbol:hover {
+      color: rgba(201,168,76,0.5);
+      transform: scale(1.5) !important;
+    }
+
+    .currency-orbit .currency-symbol:nth-child(1) { transform: rotate(0deg) translateX(-68px); }
+    .currency-orbit .currency-symbol:nth-child(2) { transform: rotate(60deg) translateX(-68px); }
+    .currency-orbit .currency-symbol:nth-child(3) { transform: rotate(120deg) translateX(-68px); }
+    .currency-orbit .currency-symbol:nth-child(4) { transform: rotate(180deg) translateX(-68px); }
+    .currency-orbit .currency-symbol:nth-child(5) { transform: rotate(240deg) translateX(-68px); }
+    .currency-orbit .currency-symbol:nth-child(6) { transform: rotate(300deg) translateX(-68px); }
+
+    @keyframes spinOrbit {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes spinRing {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes floatGlobe {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-4px); }
+    }
+
+    .brand-text {
+      text-align: center;
+    }
+
+    .brand-text h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .brand-text h1 .highlight {
+      background: linear-gradient(135deg, var(--gold-light), var(--gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .brand-text .tagline {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      letter-spacing: 0.2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 0.2rem;
+    }
+
+    .brand-text .tagline i {
+      color: var(--gold);
+    }
+
+    .brand-bottom {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      margin-top: 0.8rem;
+    }
+
+    .badge-date {
+      background: var(--glass-bg);
+      backdrop-filter: blur(2px);
+      padding: 0.5rem 1.5rem;
+      border-radius: 60px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      border: 1px solid var(--border-light);
+      box-shadow: 0 6px 14px var(--shadow-color);
+      animation: badgePulse 3s ease-in-out infinite;
+    }
+
+    @keyframes badgePulse {
+      0%, 100% { border-color: var(--border-light); }
+      50% { border-color: rgba(201,168,76,0.15); }
+    }
+
+    .badge-date i {
+      color: var(--gold);
+    }
+
+    .theme-toggle {
+      background: var(--glass-bg);
+      border: 1px solid var(--border-light);
+      border-radius: 40px;
+      padding: 0.4rem 1rem;
+      cursor: pointer;
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(2px);
+    }
+
+    .theme-toggle:hover {
+      background: rgba(201,168,76,0.1);
+      border-color: rgba(201,168,76,0.2);
+      transform: scale(1.02);
+    }
+
+    .theme-toggle i {
+      font-size: 1rem;
+      color: var(--gold);
+    }
+
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.8rem;
+      gap: 1rem 0.5rem;
+    }
+
+    .filter-group {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--glass-bg);
+      backdrop-filter: blur(2px);
+      padding: 0.2rem 0.2rem 0.2rem 1.2rem;
+      border-radius: 40px;
+      border: 1px solid var(--border-light);
+      box-shadow: 0 4px 10px var(--shadow-color);
+    }
+
+    .filter-group i {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .filter-group select {
+      background: transparent;
+      border: none;
+      padding: 0.5rem 1rem 0.5rem 0.3rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      outline: none;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+
+    .filter-group select option {
+      background: var(--bg-primary);
+      color: var(--text-primary);
+    }
+
+    .right-tool {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+    }
+
+    .transaction-pulse {
+      background: rgba(201, 168, 76, 0.08);
+      border: 1px solid rgba(201, 168, 76, 0.15);
+      border-radius: 60px;
+      padding: 0.3rem 1rem 0.3rem 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-weight: 500;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      backdrop-filter: blur(2px);
+      animation: pulseGlow 2.2s infinite;
+    }
+
+    .transaction-pulse i {
+      color: var(--gold);
+      font-size: 0.9rem;
+    }
+
+    .tx-anim {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .tx-anim .fa-arrow-right {
+      animation: slideArrow 1.4s ease-in-out infinite;
+      color: var(--rate-buy);
+    }
+
+    .tx-anim .fa-arrow-left {
+      animation: slideArrowRev 1.4s ease-in-out infinite;
+      color: var(--rate-sell);
+    }
+
+    @keyframes slideArrow {
+      0% { transform: translateX(0); opacity: 0.5; }
+      50% { transform: translateX(4px); opacity: 1; }
+      100% { transform: translateX(0); opacity: 0.5; }
+    }
+    @keyframes slideArrowRev {
+      0% { transform: translateX(0); opacity: 0.5; }
+      50% { transform: translateX(-4px); opacity: 1; }
+      100% { transform: translateX(0); opacity: 0.5; }
+    }
+    @keyframes pulseGlow {
+      0% { box-shadow: 0 0 0 0 rgba(201, 168, 76, 0.05); }
+      70% { box-shadow: 0 0 0 8px rgba(201, 168, 76, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(201, 168, 76, 0); }
+    }
+
+    .update-info {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      color: var(--text-muted);
+      font-weight: 450;
+      font-size: 0.85rem;
+    }
+
+    .btn-refresh {
+      background: var(--glass-bg);
+      border: 1px solid var(--border-light);
+      border-radius: 40px;
+      padding: 0.4rem 1.1rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.8rem;
+      backdrop-filter: blur(2px);
+      box-shadow: 0 2px 8px var(--shadow-color);
+    }
+
+    .btn-refresh:hover {
+      background: rgba(201,168,76,0.1);
+      border-color: rgba(201,168,76,0.2);
+      transform: scale(1.02);
+      color: var(--text-primary);
+    }
+
+    .btn-refresh:active {
+      transform: scale(0.95);
+    }
+
+    .live-dot {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      background: var(--rate-buy);
+      border-radius: 50%;
+      animation: livePulse 1.5s ease-in-out infinite;
+      margin-right: 3px;
+      box-shadow: 0 0 10px rgba(76,175,132,0.3);
+    }
+
+    @keyframes livePulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.3; transform: scale(0.7); }
+    }
+
+    .table-wrapper {
+      overflow-x: auto;
+      border-radius: 1.5rem;
+      border: 1px solid var(--border-light);
+      background: var(--bg-table);
+      backdrop-filter: blur(4px);
+      margin-top: 0.3rem;
+      box-shadow: 0 8px 20px var(--shadow-color);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+      min-width: 650px;
+    }
+
+    th {
+      text-align: left;
+      padding: 1rem 1rem 0.8rem 1.2rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      background: rgba(255,255,255,0.02);
+      border-bottom: 1px solid var(--border-light);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      font-size: 0.7rem;
+    }
+
+    th:last-child, td:last-child {
+      text-align: right;
+      padding-right: 1.5rem;
+    }
+
+    td {
+      padding: 0.7rem 1rem 0.7rem 1.2rem;
+      border-bottom: 1px solid var(--border-light);
+      color: var(--text-secondary);
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    tbody tr {
+      transition: all 0.3s ease;
+      cursor: default;
+    }
+
+    tbody tr:hover {
+      background: rgba(201,168,76,0.04);
+      transform: scale(1.002);
+      box-shadow: 0 0 30px rgba(201,168,76,0.02);
+    }
+
+    .currency-code {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .currency-code .fi {
+      font-size: 1.6rem;
+      width: 2rem;
+      display: inline-block;
+      line-height: 1;
+      border-radius: 2px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    }
+
+    .badge-pair {
+      background: var(--glass-bg);
+      padding: 0.15rem 0.6rem;
+      border-radius: 30px;
+      font-size: 0.55rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      letter-spacing: 0.3px;
+      margin-left: 0.3rem;
+      backdrop-filter: blur(2px);
+      border: 1px solid var(--border-light);
+    }
+
+    /* ===== RATE CELL WITH FULL WIDTH ANIMATION ===== */
+    .rate-cell {
+      position: relative;
+      padding: 0.7rem 1rem 0.7rem 1.2rem !important;
+      min-width: 130px;
+      text-align: center !important;
+      overflow: hidden;
+    }
+
+    .rate-cell .rate-value {
+      position: relative;
+      z-index: 2;
+      font-weight: 700;
+      display: inline-block;
+      padding: 0 12px;
+      font-size: 0.95rem;
+    }
+
+    .rate-cell.buy .rate-value {
+      color: var(--rate-buy);
+    }
+
+    .rate-cell.sell .rate-value {
+      color: var(--rate-sell);
+    }
+
+    /* ===== FULL WIDTH TRANSACTION LINE ===== */
+    .rate-cell .tx-line-visible {
+      position: absolute;
+      bottom: 2px;
+      left: 0%;
+      right: 0%;
+      height: 2px;
+      background: var(--line-color);
+      opacity: 0.4;
+      border-radius: 2px;
+      animation: linePulse 4s ease-in-out infinite;
+    }
+
+    .rate-cell .tx-line-visible::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: 0;
+      right: 0;
+      height: 6px;
+      background: rgba(201,168,76,0.1);
+      filter: blur(3px);
+      animation: linePulse 4s ease-in-out infinite 0.5s;
+    }
+
+    @keyframes linePulse {
+      0%, 100% { opacity: 0.3; transform: scaleX(1); }
+      50% { opacity: 0.8; transform: scaleX(1.05); }
+    }
+
+    /* ===== ICON MOVING FROM LEFT CORNER TO RIGHT CORNER ===== */
+    .rate-cell .line-icons {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .rate-cell .line-icons .move-icon {
+      position: absolute;
+      top: 50%;
+      font-size: 0.85rem;
+      font-weight: 700;
+      opacity: 0;
+      animation: slideLeftToRight 5s ease-in-out infinite;
+      text-shadow: 0 0 15px rgba(201,168,76,0.2);
+      transform: translateY(-50%);
+    }
+
+    /* Buy cell - icon moves LEFT to RIGHT starting from LEFT EDGE */
+    .rate-cell.buy .line-icons .move-icon {
+      color: var(--rate-buy);
+    }
+
+    .rate-cell.buy .line-icons .move-icon:nth-child(1) { animation-delay: 0s; }
+    .rate-cell.buy .line-icons .move-icon:nth-child(2) { animation-delay: 1.7s; }
+    .rate-cell.buy .line-icons .move-icon:nth-child(3) { animation-delay: 3.4s; }
+
+    /* Sell cell - icon moves RIGHT to LEFT starting from RIGHT EDGE */
+    .rate-cell.sell .line-icons .move-icon {
+      color: var(--rate-sell);
+    }
+
+    .rate-cell.sell .line-icons .move-icon:nth-child(1) { animation-delay: 0.8s; }
+    .rate-cell.sell .line-icons .move-icon:nth-child(2) { animation-delay: 2.5s; }
+    .rate-cell.sell .line-icons .move-icon:nth-child(3) { animation-delay: 4.2s; }
+
+    /* BUY: Slide from LEFT CORNER (0%) to RIGHT CORNER (100%) */
+    @keyframes slideLeftToRight {
+      0% { 
+        left: 0%; 
+        opacity: 0; 
+        transform: translateY(-50%) scale(0.5);
+      }
+      8% { 
+        opacity: 1; 
+        transform: translateY(-50%) scale(1.2);
+      }
+      20% { 
+        transform: translateY(-50%) scale(1);
+      }
+      80% { 
+        opacity: 1; 
+        transform: translateY(-50%) scale(1);
+      }
+      92% { 
+        opacity: 0.5; 
+        transform: translateY(-50%) scale(0.8);
+      }
+      100% { 
+        left: 105%; 
+        opacity: 0; 
+        transform: translateY(-50%) scale(0.3);
+      }
+    }
+
+    /* SELL: Slide from RIGHT CORNER (100%) to LEFT CORNER (0%) */
+    .rate-cell.sell .line-icons .move-icon {
+      animation-name: slideRightToLeft;
+    }
+
+    @keyframes slideRightToLeft {
+      0% { 
+        left: 105%; 
+        opacity: 0; 
+        transform: translateY(-50%) scale(0.5);
+      }
+      8% { 
+        opacity: 1; 
+        transform: translateY(-50%) scale(1.2);
+      }
+      20% { 
+        transform: translateY(-50%) scale(1);
+      }
+      80% { 
+        opacity: 1; 
+        transform: translateY(-50%) scale(1);
+      }
+      92% { 
+        opacity: 0.5; 
+        transform: translateY(-50%) scale(0.8);
+      }
+      100% { 
+        left: -5%; 
+        opacity: 0; 
+        transform: translateY(-50%) scale(0.3);
+      }
+    }
+
+    .rate-cell .line-icons .move-icon.gold { color: var(--gold); }
+    .rate-cell .line-icons .move-icon.green { color: var(--rate-buy); }
+    .rate-cell .line-icons .move-icon.red { color: var(--rate-sell); }
+
+    .rate-cell.buy .line-icons .move-icon.gold { color: var(--gold); }
+    .rate-cell.buy .line-icons .move-icon.green { color: var(--rate-buy); }
+    .rate-cell.buy .line-icons .move-icon.red { color: #e8745a; }
+
+    .rate-cell.sell .line-icons .move-icon.gold { color: var(--gold); }
+    .rate-cell.sell .line-icons .move-icon.green { color: var(--rate-buy); }
+    .rate-cell.sell .line-icons .move-icon.red { color: var(--rate-sell); }
+
+    .rate-flash {
+      animation: rateFlash 0.5s ease;
+    }
+
+    @keyframes rateFlash {
+      0% { background: rgba(201,168,76,0.15); }
+      100% { background: transparent; }
+    }
+
+    .footer-note {
+      margin-top: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      align-items: center;
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      border-top: 1px solid var(--border-light);
+      padding-top: 1.2rem;
+    }
+
+    .footer-note i {
+      color: var(--gold);
+      margin-right: 0.3rem;
+    }
+
+    .footer-note .power {
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+
+    .flash-row {
+      animation: flashGreen 0.6s ease;
+    }
+    @keyframes flashGreen {
+      0% { background: rgba(201,168,76,0.15); box-shadow: 0 0 30px rgba(201,168,76,0.05); }
+      100% { background: transparent; box-shadow: none; }
+    }
+
+    .table-wrapper::-webkit-scrollbar {
+      height: 4px;
+    }
+
+    .table-wrapper::-webkit-scrollbar-track {
+      background: var(--scrollbar-track);
+      border-radius: 10px;
+    }
+
+    .table-wrapper::-webkit-scrollbar-thumb {
+      background: var(--scrollbar-thumb);
+      border-radius: 10px;
+    }
+
+    .table-wrapper::-webkit-scrollbar-thumb:hover {
+      background: rgba(201,168,76,0.3);
+    }
+
+    @media (max-width: 700px) {
+      .card { padding: 1.5rem; }
+      .brand-top { flex-direction: column; gap: 0.8rem; }
+      .brand-bottom { flex-direction: column; gap: 0.8rem; }
+      .badge-date { align-self: center; }
+      .toolbar { flex-direction: column; align-items: stretch; }
+      .filter-group { width: 100%; }
+      .right-tool { width: 100%; justify-content: space-between; }
+      .logo-globe { width: 65px; height: 65px; }
+      .logo-letter-globe { font-size: 1.7rem; }
+      .flag-orbit .flag-item { width: 22px; height: 16px; }
+      .flag-orbit .flag-item .fi { font-size: 1.1rem; }
+      .flag-orbit .flag-item:nth-child(1) { transform: rotate(0deg) translateX(-38px); }
+      .flag-orbit .flag-item:nth-child(2) { transform: rotate(45deg) translateX(-38px); }
+      .flag-orbit .flag-item:nth-child(3) { transform: rotate(90deg) translateX(-38px); }
+      .flag-orbit .flag-item:nth-child(4) { transform: rotate(135deg) translateX(-38px); }
+      .flag-orbit .flag-item:nth-child(5) { transform: rotate(180deg) translateX(-38px); }
+      .flag-orbit .flag-item:nth-child(6) { transform: rotate(225deg) translateX(-38px); }
+      .flag-orbit .flag-item:nth-child(7) { transform: rotate(270deg) translateX(-38px); }
+      .flag-orbit .flag-item:nth-child(8) { transform: rotate(315deg) translateX(-38px); }
+      .currency-orbit { display: none; }
+      .floating-currencies { display: none; }
+      body::before { display: none; }
+      .rate-cell { min-width: 80px; }
+      .rate-cell .line-icons .move-icon { font-size: 0.7rem; }
+      .rate-cell .rate-value { font-size: 0.8rem; }
+      .theme-toggle { font-size: 0.7rem; padding: 0.3rem 0.7rem; }
+      .brand-text h1 { font-size: 1.6rem; }
+      .brand-text .tagline { font-size: 0.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="floating-currencies">
+    <span>$</span><span>€</span><span>£</span><span>¥</span><span>₿</span>
+    <span>₹</span><span>$</span><span>€</span><span>£</span><span>¥</span>
+    <span>₿</span><span>₹</span>
+  </div>
+
+<div class="card">
+
+  <div class="brand">
+    <div class="brand-top">
+      <div class="logo-globe">
+        <div class="globe-ring">
+          <div class="globe-inner">
+            <div class="globe-grid">
+              <span class="lat"></span>
+              <span class="lat"></span>
+              <span class="lat"></span>
+              <span class="lon"></span>
+              <span class="lon"></span>
+              <span class="lon"></span>
+            </div>
+            <div class="rotating-ring">
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+            </div>
+            <div class="flag-orbit">
+              <span class="flag-item"><span class="fi fi-us"></span></span>
+              <span class="flag-item"><span class="fi fi-eu"></span></span>
+              <span class="flag-item"><span class="fi fi-gb"></span></span>
+              <span class="flag-item"><span class="fi fi-ca"></span></span>
+              <span class="flag-item"><span class="fi fi-au"></span></span>
+              <span class="flag-item"><span class="fi fi-cn"></span></span>
+              <span class="flag-item"><span class="fi fi-jp"></span></span>
+              <span class="flag-item"><span class="fi fi-sa"></span></span>
+            </div>
+            <div class="currency-orbit">
+              <span class="currency-symbol">$</span>
+              <span class="currency-symbol">€</span>
+              <span class="currency-symbol">£</span>
+              <span class="currency-symbol">¥</span>
+              <span class="currency-symbol">₿</span>
+              <span class="currency-symbol">₹</span>
+            </div>
+            <span class="logo-letter-globe">M</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="brand-text">
+        <h1>Mafuya <span class="highlight">Solution</span></h1>
+        <div class="tagline">
+          <i class="fas fa-circle-check"></i> premium forex · currency solutions
+          <span style="display:inline-flex;align-items:center;gap:3px;margin-left:5px;font-weight:400;font-size:0.75rem;color:var(--rate-buy);">
+            <span class="live-dot"></span> LIVE
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="brand-bottom">
+      <button class="theme-toggle" id="themeToggle">
+        <i class="fas fa-moon"></i>
+        <span id="themeLabel">Dark</span>
+      </button>
+      <div class="badge-date">
+        <i class="fas fa-calendar-day"></i> 
+        <span id="effectiveDate">2026-06-23</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="toolbar">
+    <div class="filter-group">
+      <i class="fas fa-filter"></i>
+      <select id="currencyFilter">
+        <option value="all">All currencies</option>
+        <option value="USD">🇺🇸 USD</option>
+        <option value="EUR">🇪🇺 EUR</option>
+        <option value="GBP">🇬🇧 GBP</option>
+        <option value="CAD">🇨🇦 CAD</option>
+        <option value="AUD">🇦🇺 AUD</option>
+        <option value="CNY">🇨🇳 CNY</option>
+        <option value="SAR">🇸🇦 SAR</option>
+      </select>
+    </div>
+    <div class="right-tool">
+      <div class="transaction-pulse">
+        <i class="fas fa-exchange-alt"></i>
+        <span class="tx-anim">
+          <i class="fas fa-arrow-right"></i>
+          <span style="font-weight:600;">live tx</span>
+          <i class="fas fa-arrow-left"></i>
+        </span>
+        <span style="opacity:0.5; margin-left:0.2rem;">⚡</span>
+      </div>
+      <div class="update-info">
+        <i class="fas fa-rotate-right"></i>
+        <span><span id="lastUpdate">just now</span></span>
+        <button class="btn-refresh" id="refreshBtn"><i class="fas fa-arrows-rotate"></i> refresh</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-wrapper">
+    <table id="forexTable">
+      <thead>
+        <tr>
+          <th>Currency</th>
+          <th style="text-align:center;">We Buy <span style="font-size:0.6rem;opacity:0.4;">(→ ZAR)</span></th>
+          <th style="text-align:center;">We Sell <span style="font-size:0.6rem;opacity:0.4;">(ZAR →)</span></th>
+        </tr>
+      </thead>
+      <tbody id="tableBody">
+      </tbody>
+    </table>
+  </div>
+
+  <div class="footer-note">
+    <div>
+      <i class="fas fa-asterisk"></i> Rates are indicative · <span class="power">Mafuya Solution</span>
+      <span style="margin-left:12px;font-size:0.65rem;opacity:0.5;">
+        <i class="fas fa-shield-alt"></i> secure
+      </span>
+    </div>
+    <div>
+      <i class="far fa-clock"></i> updated: <span id="footerTimestamp">2026-06-23 14:30</span>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function() {
+    "use strict";
+
+    const RATE_SET = [
+      { currency: "USD", buy: 177.0000, sell: 180.5400, flagClass: "fi-us", symbol: "$", color: "green" },
+      { currency: "CAD", buy: 200.0000, sell: 204.0000, flagClass: "fi-ca", symbol: "C$", color: "gold", label: "spot" },
+      { currency: "AUD", buy: 228.9999, sell: 233.5799, flagClass: "fi-au", symbol: "A$", color: "green" },
+      { currency: "EUR", buy: 47.5000, sell: 48.4500, flagClass: "fi-eu", symbol: "€", color: "gold" },
+      { currency: "CAD", buy: 117.0000, sell: 119.3400, flagClass: "fi-ca", symbol: "C$", color: "gold", label: "cross" },
+      { currency: "CNY", buy: 213.9999, sell: 218.2799, flagClass: "fi-cn", symbol: "¥", color: "red", label: "spot" },
+      { currency: "SAR", buy: 25.0000, sell: 25.5000, flagClass: "fi-sa", symbol: "﷼", color: "green" },
+      { currency: "CNY", buy: 46.5000, sell: 47.4300, flagClass: "fi-cn", symbol: "¥", color: "red", label: "cross" }
+    ];
+
+    const tbody = document.getElementById('tableBody');
+    const filterSelect = document.getElementById('currencyFilter');
+    const refreshBtn = document.getElementById('refreshBtn');
+    const lastUpdateSpan = document.getElementById('lastUpdate');
+    const footerTimestamp = document.getElementById('footerTimestamp');
+    const effectiveDateSpan = document.getElementById('effectiveDate');
+    const themeToggle = document.getElementById('themeToggle');
+    const themeLabel = document.getElementById('themeLabel');
+
+    let currentTheme = 'dark';
+
+    themeToggle.addEventListener('click', function() {
+      if (currentTheme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'light');
+        currentTheme = 'light';
+        themeLabel.textContent = 'Light';
+        themeToggle.innerHTML = '<i class="fas fa-sun"></i> <span id="themeLabel">Light</span>';
+      } else {
+        document.documentElement.removeAttribute('data-theme');
+        currentTheme = 'dark';
+        themeLabel.textContent = 'Dark';
+        themeToggle.innerHTML = '<i class="fas fa-moon"></i> <span id="themeLabel">Dark</span>';
+      }
+    });
+
+    function renderTable(filterValue = 'all') {
+      let filtered = RATE_SET;
+      if (filterValue !== 'all') {
+        filtered = RATE_SET.filter(row => row.currency === filterValue);
+      }
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="3" style="text-align:center; padding:2rem; color:var(--text-muted); font-weight:500;">
+              <i class="fas fa-search" style="margin-right:0.5rem;"></i> No currencies match filter
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      let html = '';
+      filtered.forEach((item) => {
+        const code = item.currency;
+        const flagClass = item.flagClass || 'fi';
+        const symbol = item.symbol || '$';
+        const colorClass = item.color || 'green';
+        const duplicateCount = RATE_SET.filter(r => r.currency === code).length;
+        let badgeHtml = '';
+        if (duplicateCount > 1) {
+          const idx = RATE_SET.filter(r => r.currency === code).indexOf(item);
+          badgeHtml = `<span class="badge-pair">${idx === 0 ? 'spot' : 'cross'}</span>`;
+        }
+
+        html += `
+          <tr data-currency="${code}">
+            <td>
+              <div class="currency-code">
+                <span class="fi ${flagClass}"></span>
+                <span>${code} ${badgeHtml}</span>
+              </div>
+            </td>
+            <td class="rate-cell buy" style="text-align:center;position:relative;">
+              <div class="line-icons">
+                <span class="move-icon ${colorClass}">${symbol}</span>
+                <span class="move-icon ${colorClass}">${symbol}</span>
+                <span class="move-icon ${colorClass}">${symbol}</span>
+              </div>
+              <span class="rate-value">${item.buy.toFixed(4)}</span>
+              <div class="tx-line-visible"></div>
+            </td>
+            <td class="rate-cell sell" style="text-align:center;position:relative;">
+              <div class="line-icons">
+                <span class="move-icon ${colorClass}">${symbol}</span>
+                <span class="move-icon ${colorClass}">${symbol}</span>
+                <span class="move-icon ${colorClass}">${symbol}</span>
+              </div>
+              <span class="rate-value">${item.sell.toFixed(4)}</span>
+              <div class="tx-line-visible"></div>
+            </td>
+          </tr>
+        `;
+      });
+
+      tbody.innerHTML = html;
+    }
+
+    function updateTimestamps() {
+      const now = new Date();
+      const dateStr = now.toISOString().slice(0,10);
+      const timeStr = now.toTimeString().slice(0,5);
+      effectiveDateSpan.textContent = dateStr;
+      footerTimestamp.textContent = `${dateStr} ${timeStr}`;
+      lastUpdateSpan.textContent = 'just now';
+    }
+
+    function refreshRates() {
+      updateTimestamps();
+      const filterVal = filterSelect.value;
+      renderTable(filterVal);
+
+      const rows = tbody.querySelectorAll('tr');
+      rows.forEach((row, i) => {
+        setTimeout(() => {
+          row.classList.add('flash-row');
+          setTimeout(() => row.classList.remove('flash-row'), 600);
+        }, i * 40);
+      });
+
+      refreshBtn.style.transform = 'rotate(25deg)';
+      setTimeout(() => { refreshBtn.style.transform = 'rotate(0deg)'; }, 250);
+    }
+
+    function onFilterChange() {
+      renderTable(filterSelect.value);
+    }
+
+    function init() {
+      effectiveDateSpan.textContent = '2026-06-23';
+      footerTimestamp.textContent = '2026-06-23 14:30';
+      renderTable('all');
+      filterSelect.addEventListener('change', onFilterChange);
+      refreshBtn.addEventListener('click', refreshRates);
+      lastUpdateSpan.textContent = 'just now';
+    }
+
+    init();
+  })();
+</script>
+</body>
+</html>
