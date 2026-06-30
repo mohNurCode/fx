@@ -1,552 +1,629 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>ብልጥ የውጭ ምንዛሪ ንግድ | FXPrime Ethiopia – Advanced Forex</title>
-  <!-- Google Fonts + Icons -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Mafuya Solution – Independent Foreign Exchange Bureau</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <!-- flag-icon-css for real country flags -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css" />
+
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    /* ===== CSS Variables (Light/Dark) ===== */
+    :root {
+      --bg-primary: #F1F5F9;
+      --bg-secondary: #FFFFFF;
+      --bg-nav: rgba(255,255,255,0.92);
+      --bg-glass: rgba(255,255,255,0.6);
+      --text-primary: #0F172A;
+      --text-secondary: #475569;
+      --text-muted: #64748B;
+      --border-color: rgba(0,0,0,0.08);
+      --shadow-color: rgba(0,0,0,0.06);
+      --badge-bg: rgba(45,212,191,0.12);
+      --scrollbar-track: #E2E8F0;
+      --scrollbar-thumb: #94A3B8;
+      --accent: #2DD4BF;
+      --accent-dark: #1EA89A;
+      --danger: #F43F5E;
+      --gradient-start: #E2E8F0;
+      --gradient-end: #F8FAFC;
+      --nav-blur: 12px;
     }
 
+    [data-theme="dark"] {
+      --bg-primary: #05070F;
+      --bg-secondary: rgba(8,14,26,0.75);
+      --bg-nav: rgba(5,7,15,0.92);
+      --bg-glass: rgba(8,14,26,0.7);
+      --text-primary: #EFF3FC;
+      --text-secondary: #94A3B8;
+      --text-muted: #64748B;
+      --border-color: rgba(45,212,191,0.25);
+      --shadow-color: rgba(0,0,0,0.4);
+      --badge-bg: rgba(45,212,191,0.12);
+      --scrollbar-track: #0A0E1A;
+      --scrollbar-thumb: #2DD4BF;
+      --gradient-start: #0A0F2A;
+      --gradient-end: #010103;
+    }
+
+    /* ===== Reset & Base ===== */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Inter', sans-serif;
-      background: #05070F;
-      color: #EFF3FC;
+      background: var(--bg-primary);
+      color: var(--text-primary);
       overflow-x: hidden;
       scroll-behavior: smooth;
+      transition: background 0.3s, color 0.2s;
     }
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--scrollbar-track); }
+    ::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border-radius: 10px; }
 
-    /* advanced dynamic gradient background */
     .gradient-bg {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -2;
-      background: radial-gradient(circle at 30% 10%, #0A0F2A, #010103);
+      position: fixed; top:0; left:0; width:100%; height:100%; z-index:-2;
+      background: radial-gradient(circle at 30% 10%, var(--gradient-start), var(--gradient-end));
+      transition: background 0.4s;
+      animation: gradientShift 20s ease-in-out infinite alternate;
+    }
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; background-size: 200% 200%; }
+      100% { background-position: 100% 50%; background-size: 200% 200%; }
     }
     .gradient-bg::after {
       content: "";
-      position: absolute;
-      width: 100%;
-      height: 100%;
+      position: absolute; width:100%; height:100%;
       background: repeating-linear-gradient(45deg, rgba(45,212,191,0.02) 0px, rgba(45,212,191,0.02) 2px, transparent 2px, transparent 8px);
       pointer-events: none;
     }
-
     .grid-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
+      position: fixed; top:0; left:0; width:100%; height:100%;
+      background-image: linear-gradient(rgba(0,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,255,255,0.03) 1px, transparent 1px);
       background-size: 55px 55px;
       pointer-events: none;
       z-index: -1;
+      opacity: 0.3;
+      transition: opacity 0.3s;
     }
+    [data-theme="light"] .grid-overlay { opacity: 0.08; }
 
-    ::-webkit-scrollbar { width: 5px; }
-    ::-webkit-scrollbar-track { background: #0A0E1A; }
-    ::-webkit-scrollbar-thumb { background: #2DD4BF; border-radius: 10px; }
+    .container { max-width:1400px; margin:0 auto; padding:0 5%; width:100%; }
 
-    .container {
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 0 5%;
+    /* ===== Full‑width Navbar ===== */
+    .navbar-wrapper {
       width: 100%;
+      background: var(--bg-nav);
+      backdrop-filter: blur(var(--nav-blur));
+      -webkit-backdrop-filter: blur(var(--nav-blur));
+      border-bottom: 1px solid var(--border-color);
+      transition: background 0.3s, border-color 0.3s;
+      position: sticky; top:0; z-index:100;
+      padding: 0 5%;
     }
-
-    /* === FULLY RESPONSIVE NAVBAR === */
     .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 24px 0;
-      flex-wrap: wrap;
-      gap: 20px;
-      border-bottom: 1px solid rgba(45, 212, 191, 0.25);
-      backdrop-filter: blur(4px);
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 20px 0; flex-wrap: wrap; gap: 20px;
+      max-width: 1400px; margin: 0 auto;
     }
     .logo {
       font-size: clamp(1.5rem, 6vw, 2rem);
       font-weight: 800;
       background: linear-gradient(130deg, #FFFFFF, #2DD4BF, #A5F3E8);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+      letter-spacing: -0.5px;
     }
-    .nav-links {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 20px;
-      justify-content: center;
+    [data-theme="light"] .logo {
+      background: linear-gradient(130deg, #0F172A, #14B8A6, #0F172A);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
     }
-    @media (max-width: 860px) {
-      .navbar { flex-direction: column; text-align: center; }
-      .nav-links { justify-content: center; gap: 18px; }
-    }
-    @media (max-width: 640px) {
-      .nav-links { gap: 12px; }
-      .nav-links a { font-size: 0.85rem; }
-      .lang-switch { padding: 3px 8px; }
-      .lang-btn { padding: 4px 10px; font-size: 0.75rem; }
-      .btn-outline-glow { padding: 6px 18px; font-size: 0.8rem; }
-    }
-    .nav-links a {
-      text-decoration: none;
-      color: #CBD5E1;
-      font-weight: 500;
-      transition: 0.2s;
-      font-size: 0.95rem;
-      white-space: nowrap;
-    }
-    @media (max-width: 550px) {
-      .nav-links a { white-space: normal; font-size: 0.8rem; }
-    }
-    .nav-links a:hover { color: #2DD4BF; text-shadow: 0 0 5px #2DD4BF40; }
-    .lang-switch {
-      display: flex;
-      gap: 6px;
-      background: rgba(20, 30, 55, 0.7);
-      backdrop-filter: blur(8px);
-      padding: 5px 12px;
-      border-radius: 50px;
-      border: 1px solid rgba(45,212,191,0.4);
-    }
-    .lang-btn {
-      background: transparent;
-      border: none;
-      color: #94A3B8;
-      font-weight: 600;
-      font-size: 0.8rem;
-      padding: 5px 12px;
-      border-radius: 40px;
-      cursor: pointer;
-      transition: 0.2s;
-    }
-    .lang-btn.active {
-      background: #2DD4BF;
-      color: #0B0F1C;
-      box-shadow: 0 0 8px #2DD4BF;
-    }
-    .btn-outline-glow {
-      background: transparent;
-      border: 1px solid #2DD4BF;
-      padding: 7px 22px;
-      border-radius: 40px;
-      color: #2DD4BF;
-      font-weight: 600;
-      transition: 0.25s;
-      white-space: nowrap;
-    }
+    .logo-sub { font-size:0.65rem; font-weight:400; color:var(--text-secondary); display:block; margin-top:2px; letter-spacing:0.3px; background:none; -webkit-background-clip:unset; background-clip:unset; }
 
-    /* === HERO RESPONSIVE === */
+    .nav-links { display:flex; flex-wrap:wrap; align-items:center; gap:20px; justify-content:center; }
+    @media (max-width:860px) { .navbar { flex-direction:column; text-align:center; } .nav-links { justify-content:center; gap:18px; } }
+    @media (max-width:640px) { .nav-links { gap:12px; } .nav-links a { font-size:0.85rem; } .lang-switch { padding:3px 8px; } .lang-btn { padding:4px 10px; font-size:0.75rem; } .btn-outline-glow { padding:6px 18px; font-size:0.8rem; } }
+
+    .nav-links a { text-decoration:none; color:var(--text-secondary); font-weight:500; transition:0.2s; font-size:0.95rem; white-space:nowrap; }
+    @media (max-width:550px) { .nav-links a { white-space:normal; font-size:0.8rem; } }
+    .nav-links a:hover { color:var(--accent); text-shadow:0 0 8px var(--accent)50; }
+
+    .lang-switch { display:flex; gap:6px; background:var(--bg-glass); backdrop-filter:blur(8px); padding:5px 12px; border-radius:50px; border:1px solid var(--border-color); transition:background 0.3s, border-color 0.3s; }
+    .lang-btn { background:transparent; border:none; color:var(--text-muted); font-weight:600; font-size:0.8rem; padding:5px 12px; border-radius:40px; cursor:pointer; transition:0.2s; }
+    .lang-btn.active { background:var(--accent); color:#0B0F1C; box-shadow:0 0 12px var(--accent); }
+
+    .theme-toggle { background:var(--bg-glass); border:1px solid var(--border-color); border-radius:50%; width:38px; height:38px; display:flex; align-items:center; justify-content:center; cursor:pointer; color:var(--text-secondary); font-size:1rem; transition:0.25s; backdrop-filter:blur(4px); }
+    .theme-toggle:hover { border-color:var(--accent); color:var(--accent); transform:rotate(15deg) scale(1.05); }
+    .theme-toggle i { pointer-events:none; }
+
+    .btn-outline-glow { background:transparent; border:1px solid var(--accent); padding:7px 22px; border-radius:40px; color:var(--accent); font-weight:600; transition:0.25s; white-space:nowrap; cursor:pointer; }
+    .btn-outline-glow:hover { background:var(--accent); color:#0B0F1C; box-shadow:0 0 24px var(--accent)60; }
+
+    /* ===== Hero with Flag Background (flag-icon-css) ===== */
     .hero {
-      padding: 60px 0 50px;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
+      padding: 40px 0 30px;
+      display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center;
       gap: 40px;
+      position: relative; overflow: hidden; z-index:1;
     }
-    .hero-content { flex: 1.2; min-width: 260px; }
-    .hero-badge {
-      display: inline-flex;
+
+    .flags-bg {
+      position: absolute; top:0; left:0; width:100%; height:100%; overflow:hidden; pointer-events:none; z-index:0; opacity:0.15;
+    }
+    .flags-strip {
+      display: flex; gap: 50px; white-space: nowrap;
+      animation: scrollFlags 22s linear infinite;
+      font-size: 6.8rem; /* big flags */
       align-items: center;
-      gap: 8px;
-      background: rgba(45,212,191,0.12);
-      backdrop-filter: blur(4px);
-      padding: 6px 16px;
-      border-radius: 60px;
-      font-size: 0.75rem;
-      margin-bottom: 24px;
+      border-radius: 20px;
+      will-change: transform;
     }
+    .flags-strip:last-child { animation-delay: -11s; }
+    @keyframes scrollFlags {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    /* flag-icon-css overrides to make them bigger and square */
+    .flags-strip .flag-icon {
+      display: inline-block;
+      width: 4rem; height: 3rem; /* adjust size */
+      background-size: cover;
+    }
+
+    .hero-content { flex:1.2; min-width:260px; position:relative; z-index:2; }
+    .hero-badge { display:inline-flex; align-items:center; gap:8px; background:var(--badge-bg); backdrop-filter:blur(4px); padding:4px 14px; border-radius:60px; font-size:0.7rem; margin-bottom:16px; border:1px solid var(--border-color); color:var(--text-secondary); transition:background 0.3s, border-color 0.3s; animation:badgePulse 3s infinite; }
+    @keyframes badgePulse { 0%,100% { box-shadow:0 0 0 0 rgba(45,212,191,0); } 50% { box-shadow:0 0 12px 2px rgba(45,212,191,0.2); } }
+    .hero-badge i { color:var(--accent); }
     .hero-content h1 {
-      font-size: clamp(2rem, 7vw, 4rem);
-      font-weight: 800;
-      line-height: 1.2;
-      margin-bottom: 20px;
-      background: linear-gradient(135deg, #FFFFFF, #B0F3E8, #2DD4BF);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
+      font-size: clamp(1.5rem, 4vw, 2.8rem);
+      font-weight: 800; line-height:1.2; margin-bottom:10px;
+      background: linear-gradient(135deg, var(--text-primary), var(--accent));
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+      animation: titleGlow 6s ease-in-out infinite;
     }
-    .hero-content p {
-      font-size: clamp(0.9rem, 4vw, 1.15rem);
-      color: #A0B2D0;
-      max-width: 550px;
-      margin-bottom: 28px;
-    }
-    .hero-stats {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 30px;
-      margin: 25px 0 20px;
-    }
-    .stat-item h3 { font-size: clamp(1.5rem, 5vw, 2.2rem); }
-    .btn-group {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px;
-    }
-    .btn-primary, .btn-secondary {
-      padding: 12px 28px;
-      font-size: 0.9rem;
-      white-space: nowrap;
-    }
-    @media (max-width: 550px) {
-      .btn-primary, .btn-secondary { padding: 10px 20px; font-size: 0.8rem; white-space: normal; }
-      .hero-stats { gap: 20px; justify-content: space-between; }
-    }
-    .hero-visual { flex: 1; min-width: 260px; }
-    .chart-card {
-      background: rgba(8, 14, 26, 0.75);
-      backdrop-filter: blur(16px);
-      border-radius: 32px;
-      padding: 20px;
-    }
-    .candlestick {
-      display: flex;
-      gap: 6px;
-      justify-content: center;
-      align-items: flex-end;
-      height: 160px;
-    }
-    @media (max-width: 550px) {
-      .candlestick { gap: 4px; height: 140px; }
-      .candle { width: 22px !important; }
-    }
-    .candle {
-      width: 28px;
-      background: #2DD4BF;
-      border-radius: 6px;
-      transition: all 0.2s;
-    }
-    .candle.red { background: #F43F5E; box-shadow: 0 0 6px #F43F5E; }
+    @keyframes titleGlow { 0%,100% { filter:drop-shadow(0 0 5px rgba(45,212,191,0.1)); } 50% { filter:drop-shadow(0 0 20px rgba(45,212,191,0.25)); } }
+    .hero-content h1 .highlight { color:var(--accent); background:none; -webkit-background-clip:unset; background-clip:unset; }
+    .hero-content p { font-size:clamp(0.8rem, 2vw, 1rem); color:var(--text-secondary); max-width:500px; margin-bottom:20px; line-height:1.6; }
+    .hero-stats { display:flex; flex-wrap:wrap; gap:24px; margin:20px 0 16px; }
+    .stat-item h3 { font-size:clamp(1.2rem, 3.5vw, 1.8rem); color:var(--accent); animation:statPop 1.5s ease-out; }
+    @keyframes statPop { 0% { transform:scale(0.8); opacity:0; } 60% { transform:scale(1.1); } 100% { transform:scale(1); opacity:1; } }
+    .stat-item p { color:var(--text-muted); font-size:0.7rem; margin-top:2px; }
+    .btn-group { display:flex; flex-wrap:wrap; gap:14px; }
+    .btn-primary, .btn-secondary { padding:10px 22px; font-size:0.8rem; white-space:nowrap; border-radius:60px; font-weight:600; border:none; cursor:pointer; transition:0.25s; }
+    .btn-primary { background:linear-gradient(135deg, var(--accent), var(--accent-dark)); color:#0B0F1C; box-shadow:0 4px 20px var(--accent)50; animation:btnPulse 4s infinite; }
+    @keyframes btnPulse { 0%,100% { box-shadow:0 4px 20px var(--accent)50; } 50% { box-shadow:0 4px 40px var(--accent)80; } }
+    .btn-primary:hover { transform:translateY(-3px) scale(1.02); box-shadow:0 8px 40px var(--accent)80; }
+    .btn-secondary { background:var(--bg-glass); border:1px solid var(--border-color); color:var(--text-primary); }
+    .btn-secondary:hover { background:var(--accent); color:#0B0F1C; border-color:var(--accent); transform:translateY(-3px); }
+    @media (max-width:550px) { .btn-primary, .btn-secondary { padding:8px 16px; font-size:0.7rem; white-space:normal; } .hero-stats { gap:16px; justify-content:space-between; } }
 
-    /* Features grid responsive */
-    .section { padding: 70px 0 50px; }
-    .section-title { font-size: clamp(1.8rem, 6vw, 2.8rem); text-align: center; }
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 30px;
-      margin-top: 45px;
-    }
-    .feature-card { padding: 28px 20px; border-radius: 28px; }
-    .feature-icon { font-size: 2.2rem; }
+    .hero-visual { flex:1; min-width:260px; position:relative; z-index:2; }
+    .chart-card { background:var(--bg-secondary); backdrop-filter:blur(16px); border-radius:28px; padding:20px 16px; border:1px solid var(--border-color); box-shadow:0 8px 32px var(--shadow-color); transition:background 0.3s, border-color 0.3s, box-shadow 0.3s; animation:floatNeon 5s infinite alternate ease-in-out; }
+    @keyframes floatNeon { 0% { transform:translateY(0px); } 100% { transform:translateY(-6px); } }
+    .candlestick { display:flex; gap:6px; justify-content:center; align-items:flex-end; height:120px; }
+    @media (max-width:550px) { .candlestick { gap:4px; height:100px; } .candle { width:18px !important; } }
+    .candle { width:24px; background:var(--accent); border-radius:6px; transition:all 0.3s ease; min-height:6px; animation:candleRise 0.5s ease-out; }
+    @keyframes candleRise { 0% { transform:scaleY(0); opacity:0; } 100% { transform:scaleY(1); opacity:1; } }
+    .candle.red { background:var(--danger); box-shadow:0 0 8px var(--danger); }
+    .price-glow { transition:color 0.2s ease; }
+    .price-update { animation:priceFlash 0.4s ease; }
+    @keyframes priceFlash { 0% { text-shadow:0 0 0 rgba(45,212,191,0); } 30% { text-shadow:0 0 20px var(--accent); color:var(--accent); } 100% { text-shadow:0 0 0 rgba(45,212,191,0); } }
 
-    /* dashboard table responsive */
-    .dashboard-preview {
-      padding: 30px 20px;
-      border-radius: 40px;
-      overflow-x: auto;
-    }
-    .trade-row {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 14px 0;
-    }
-    @media (max-width: 550px) {
-      .trade-row { font-size: 0.8rem; }
-      .dashboard-preview h3 { font-size: 1.3rem; }
-    }
+    /* ===== Rates Table ===== */
+    .section { padding:50px 0 30px; }
+    .section-title { font-size:clamp(1.6rem, 5vw, 2.4rem); text-align:center; font-weight:700; color:var(--text-primary); }
+    .section-sub { text-align:center; color:var(--text-secondary); margin-top:10px; margin-bottom:24px; padding:0 10px; font-size:clamp(0.8rem, 1.8vw, 1rem); max-width:650px; margin-left:auto; margin-right:auto; }
 
-    /* Ethiopia spotlight responsive */
-    .ethiopia-spotlight {
-      padding: 40px 28px;
-      border-radius: 48px;
-      flex-direction: row;
-    }
-    @media (max-width: 780px) {
-      .ethiopia-spotlight { flex-direction: column; text-align: center; }
-      .eth-text p { margin: 0 auto; }
-    }
-    .local-badge { padding: 10px 20px; font-size: 0.85rem; white-space: nowrap; }
-    @media (max-width: 500px) {
-      .local-badge { white-space: normal; text-align: center; }
-    }
+    .rates-table-wrap { background:var(--bg-secondary); backdrop-filter:blur(12px); border-radius:36px; padding:20px 16px 24px; border:1px solid var(--border-color); box-shadow:0 8px 32px var(--shadow-color); overflow-x:auto; transition:background 0.3s, border-color 0.3s, box-shadow 0.3s; position:relative; }
+    .rates-table-wrap::before { content:''; position:absolute; top:0; left:-100%; width:200%; height:100%; background:linear-gradient(90deg, transparent, rgba(45,212,191,0.03), transparent); animation:shimmer 8s infinite; pointer-events:none; }
+    @keyframes shimmer { 0% { transform:translateX(-100%); } 100% { transform:translateX(100%); } }
 
-    /* CTA responsive */
-    .cta-section {
-      padding: 50px 20px;
-      border-radius: 48px;
-      margin: 40px 0;
-    }
-    .cta-section h2 { font-size: clamp(1.5rem, 6vw, 2.5rem); }
-    footer {
-      flex-direction: row;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      text-align: center;
-      gap: 16px;
-      font-size: 0.8rem;
-    }
-    @media (max-width: 600px) {
-      footer { flex-direction: column; align-items: center; }
-      .social-links i { margin: 0 12px; }
-      .container { padding: 0 20px; }
-    }
-    @keyframes floatNeon {
-      0% { transform: translateY(0px); }
-      100% { transform: translateY(-8px);}
-    }
-    .chart-card { animation: floatNeon 5s infinite alternate ease-in-out; }
-    [data-translate] { transition: all 0.2s; }
-    .live-badge { font-size: 0.7rem; background: #F43F5E20; padding: 4px 12px; border-radius: 20px; }
+    .rates-table-wrap .table-header { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:14px; }
+    .rates-table-wrap .table-header h3 { font-size:clamp(1rem, 3vw, 1.3rem); color:var(--text-primary); }
+    .rates-table-wrap .table-header .badge-live { background:rgba(244,63,94,0.15); padding:4px 14px; border-radius:40px; font-size:0.65rem; color:var(--danger); border:1px solid var(--danger)30; animation:liveDot 1.4s infinite; }
+    @keyframes liveDot { 0%,100% { opacity:1; } 50% { opacity:0.2; } }
+
+    .rates-table { width:100%; border-collapse:collapse; font-size:clamp(0.7rem, 1.8vw, 0.85rem); min-width:450px; }
+    .rates-table thead th { text-align:left; padding:10px 6px 10px 0; color:var(--text-muted); font-weight:500; border-bottom:1px solid var(--border-color); font-size:0.7rem; text-transform:uppercase; letter-spacing:0.5px; }
+    .rates-table tbody tr { transition:background 0.2s; }
+    .rates-table tbody tr:hover { background:var(--badge-bg); }
+    .rates-table tbody td { padding:10px 6px 10px 0; border-bottom:1px solid var(--border-color); font-weight:500; color:var(--text-primary); }
+    .rates-table tbody tr:last-child td { border-bottom:none; }
+    .rates-table .currency-cell { display:flex; align-items:center; gap:8px; }
+    .rates-table .currency-cell .code { font-weight:700; color:var(--text-primary); }
+    .rates-table .currency-cell .name { color:var(--text-muted); font-weight:400; font-size:0.7rem; }
+    .rates-table .buy { color:var(--accent); }
+    .rates-table .sell { color:#F97316; }
+    .rate-note { margin-top:14px; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:10px; font-size:0.7rem; color:var(--text-muted); border-top:1px solid var(--border-color); padding-top:14px; }
+    .rate-note .negotiate { color:var(--accent); cursor:default; animation:negotiatePulse 3s infinite; }
+    @keyframes negotiatePulse { 0%,100% { opacity:1; } 50% { opacity:0.6; } }
+    .rate-note .refresh-btn { background:var(--bg-glass); border:1px solid var(--border-color); color:var(--text-secondary); padding:3px 14px; border-radius:40px; font-size:0.65rem; cursor:pointer; transition:0.2s; }
+    .rate-note .refresh-btn:hover { background:var(--accent); color:#0B0F1C; border-color:var(--accent); box-shadow:0 0 20px var(--accent)40; }
+
+    /* ===== Features & Services ===== */
+    .features-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:24px; margin-top:32px; }
+    .feature-card { padding:24px 18px; border-radius:24px; background:var(--bg-secondary); backdrop-filter:blur(8px); border:1px solid var(--border-color); box-shadow:0 4px 16px var(--shadow-color); transition:background 0.3s, border-color 0.3s, box-shadow 0.3s, transform 0.25s; animation:cardRise 0.6s ease-out both; animation-delay:calc(var(--i,0)*0.1s); }
+    @keyframes cardRise { 0% { transform:translateY(30px); opacity:0; } 100% { transform:translateY(0); opacity:1; } }
+    .feature-card:hover { border-color:var(--accent); transform:translateY(-4px); box-shadow:0 12px 40px var(--shadow-color); }
+    .feature-icon { font-size:1.8rem; color:var(--accent); margin-bottom:10px; transition:transform 0.3s; }
+    .feature-card:hover .feature-icon { transform:scale(1.1) rotate(-5deg); }
+    .feature-card h3 { font-size:1rem; margin-bottom:6px; color:var(--text-primary); }
+    .feature-card p { color:var(--text-secondary); font-size:0.85rem; line-height:1.5; }
+
+    .services-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(180px,1fr)); gap:20px; margin-top:32px; }
+    .service-item { background:var(--bg-secondary); backdrop-filter:blur(8px); border-radius:20px; padding:24px 16px; text-align:center; border:1px solid var(--border-color); box-shadow:0 4px 16px var(--shadow-color); transition:background 0.3s, border-color 0.3s, box-shadow 0.3s, transform 0.25s; animation:cardRise 0.6s ease-out both; animation-delay:calc(var(--i,0)*0.1s + 0.2s); }
+    .service-item:hover { border-color:var(--accent); transform:translateY(-3px) scale(1.02); box-shadow:0 12px 32px var(--shadow-color); }
+    .service-item i { font-size:2rem; color:var(--accent); margin-bottom:10px; transition:transform 0.3s; }
+    .service-item:hover i { transform:scale(1.1) rotate(5deg); }
+    .service-item h4 { font-size:0.95rem; margin-bottom:4px; color:var(--text-primary); }
+    .service-item p { color:var(--text-secondary); font-size:0.75rem; }
+
+    /* ===== CTA ===== */
+    .cta-section { padding:40px 20px; border-radius:40px; margin:30px 0; background:var(--bg-secondary); backdrop-filter:blur(8px); border:1px solid var(--border-color); box-shadow:0 8px 32px var(--shadow-color); text-align:center; transition:background 0.3s, border-color 0.3s, box-shadow 0.3s; animation:ctaFade 1s ease-out; }
+    @keyframes ctaFade { 0% { opacity:0; transform:scale(0.95); } 100% { opacity:1; transform:scale(1); } }
+    .cta-section h2 { font-size:clamp(1.4rem, 5vw, 2.2rem); font-weight:700; color:var(--text-primary); }
+    .cta-section p { margin:14px auto; max-width:500px; color:var(--text-secondary); padding:0 12px; font-size:0.9rem; }
+
+    /* ===== Footer ===== */
+    footer { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; padding:24px 0 30px; border-top:1px solid var(--border-color); gap:16px; font-size:0.75rem; color:var(--text-muted); transition:border-color 0.3s; }
+    footer .footer-links { display:flex; flex-wrap:wrap; gap:16px; }
+    footer .footer-links a { color:var(--text-secondary); text-decoration:none; transition:0.2s; font-size:0.7rem; }
+    footer .footer-links a:hover { color:var(--accent); text-shadow:0 0 8px var(--accent)40; }
+    .social-links { display:flex; gap:14px; }
+    .social-links i { font-size:1rem; color:var(--text-muted); transition:0.3s; cursor:default; }
+    .social-links i:hover { color:var(--accent); transform:scale(1.1) rotate(-5deg); }
+    @media (max-width:700px) { footer { flex-direction:column; text-align:center; } footer .footer-links { justify-content:center; } }
+
+    .footer-legal { text-align:center; font-size:0.6rem; color:var(--text-muted); padding-bottom:16px; border-top:1px solid var(--border-color); padding-top:14px; transition:border-color 0.3s; }
+    .footer-legal span { margin:0 4px; }
+
+    .live-badge-sm { display:inline-flex; align-items:center; gap:4px; background:rgba(244,63,94,0.12); padding:2px 8px; border-radius:20px; font-size:0.65rem; color:var(--danger); border:1px solid var(--danger)20; animation:livePulse 1.6s infinite; }
+    @keyframes livePulse { 0%,100% { opacity:1; transform:scale(1); } 50% { opacity:0.6; transform:scale(0.98); } }
+
+    @media (max-width:600px) { .container { padding:0 16px; } .navbar-wrapper { padding:0 16px; } }
   </style>
 </head>
 <body>
-<div class="gradient-bg"></div>
-<div class="grid-overlay"></div>
+  <div class="gradient-bg"></div>
+  <div class="grid-overlay"></div>
 
-<div class="container">
-  <!-- Navigation -->
-  <div class="navbar">
-    <div class="logo">FX<span style="color:#2DD4BF;">Prime</span> <span style="font-size:1.2rem;">🇪🇹</span></div>
-    <div class="nav-links">
-      <a href="#" data-translate="markets">Markets</a>
-      <a href="#" data-translate="tools">Trading Tools</a>
-      <a href="#" data-translate="edu">Education</a>
-      <a href="#" data-translate="partner">Partner</a>
-      <div class="lang-switch">
-        <button class="lang-btn active" data-lang="en">EN</button>
-        <button class="lang-btn" data-lang="am">አማርኛ</button>
+  <!-- Full-width navbar -->
+  <div class="navbar-wrapper">
+    <div class="navbar">
+      <div>
+        <div class="logo">Mafuya <span style="color:var(--accent);">Solution</span></div>
+        <span class="logo-sub">Independent Foreign Exchange Bureau</span>
       </div>
-      <a href="#" class="btn-outline-glow" data-translate="open_acc">Open Account</a>
+      <div class="nav-links">
+        <a href="#" data-translate="nav_why">Why Us</a>
+        <a href="#" data-translate="nav_rates">Rates</a>
+        <a href="#" data-translate="nav_services">Services</a>
+        <a href="#" data-translate="nav_contact">Contact</a>
+        <div class="lang-switch">
+          <button class="lang-btn active" data-lang="en">EN</button>
+          <button class="lang-btn" data-lang="am">አማርኛ</button>
+        </div>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"><i class="fas fa-moon"></i></button>
+        <a href="#" class="btn-outline-glow" data-translate="nav_rates_btn">View Rates</a>
+      </div>
     </div>
   </div>
 
-  <!-- Hero Section -->
-  <div class="hero">
-    <div class="hero-content">
-      <div class="hero-badge">
-        <i class="fas fa-chart-line"></i> <span data-translate="badge_text">Ethiopia's #1 Regulated FX Broker</span>
-      </div>
-      <h1><span data-translate="hero_title1">Trade Forex Like a</span> <span class="glow-text" data-translate="hero_title2">Market Titan</span><br> <span data-translate="hero_title3">from Addis to Global</span></h1>
-      <p data-translate="hero_desc">Leverage institutional-grade spreads, AI analytics, and local Ethiopian support — Zero slippage on major pairs, lightning execution.</p>
-      <div class="btn-group">
-        <button class="btn-primary" data-translate="start_btn">Start Trading <i class="fas fa-arrow-right"></i></button>
-        <button class="btn-secondary" data-translate="demo_btn">Demo Account</button>
-      </div>
-      <div class="hero-stats">
-        <div class="stat-item"><h3>0.0</h3><p data-translate="stat1">pips spread*</p></div>
-        <div class="stat-item"><h3>1:500</h3><p data-translate="stat2">leverage</p></div>
-        <div class="stat-item"><h3>24/7</h3><p data-translate="stat3">local support</p></div>
-      </div>
-    </div>
-    <div class="hero-visual">
-      <div class="chart-card">
-        <div style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px; margin-bottom:15px;">
-          <span>USD/ETB synthetic <i class="fas fa-circle" style="font-size: 8px; color:#2DD4BF;"></i> LIVE</span>
-          <span class="live-badge" id="livePercentBadge">+0.34%</span>
+  <div class="container">
+    <!-- Hero with flag background (flag-icon-css) -->
+    <div class="hero">
+      <div class="flags-bg" id="flagsBg"></div>
+
+      <div class="hero-content">
+        <div class="hero-badge"><i class="fas fa-shield-alt"></i> <span data-translate="badge_text">Licensed &amp; Regulated in Ethiopia</span></div>
+        <h1><span data-translate="hero_title1">Trusted Global Currency Exchange</span><br /><span data-translate="hero_title2">Connecting Ethiopia With The World</span></h1>
+        <p data-translate="hero_desc">Exchange with confidence through clarity, security, and professional guidance from Ethiopia's trusted independent forex institution.</p>
+        <div class="btn-group">
+          <button class="btn-primary" data-translate="hero_btn_rates">View Today's Rates <i class="fas fa-arrow-right"></i></button>
+          <button class="btn-secondary" data-translate="hero_btn_contact">Contact Us</button>
         </div>
-        <div class="candlestick" id="candleChart"></div>
-        <div style="margin-top: 20px; display: flex; justify-content: space-between; flex-wrap:wrap; gap:12px;">
-          <div><span style="color:#94A3B8;">Bid</span> <strong id="bidVal" style="color:#2DD4BF;">53.8742</strong></div>
-          <div><span style="color:#94A3B8;">Ask</span> <strong id="askVal" style="color:#F97316;">53.8921</strong></div>
-          <div><i class="fas fa-arrow-up" id="trendIcon"></i> <span id="changePercent">+0.12%</span></div>
+        <div class="hero-stats">
+          <div class="stat-item"><h3>8+</h3><p data-translate="stat_currencies">Currencies</p></div>
+          <div class="stat-item"><h3>7+</h3><p data-translate="stat_branches">Branches</p></div>
+          <div class="stat-item"><h3><i class="fas fa-check-circle" style="font-size:1rem;"></i></h3><p data-translate="stat_licensed">NBE Licensed</p></div>
         </div>
       </div>
-    </div>
-  </div>
 
-  <!-- Features -->
-  <div class="section">
-    <h2 class="section-title"><span data-translate="features_title1">Elite Execution</span>, <span style="color:#2DD4BF;" data-translate="features_title2">Infinite Possibilities</span></h2>
-    <div style="text-align:center; color:#9AA9C1; margin-top: 12px; margin-bottom: 30px; padding:0 10px;" data-translate="features_desc">Advanced tools, AI analytics, deep liquidity — built for Ethiopian forex pioneers.</div>
-    <div class="features-grid">
-      <div class="feature-card"><div class="feature-icon"><i class="fas fa-microchip"></i></div><h3 data-translate="feat1_title">Sub‑Millisecond Execution</h3><p data-translate="feat1_desc">Ultra-low latency DMA, fills instantly even during high-impact news.</p></div>
-      <div class="feature-card"><div class="feature-icon"><i class="fas fa-robot"></i></div><h3 data-translate="feat2_title">AI Sentiment Suite</h3><p data-translate="feat2_desc">Machine-learning sentiment + real-time signals for major FX pairs.</p></div>
-      <div class="feature-card"><div class="feature-icon"><i class="fas fa-shield-haltered"></i></div><h3 data-translate="feat3_title">Local Regulation + Security</h3><p data-translate="feat3_desc">SSL encryption, segregated accounts, and licensed operations.</p></div>
-      <div class="feature-card"><div class="feature-icon"><i class="fas fa-chart-simple"></i></div><h3 data-translate="feat4_title">Advanced Charting Pro</h3><p data-translate="feat4_desc">50+ indicators, drawing tools, and AI pattern recognition.</p></div>
-    </div>
-  </div>
-
-  <!-- Live Dashboard -->
-  <div class="dashboard-preview">
-    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap:wrap; gap: 12px; margin-bottom: 20px;">
-      <h3 style="font-size: clamp(1.3rem, 5vw, 1.8rem);"><i class="fas fa-fire-flame"></i> <span data-translate="dashboard_title">Live Forex Snapshot</span></h3>
-      <span style="background:#2DD4BF20; padding:5px 12px; border-radius: 40px; font-size:0.75rem;"><i class="fas fa-sync-alt"></i> real-time</span>
-    </div>
-    <div id="liveForexTable"></div>
-    <div style="margin-top: 28px; text-align: right;"><button class="btn-secondary" style="padding: 8px 18px;" data-translate="view_all">View all 60+ pairs →</button></div>
-  </div>
-
-  <!-- Ethiopia Local Edge -->
-  <div class="ethiopia-spotlight">
-    <div class="eth-text">
-      <h3><i class="fas fa-map-marker-alt" style="color:#2DD4BF;"></i> <span data-translate="eth_title">Built for Ethiopian Traders</span></h3>
-      <p data-translate="eth_desc">Local currency deposits via TeleBirr & bank transfers, Amharic support, and dedicated account managers. Global forex with local advantages.</p>
-      <div style="margin-top: 25px; display: flex; gap: 15px; flex-wrap: wrap; justify-content: center;">
-        <span class="local-badge"><i class="fas fa-wallet"></i> <span data-translate="telebirr">TeleBirr integration</span></span>
-        <span class="local-badge"><i class="fas fa-headset"></i> <span data-translate="support247">24/7 Amharic helpdesk</span></span>
+      <div class="hero-visual">
+        <div class="chart-card">
+          <div style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:6px; margin-bottom:12px;">
+            <span style="font-size:0.8rem;"><i class="fas fa-chart-simple" style="color:var(--accent);"></i> USD/ETB <span style="color:var(--text-muted);font-weight:400;">live</span></span>
+            <span class="live-badge-sm" id="livePercentBadge"><i class="fas fa-circle" style="font-size:6px;color:var(--accent);"></i> +0.34%</span>
+          </div>
+          <div class="candlestick" id="candleChart"></div>
+          <div style="margin-top:16px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; font-size:0.85rem;">
+            <div><span style="color:var(--text-muted);">We Buy</span> <strong id="bidVal" class="price-glow" style="color:var(--accent);">176.1161</strong></div>
+            <div><span style="color:var(--text-muted);">We Sell</span> <strong id="askVal" class="price-glow" style="color:#F97316;">179.6384</strong></div>
+            <div><i class="fas fa-arrow-up" id="trendIcon" style="color:var(--accent);"></i> <span id="changePercent" style="color:var(--accent);">+0.12%</span></div>
+          </div>
+        </div>
       </div>
     </div>
-    <div><i class="fas fa-charging-station" style="font-size: 3.5rem; color:#2DD4BF; opacity:0.8;"></i></div>
+
+    <!-- Live Rates Table -->
+    <div class="section">
+      <h2 class="section-title" data-translate="rates_title">Live Forex Rates</h2>
+      <p class="section-sub" data-translate="rates_sub">Real Time Exchange Rates — Transparent buy and sell rates updated throughout the trading day. All rates shown in Ethiopian Birr (ETB) per unit of foreign currency.</p>
+      <div class="rates-table-wrap">
+        <div class="table-header">
+          <h3><i class="fas fa-sync-alt fa-fw" style="color:var(--accent);font-size:0.9rem;"></i> <span data-translate="rates_table_title">Real Time Exchange Rates</span></h3>
+          <span class="badge-live"><i class="fas fa-circle"></i> LIVE</span>
+        </div>
+        <table class="rates-table" id="forexRateTable">
+          <thead>
+            <tr><th data-translate="th_currency">Currency</th><th data-translate="th_buy">We Buy (ETB)</th><th data-translate="th_sell">We Sell (ETB)</th></tr>
+          </thead>
+          <tbody id="rateTableBody"></tbody>
+        </table>
+        <div class="rate-note">
+          <span><span data-translate="effective_label">Effective</span> <span id="effectiveDate">2026-06-30</span> · <span data-translate="service_charge">Service charge 2% on sell transactions</span></span>
+          <span class="negotiate" data-translate="negotiate_note"><i class="fas fa-handshake"></i> Our listed prices are open to negotiation under certain conditions.</span>
+          <button class="refresh-btn" id="refreshRatesBtn"><i class="fas fa-sync-alt"></i> <span data-translate="refresh_btn">Refresh rates</span></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Why Choose -->
+    <div class="section">
+      <h2 class="section-title" data-translate="why_title">Why Choose <span style="color:var(--accent);">Mafuya Solution</span></h2>
+      <p class="section-sub" data-translate="why_sub">We combine international banking standards with deep local expertise to deliver an exchange experience you can trust.</p>
+      <div class="features-grid">
+        <div class="feature-card" style="--i:0;"><div class="feature-icon"><i class="fas fa-certificate"></i></div><h3 data-translate="why_trust_title">Trusted Exchange</h3><p data-translate="why_trust_desc">Fully licensed by the National Bank of Ethiopia with over 8 years of unwavering integrity and regulatory excellence.</p></div>
+        <div class="feature-card" style="--i:1;"><div class="feature-icon"><i class="fas fa-arrow-trend-up"></i></div><h3 data-translate="why_rates_title">Competitive Rates</h3><p data-translate="why_rates_desc">Institutional-grade pricing with transparent spreads. No hidden fees — what you see is what you exchange.</p></div>
+        <div class="feature-card" style="--i:2;"><div class="feature-icon"><i class="fas fa-user-tie"></i></div><h3 data-translate="why_guidance_title">Professional Guidance</h3><p data-translate="why_guidance_desc">Seasoned forex specialists provide informed counsel for every transaction, from travel money to corporate hedging.</p></div>
+        <div class="feature-card" style="--i:3;"><div class="feature-icon"><i class="fas fa-lock"></i></div><h3 data-translate="why_secure_title">Secure Transactions</h3><p data-translate="why_secure_desc">Bank-grade security protocols, full AML compliance, and documented transactions for complete peace of mind.</p></div>
+      </div>
+    </div>
+
+    <!-- Services -->
+    <div class="section">
+      <h2 class="section-title" data-translate="services_title">Our <span style="color:var(--accent);">Services</span></h2>
+      <p class="section-sub" data-translate="services_sub">Ethiopia's trusted international forex institution. Authoritative expertise, transparent rates, and unwavering integrity.</p>
+      <div class="services-grid">
+        <div class="service-item" style="--i:0;"><i class="fas fa-hand-holding-dollar"></i><h4 data-translate="svc_cash_buy">Cash Buy</h4><p data-translate="svc_cash_buy_desc">Purchase foreign currency at competitive buy rates.</p></div>
+        <div class="service-item" style="--i:1;"><i class="fas fa-money-bill-wave"></i><h4 data-translate="svc_cash_sell">Cash Sell</h4><p data-translate="svc_cash_sell_desc">Sell your foreign currency with fair sell rates.</p></div>
+        <div class="service-item" style="--i:2;"><i class="fas fa-building"></i><h4 data-translate="svc_business">Business Forex</h4><p data-translate="svc_business_desc">Corporate hedging and bulk exchange solutions.</p></div>
+        <div class="service-item" style="--i:3;"><i class="fas fa-plane"></i><h4 data-translate="svc_travel">Travel Exchange</h4><p data-translate="svc_travel_desc">Convenient travel money for your international trips.</p></div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-section">
+      <h2 data-translate="cta_title">Ready to exchange with confidence?</h2>
+      <p data-translate="cta_desc">Visit our branch or contact our team for professional forex services tailored to your needs.</p>
+      <button class="btn-primary" style="background:linear-gradient(135deg,var(--accent),var(--accent-dark));color:#0B0F1C;box-shadow:0 4px 24px var(--accent)50;" data-translate="cta_btn">Get Started <i class="fas fa-arrow-right"></i></button>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <div><div style="font-weight:700;color:var(--text-primary);font-size:0.9rem;">Mafuya <span style="color:var(--accent);">Solution</span></div><div style="font-size:0.65rem;color:var(--text-muted);margin-top:4px;" data-translate="footer_tagline">Independent Foreign Exchange Bureau · Addis Ababa, Ethiopia</div></div>
+      <div class="footer-links"><a href="#" data-translate="footer_about">About</a><a href="#" data-translate="footer_rates">Live Rates</a><a href="#" data-translate="footer_branches">Branches</a><a href="#" data-translate="footer_faq">FAQ</a><a href="#" data-translate="footer_contact">Contact</a></div>
+      <div class="social-links"><i class="fab fa-twitter"></i><i class="fab fa-telegram"></i><i class="fab fa-instagram"></i></div>
+    </footer>
+    <div class="footer-legal"><span data-translate="footer_copyright">© 2026 Mafuya Solution. All rights reserved.</span> · <span data-translate="footer_legal">Licensed Forex Bureau</span> · <span data-translate="footer_dev">Developed by TripleVox Engineering</span></div>
   </div>
 
-  <!-- CTA -->
-  <div class="cta-section">
-    <h2 data-translate="cta_title">Ready to master the forex market?</h2>
-    <p style="margin: 18px auto; max-width: 550px; padding:0 12px;" data-translate="cta_desc">Join over 15,000 Ethiopian traders who trust FXPrime for advanced tools and fast withdrawals.</p>
-    <button class="btn-primary" style="background: white; color:#0B0F1C;" data-translate="cta_btn">Create Free Account <i class="fas fa-user-plus"></i></button>
-  </div>
+  <script>
+    // ===== TRANSLATIONS =====
+    const translations = {
+      en: {
+        nav_why: "Why Us", nav_rates: "Rates", nav_services: "Services", nav_contact: "Contact", nav_rates_btn: "View Rates",
+        badge_text: "Licensed & Regulated in Ethiopia",
+        hero_title1: "Trusted Global Currency Exchange", hero_title2: "Connecting Ethiopia With The World",
+        hero_desc: "Exchange with confidence through clarity, security, and professional guidance from Ethiopia's trusted independent forex institution.",
+        hero_btn_rates: "View Today's Rates", hero_btn_contact: "Contact Us",
+        stat_currencies: "Currencies", stat_branches: "Branches", stat_licensed: "NBE Licensed",
+        rates_title: "Live Forex Rates", rates_sub: "Real Time Exchange Rates — Transparent buy and sell rates updated throughout the trading day. All rates shown in Ethiopian Birr (ETB) per unit of foreign currency.",
+        rates_table_title: "Real Time Exchange Rates", th_currency: "Currency", th_buy: "We Buy (ETB)", th_sell: "We Sell (ETB)",
+        effective_label: "Effective", service_charge: "Service charge 2% on sell transactions",
+        negotiate_note: "Our listed prices are open to negotiation under certain conditions.", refresh_btn: "Refresh rates",
+        why_title: "Why Choose", why_sub: "We combine international banking standards with deep local expertise to deliver an exchange experience you can trust.",
+        why_trust_title: "Trusted Exchange", why_trust_desc: "Fully licensed by the National Bank of Ethiopia with over 8 years of unwavering integrity and regulatory excellence.",
+        why_rates_title: "Competitive Rates", why_rates_desc: "Institutional-grade pricing with transparent spreads. No hidden fees — what you see is what you exchange.",
+        why_guidance_title: "Professional Guidance", why_guidance_desc: "Seasoned forex specialists provide informed counsel for every transaction, from travel money to corporate hedging.",
+        why_secure_title: "Secure Transactions", why_secure_desc: "Bank-grade security protocols, full AML compliance, and documented transactions for complete peace of mind.",
+        services_title: "Our Services", services_sub: "Ethiopia's trusted international forex institution. Authoritative expertise, transparent rates, and unwavering integrity.",
+        svc_cash_buy: "Cash Buy", svc_cash_buy_desc: "Purchase foreign currency at competitive buy rates.",
+        svc_cash_sell: "Cash Sell", svc_cash_sell_desc: "Sell your foreign currency with fair sell rates.",
+        svc_business: "Business Forex", svc_business_desc: "Corporate hedging and bulk exchange solutions.",
+        svc_travel: "Travel Exchange", svc_travel_desc: "Convenient travel money for your international trips.",
+        cta_title: "Ready to exchange with confidence?", cta_desc: "Visit our branch or contact our team for professional forex services tailored to your needs.",
+        cta_btn: "Get Started",
+        footer_tagline: "Independent Foreign Exchange Bureau · Addis Ababa, Ethiopia",
+        footer_about: "About", footer_rates: "Live Rates", footer_branches: "Branches", footer_faq: "FAQ", footer_contact: "Contact",
+        footer_copyright: "© 2026 Mafuya Solution. All rights reserved.", footer_legal: "Licensed Forex Bureau", footer_dev: "Developed by TripleVox Engineering"
+      },
+      am: {
+        nav_why: "ለምን እኛ", nav_rates: "የዋጋ ተመኖች", nav_services: "አገልግሎቶች", nav_contact: "አግኙን", nav_rates_btn: "የዋጋ ተመኖችን ይመልከቱ",
+        badge_text: "በኢትዮጵያ ፈቃድ ያለው እና ቁጥጥር የሚደረግለት",
+        hero_title1: "የታመነ ዓለም አቀፍ የምንዛሬ ልውውጥ", hero_title2: "ኢትዮጵያን ከዓለም ጋር በማገናኘት",
+        hero_desc: "ከኢትዮጵያ የታመነ ገለልተኛ የውጭ ምንዛሪ ተቋም ግልጽነት፣ ደህንነት እና ሙያዊ መመሪያ በመያዝ በራስ መተማመን ይለዋወጡ።",
+        hero_btn_rates: "የዛሬውን ዋጋ ይመልከቱ", hero_btn_contact: "አግኙን",
+        stat_currencies: "ምንዛሬዎች", stat_branches: "ቅርንጫፎች", stat_licensed: "በኢትዮጵያ ብሔራዊ ባንክ ፈቃድ ያለው",
+        rates_title: "የቀጥታ የውጭ ምንዛሪ ዋጋዎች", rates_sub: "የእውነተኛ ጊዜ የልውውጥ ዋጋዎች — ግልጽ የግዢ እና የሽያጭ ዋጋዎች በቀን ውስጥ ይዘመናሉ። ሁሉም ዋጋዎች በኢትዮጵያ ብር (ETB) በአንድ የውጭ ምንዛሪ ክፍል ይታያሉ።",
+        rates_table_title: "የእውነተኛ ጊዜ የልውውጥ ዋጋዎች", th_currency: "ምንዛሬ", th_buy: "እንገዛለን (ብር)", th_sell: "እንሸጣለን (ብር)",
+        effective_label: "ውጤታማ", service_charge: "በሽያጭ ግብይቶች ላይ 2% የአገልግሎት ክፍያ",
+        negotiate_note: "የተዘረዘሩት ዋጋዎች በተወሰኑ ሁኔታዎች ለድርድር ክፍት ናቸው።", refresh_btn: "ዋጋዎችን አድስ",
+        why_title: "ለምን መምረጥ አለብዎት", why_sub: "አስተማማኝ የልውውጥ ልምድ ለመስጠት ዓለም አቀፍ የባንክ ደረጃዎችን ከጥልቅ የአካባቢ እውቀት ጋር እናጣምራለን።",
+        why_trust_title: "የታመነ ልውውጥ", why_trust_desc: "ከ8 ዓመታት በላይ በማያሻግር ታማኝነት እና የቁጥጥር ልቀት በኢትዮጵያ ብሔራዊ ባንክ ሙሉ ፈቃድ ያለው።",
+        why_rates_title: "ተወዳዳሪ ዋጋዎች", why_rates_desc: "ተቋማዊ ደረጃ ዋጋ አሰጣጥ ከግልጽ ስርጭቶች ጋር። ምንም የተደበቁ ክፍያዎች የሉም — የሚያዩት የሚለዋወጡት ነው።",
+        why_guidance_title: "ሙያዊ መመሪያ", why_guidance_desc: "ልምድ ያላቸው የውጭ ምንዛሪ ባለሙያዎች ከጉዞ ገንዘብ እስከ የኮርፖሬት አጥር ለእያንዳንዱ ግብይት በመረጃ ምክር ይሰጣሉ።",
+        why_secure_title: "ደህንነቱ የተጠበቀ ግብይቶች", why_secure_desc: "የባንክ ደረጃ የደህንነት ፕሮቶኮሎች፣ ሙሉ የAML ተገዢነት እና ለተሟላ የአእምሮ ሰላም የተመዘገቡ ግብይቶች።",
+        services_title: "አገልግሎቶቻችን", services_sub: "የኢትዮጵያ የታመነ ዓለም አቀፍ የውጭ ምንዛሪ ተቋም። ስልጣን ያለው እውቀት፣ ግልጽ ዋጋዎች እና የማያሻግር ታማኝነት።",
+        svc_cash_buy: "የጥሬ ገንዘብ ግዢ", svc_cash_buy_desc: "በተወዳዳሪ የግዢ ዋጋ የውጭ ምንዛሪ ይግዙ።",
+        svc_cash_sell: "የጥሬ ገንዘብ ሽያጭ", svc_cash_sell_desc: "የውጭ ምንዛሪዎን በፍትሃዊ የሽያጭ ዋጋ ይሸጡ።",
+        svc_business: "የንግድ ውጭ ምንዛሪ", svc_business_desc: "የኮርፖሬት አጥር እና የጅምላ ልውውጥ መፍትሄዎች።",
+        svc_travel: "የጉዞ ልውውጥ", svc_travel_desc: "ለዓለም አቀፍ ጉዞዎችዎ ምቹ የጉዞ ገንዘብ።",
+        cta_title: "በራስ መተማመን ለመለዋወጥ ዝግጁ ነዎት?", cta_desc: "ቅርንጫፋችንን ይጎብኙ ወይም ለፍላጎትዎ የተበጁ ሙያዊ የውጭ ምንዛሪ አገልግሎቶችን ለማግኘት ቡድናችንን ያግኙ።",
+        cta_btn: "ይጀምሩ",
+        footer_tagline: "ገለልተኛ የውጭ ምንዛሪ ቢሮ · አዲስ አበባ፣ ኢትዮጵያ",
+        footer_about: "ስለእኛ", footer_rates: "የቀጥታ ዋጋዎች", footer_branches: "ቅርንጫፎች", footer_faq: "በተደጋጋሚ የሚጠየቁ ጥያቄዎች", footer_contact: "አግኙን",
+        footer_copyright: "© 2026 Mafuya Solution. ሁሉም መብቶች የተጠበቁ ናቸው።", footer_legal: "ፈቃድ ያለው የውጭ ምንዛሪ ቢሮ", footer_dev: "በTripleVox Engineering የተሰራ"
+      }
+    };
 
-  <footer>
-    <div>© 2025 FXPrime Ethiopia — <span data-translate="footer_text">Advanced Forex Hub</span>. All rights reserved.</div>
-    <div class="social-links"><i class="fab fa-twitter"></i><i class="fab fa-telegram"></i><i class="fab fa-instagram"></i></div>
-  </footer>
-</div>
-
-<script>
-  // Bilingual Dictionary
-  const translations = {
-    en: {
-      markets: "Markets", tools: "Trading Tools", edu: "Education", partner: "Partner", open_acc: "Open Account",
-      badge_text: "Ethiopia's #1 Regulated FX Broker",
-      hero_title1: "Trade Forex Like a", hero_title2: "Market Titan", hero_title3: "from Addis to Global",
-      hero_desc: "Leverage institutional-grade spreads, AI analytics, and local Ethiopian support — Zero slippage on major pairs, lightning execution.",
-      start_btn: "Start Trading", demo_btn: "Demo Account",
-      stat1: "pips spread*", stat2: "leverage", stat3: "local support",
-      features_title1: "Elite Execution", features_title2: "Infinite Possibilities",
-      features_desc: "Advanced tools, AI analytics, deep liquidity — built for Ethiopian forex pioneers.",
-      feat1_title: "Sub‑Millisecond Execution", feat1_desc: "Ultra-low latency DMA, fills instantly even during high-impact news.",
-      feat2_title: "AI Sentiment Suite", feat2_desc: "Machine-learning sentiment + real-time signals for major FX pairs.",
-      feat3_title: "Local Regulation + Security", feat3_desc: "SSL encryption, segregated accounts, and licensed operations.",
-      feat4_title: "Advanced Charting Pro", feat4_desc: "50+ indicators, drawing tools, and AI pattern recognition.",
-      dashboard_title: "Live Forex Snapshot", view_all: "View all 60+ pairs →",
-      eth_title: "Built for Ethiopian Traders", eth_desc: "Local currency deposits via TeleBirr & bank transfers, Amharic support, and dedicated account managers. Global forex with local advantages.",
-      telebirr: "TeleBirr integration", support247: "24/7 Amharic helpdesk",
-      cta_title: "Ready to master the forex market?", cta_desc: "Join over 15,000 Ethiopian traders who trust FXPrime for advanced tools and fast withdrawals.",
-      cta_btn: "Create Free Account", footer_text: "Advanced Forex Hub"
-    },
-    am: {
-      markets: "ገበያዎች", tools: "የንግድ መሳሪያዎች", edu: "ትምህርት", partner: "አጋር", open_acc: "አካውንት ክፈት",
-      badge_text: "ኢትዮጵያ ቁጥር 1 ቁጥጥር የሚደረግለት የውጭ ምንዛሪ ደላላ",
-      hero_title1: "የውጭ ምንዛሪ ንግድ እንደ", hero_title2: "የገበያ ግዙፍ", hero_title3: "ከአዲስ አበባ ወደ አለም",
-      hero_desc: "ተቋማዊ ስርጭቶችን፣ አርቲፊሻል ኢንተሊጀንስ እና የኢትዮጵያ ድጋፍ ይጠቀሙ — ዜሮ መንሸራተት ፈጣን አፈፃፀም።",
-      start_btn: "ንግድ ጀምር", demo_btn: "ማሳያ አካውንት",
-      stat1: "ፒፕስ ስርጭት*", stat2: "ሌቨሬጅ", stat3: "የሀገር ውስጥ ድጋፍ",
-      features_title1: "ከፍተኛ አፈፃፀም", features_title2: "ማለቂያ የሌላቸው እድሎች",
-      features_desc: "የላቀ መሳሪያዎች፣ AI ትንተና እና ጥልቅ ፈሳሽነት — ለኢትዮጵያ የውጭ ምንዛሪ አቅኚዎች ተሰርቷል።",
-      feat1_title: "ንዑስ ሚሊሰከንድ አፈፃፀም", feat1_desc: "ዝቅተኛ መዘግየት DMA ፈጣን ሙሌት።",
-      feat2_title: "AI ስሜት ስብስብ", feat2_desc: "ማሽን መማር ስሜት + የማጣቀሻ ምልክቶች",
-      feat3_title: "የሀገር ውስጥ ቁጥጥር+ደህንነት", feat3_desc: "SSL ምስጠራ እና ፈቃድ ያለው ክዋኔ",
-      feat4_title: "የላቀ ገበታ ፕሮ", feat4_desc: "ከ50+ አመልካቾች እና AI ቅጦች",
-      dashboard_title: "የቀጥታ ፎሬክስ ቅጽበታዊ", view_all: "ሁሉንም 60+ ጥንዶች ተመልከት →",
-      eth_title: "ለኢትዮጵያ ነጋዴዎች ተገንብቷል", eth_desc: "በቴሌ ብር እና ባንክ ውስጥ ተቀማጭ፣ አማርኛ ድጋፍ እና የተሰጠ አካውንት አስተዳዳሪዎች።",
-      telebirr: "ቴሌ ብር ውህደት", support247: "24/7 አማርኛ ድጋፍ",
-      cta_title: "የውጭ ምንዛሪ ገበያ ለመቆጣጠር ዝግጁ ነዎት?", cta_desc: "ከ15,000+ ኢትዮጵያውያን ነጋዴዎች ጋር ይቀላቀሉ።",
-      cta_btn: "ነጻ አካውንት ፍጠር", footer_text: "የላቀ ፎሬክስ ማዕከል"
+    function applyLanguage(lang) {
+      const dict = translations[lang];
+      document.querySelectorAll('[data-translate]').forEach(el => {
+        const key = el.getAttribute('data-translate');
+        if (dict[key]) el.innerText = dict[key];
+      });
+      document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
     }
-  };
+    document.querySelectorAll('.lang-btn').forEach(b => b.addEventListener('click', () => applyLanguage(b.dataset.lang)));
+    applyLanguage('en');
 
-  function applyLanguage(lang) {
-    const dict = translations[lang];
-    document.querySelectorAll('[data-translate]').forEach(el => {
-      const key = el.getAttribute('data-translate');
-      if (dict[key]) el.innerText = dict[key];
-    });
-    document.querySelectorAll('.lang-btn').forEach(btn => {
-      if (btn.getAttribute('data-lang') === lang) btn.classList.add('active');
-      else btn.classList.remove('active');
-    });
-  }
-
-  document.querySelectorAll('.lang-btn').forEach(btn => {
-    btn.addEventListener('click', () => applyLanguage(btn.getAttribute('data-lang')));
-  });
-  applyLanguage('en');
-
-  // Dynamic candles & live forex
-  function generateCandles() {
-    const container = document.getElementById('candleChart');
-    if (!container) return;
-    const heights = [68, 52, 88, 60, 78, 105, 44, 70, 94, 58];
-    const colors = ['#2DD4BF', '#2DD4BF', '#F43F5E', '#2DD4BF', '#F43F5E', '#2DD4BF', '#F43F5E', '#2DD4BF', '#2DD4BF', '#F43F5E'];
-    container.innerHTML = '';
-    heights.forEach((h, idx) => {
-      const candle = document.createElement('div');
-      candle.className = `candle ${colors[idx] === '#F43F5E' ? 'red' : ''}`;
-      candle.style.height = `${h}px`;
-      candle.style.width = `clamp(18px, 5vw, 30px)`;
-      candle.style.margin = '0 2px';
-      container.appendChild(candle);
-    });
-  }
-
-  let eurUsd = 1.08742, gbpJpy = 190.823, usdEtb = 53.8742;
-  function updateLivePrices() {
-    eurUsd += (Math.random() - 0.495) * 0.00028;
-    eurUsd = parseFloat(eurUsd.toFixed(5));
-    gbpJpy += (Math.random() - 0.5) * 0.09;
-    gbpJpy = parseFloat(gbpJpy.toFixed(3));
-    usdEtb += (Math.random() - 0.48) * 0.014;
-    usdEtb = parseFloat(usdEtb.toFixed(4));
-
-    const eurChange = ((eurUsd - 1.08742) / 1.08742 * 100).toFixed(2);
-    const gbpChange = ((gbpJpy - 190.823) / 190.823 * 100).toFixed(2);
-    const etbChange = ((usdEtb - 53.8742) / 53.8742 * 100).toFixed(2);
-
-    const tableDiv = document.getElementById('liveForexTable');
-    if (tableDiv) {
-      tableDiv.innerHTML = `
-        <div class="trade-row"><span class="pair">EUR/USD</span><span class="bid">${eurUsd.toFixed(5)}</span><span class="ask">${(eurUsd + 0.00018).toFixed(5)}</span><span style="color:${eurChange >=0 ? '#2DD4BF' : '#F43F5E'};">${eurChange >=0 ? '▲' : '▼'} ${Math.abs(eurChange)}%</span></div>
-        <div class="trade-row"><span class="pair">GBP/JPY</span><span class="bid">${gbpJpy.toFixed(3)}</span><span class="ask">${(gbpJpy + 0.075).toFixed(3)}</span><span style="color:${gbpChange >=0 ? '#2DD4BF' : '#F43F5E'};">${gbpChange >=0 ? '▲' : '▼'} ${Math.abs(gbpChange)}%</span></div>
-        <div class="trade-row"><span class="pair">USD/ETB (FX)</span><span class="bid">${usdEtb.toFixed(4)}</span><span class="ask">${(usdEtb + 0.019).toFixed(4)}</span><span style="color:${etbChange >=0 ? '#2DD4BF' : '#F43F5E'};">${etbChange >=0 ? '▲' : '▼'} ${Math.abs(etbChange)}%</span></div>
-      `;
+    // ===== THEME TOGGLE =====
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = themeToggle.querySelector('i');
+    function setTheme(theme) {
+      document.documentElement.dataset.theme = theme;
+      localStorage.setItem('theme', theme);
+      themeIcon.className = theme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
     }
-    document.getElementById('bidVal') && (document.getElementById('bidVal').innerText = usdEtb.toFixed(4));
-    document.getElementById('askVal') && (document.getElementById('askVal').innerText = (usdEtb + 0.019).toFixed(4));
-    const percentSpan = document.getElementById('changePercent');
-    const liveBadge = document.getElementById('livePercentBadge');
-    if (percentSpan) { percentSpan.innerText = `${etbChange >=0 ? '+' : ''}${etbChange}%`; percentSpan.style.color = etbChange >=0 ? '#2DD4BF' : '#F43F5E'; }
-    if (liveBadge) { liveBadge.innerHTML = `${etbChange >=0 ? '+' : ''}${etbChange}%`; liveBadge.style.color = etbChange >=0 ? '#2DD4BF' : '#F43F5E'; }
-  }
-
-  function animateCandlesRandom() {
-    const candles = document.querySelectorAll('.candle');
-    candles.forEach(candle => {
-      let cur = parseInt(candle.style.height);
-      let delta = (Math.random() - 0.5) * 8;
-      let newH = Math.min(145, Math.max(28, cur + delta));
-      candle.style.height = `${newH}px`;
-      const isRed = candle.classList.contains('red');
-      if (delta > 2 && isRed) { candle.classList.remove('red'); candle.style.backgroundColor = '#2DD4BF'; }
-      else if (delta < -2 && !isRed) { candle.classList.add('red'); candle.style.backgroundColor = '#F43F5E'; }
+    themeToggle.addEventListener('click', () => {
+      const current = document.documentElement.dataset.theme;
+      setTheme(current === 'dark' ? 'light' : 'dark');
     });
-  }
+    setTheme(localStorage.getItem('theme') || 'dark');
 
-  // Buttons
-  document.querySelectorAll('.btn-primary, .btn-secondary, .btn-outline-glow').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      const text = btn.innerText;
-      if (text.includes('Start') || text.includes('Open') || text.includes('Create') || text.includes('ንግድ') || text.includes('አካውንት')) {
-        e.preventDefault(); alert("🚀 FXPrime Ethiopia: Our team will contact you within 24h.");
-      } else if (text.includes('Demo') || text.includes('ማሳያ')) {
-        e.preventDefault(); alert("📈 Demo activated! Virtual $100,000 to practice.");
-      } else if (btn.tagName === 'A' && !text.includes('Open')) e.preventDefault();
+    // ===== FLAG BACKGROUND (flag-icon-css) =====
+    (function initFlags() {
+      const countryCodes = ['et', 'us', 'gb', 'eu', 'jp', 'ca', 'ch', 'ae', 'de', 'fr', 'it', 'cn', 'br', 'au', 'ke', 'ng', 'za'];
+      const container = document.getElementById('flagsBg');
+      if (!container) return;
+      for (let s = 0; s < 2; s++) {
+        const strip = document.createElement('div');
+        strip.className = 'flags-strip';
+        let html = '';
+        for (let i = 0; i < 3; i++) {
+          countryCodes.forEach(code => {
+            html += `<span class="flag-icon flag-icon-${code}"></span>`;
+          });
+        }
+        strip.innerHTML = html;
+        container.appendChild(strip);
+      }
+    })();
+
+    // ===== RATES TABLE =====
+    const baseRates = [
+      { code: 'USD', name: 'United States Dollar', buy: 175.9998, sell: 179.5198 },
+      { code: 'EUR', name: 'Euro', buy: 199.9998, sell: 203.9998 },
+      { code: 'GBP', name: 'British Pound Sterling', buy: 228.9999, sell: 233.5799 },
+      { code: 'AED', name: 'United Arab Emirates Dirham', buy: 47.5000, sell: 48.4500 },
+      { code: 'CAD', name: 'Canadian Dollar', buy: 117.0000, sell: 119.3400 },
+      { code: 'CHF', name: 'Swiss Franc', buy: 213.9999, sell: 218.2799 },
+      { code: 'CNY', name: 'Chinese Yuan', buy: 24.5000, sell: 24.9900 },
+      { code: 'SAR', name: 'Saudi Riyal', buy: 46.5000, sell: 47.4300 }
+    ];
+
+    function renderRateTable(rates) {
+      const tbody = document.getElementById('rateTableBody');
+      if (!tbody) return;
+      tbody.innerHTML = rates.map(r => `
+        <tr>
+          <td><div class="currency-cell"><span class="code">${r.code}</span><span class="name">${r.name}</span></div></td>
+          <td class="buy">${r.buy.toFixed(4)}</td>
+          <td class="sell">${r.sell.toFixed(4)}</td>
+        </tr>
+      `).join('');
+    }
+
+    let currentRates = baseRates.map(r => ({ ...r }));
+    renderRateTable(currentRates);
+
+    function jitterRates() {
+      currentRates = currentRates.map(r => {
+        const buyShift = (Math.random() - 0.48) * 0.25;
+        const sellShift = (Math.random() - 0.48) * 0.25;
+        return { ...r, buy: Math.max(0.01, r.buy + buyShift), sell: Math.max(0.01, r.sell + sellShift) };
+      });
+      renderRateTable(currentRates);
+    }
+    document.getElementById('refreshRatesBtn')?.addEventListener('click', () => {
+      jitterRates();
+      const badge = document.querySelector('.badge-live');
+      if (badge) { badge.style.color = 'var(--accent)'; setTimeout(() => badge.style.color = 'var(--danger)', 300); }
+      document.getElementById('effectiveDate').textContent = new Date().toISOString().slice(0,10);
     });
-  });
+    document.getElementById('effectiveDate').textContent = new Date().toISOString().slice(0,10);
 
-  generateCandles();
-  updateLivePrices();
-  setInterval(updateLivePrices, 2800);
-  setInterval(animateCandlesRandom, 2000);
-  window.addEventListener('load', () => { generateCandles(); updateLivePrices(); setInterval(() => { if(Math.random()>0.7) generateCandles(); }, 8000); });
-  window.addEventListener('resize', () => generateCandles());
-</script>
+    // ===== CANDLESTICK =====
+    function generateCandles() {
+      const container = document.getElementById('candleChart');
+      if (!container) return;
+      const heights = [68,52,88,60,78,105,44,70,94,58];
+      const colors = ['#2DD4BF','#2DD4BF','#F43F5E','#2DD4BF','#F43F5E','#2DD4BF','#F43F5E','#2DD4BF','#2DD4BF','#F43F5E'];
+      container.innerHTML = '';
+      heights.forEach((h, idx) => {
+        const c = document.createElement('div');
+        c.className = `candle ${colors[idx] === '#F43F5E' ? 'red' : ''}`;
+        c.style.height = `${h}px`;
+        c.style.width = `clamp(16px, 4vw, 24px)`;
+        c.style.margin = '0 2px';
+        container.appendChild(c);
+      });
+    }
+    function animateCandlesRandom() {
+      document.querySelectorAll('.candle').forEach(candle => {
+        let cur = parseInt(candle.style.height) || 60;
+        let delta = (Math.random() - 0.5) * 12;
+        let newH = Math.min(150, Math.max(22, cur + delta));
+        candle.style.height = `${newH}px`;
+        const isRed = candle.classList.contains('red');
+        if (delta > 2 && isRed) { candle.classList.remove('red'); candle.style.backgroundColor = 'var(--accent)'; }
+        else if (delta < -2 && !isRed) { candle.classList.add('red'); candle.style.backgroundColor = 'var(--danger)'; }
+      });
+    }
+
+    // ===== LIVE TICKER =====
+    let usdBuy = 176.1161, usdSell = 179.6384;
+    function updateTicker() {
+      const shift = (Math.random() - 0.495) * 0.12;
+      usdBuy = parseFloat(Math.max(100, usdBuy + shift).toFixed(4));
+      usdSell = parseFloat(Math.max(100, usdSell + shift * 1.02).toFixed(4));
+      document.getElementById('bidVal').textContent = usdBuy.toFixed(4);
+      document.getElementById('askVal').textContent = usdSell.toFixed(4);
+      const change = ((usdBuy - 176.1161) / 176.1161 * 100);
+      const changeStr = `${change >= 0 ? '+' : ''}${change.toFixed(2)}%`;
+      const color = change >= 0 ? 'var(--accent)' : 'var(--danger)';
+      document.getElementById('changePercent').textContent = changeStr;
+      document.getElementById('changePercent').style.color = color;
+      document.getElementById('livePercentBadge').innerHTML = `<i class="fas fa-circle" style="font-size:6px;color:${color};"></i> ${changeStr}`;
+      document.getElementById('livePercentBadge').style.color = color;
+      const icon = document.getElementById('trendIcon');
+      icon.className = `fas fa-arrow-${change >= 0 ? 'up' : 'down'}`;
+      icon.style.color = color;
+    }
+
+    // ===== BUTTON INTERACTIONS =====
+    document.querySelectorAll('.btn-primary, .btn-secondary, .btn-outline-glow').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const text = btn.innerText;
+        if (text.includes('View') || text.includes('Rates') || text.includes('ዋጋ') || text.includes('Get Started') || text.includes('ጀምር')) {
+          e.preventDefault(); alert('📊 Mafuya Solution — Our team will assist you with competitive exchange rates. Visit our branch or contact us for details.');
+        } else if (text.includes('Contact') || text.includes('አግኙን')) {
+          e.preventDefault(); alert('📞 Mafuya Solution — Call us at +251-XXX-XXXX or visit our branch in Addis Ababa.');
+        } else if (btn.tagName === 'A' && !text.includes('View')) { e.preventDefault(); }
+      });
+    });
+
+    // ===== INIT =====
+    generateCandles();
+    updateTicker();
+    setInterval(updateTicker, 2800);
+    setInterval(animateCandlesRandom, 2000);
+    window.addEventListener('resize', generateCandles);
+    setInterval(jitterRates, 45000);
+  </script>
 </body>
 </html>

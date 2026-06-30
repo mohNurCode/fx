@@ -609,7 +609,503 @@
     }
     if (websiteBtn) {
         websiteBtn.setAttribute('href', contact.website);
+    }<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Walia Forex Bureau | Trusted Foreign Exchange in Ethiopia</title>
+  <!-- Font Awesome for icons (free version) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* ----- RESET & BASE ----- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
+    body {
+      font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
+      background: #f8fafc;
+      color: #1e293b;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* ----- HEADER / NAV ----- */
+    header {
+      background: #0b2b4a;
+      color: white;
+      padding: 16px 0;
+      border-bottom: 4px solid #f5b041;
+    }
+    header .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    .logo span {
+      color: #f5b041;
+    }
+    .logo small {
+      display: block;
+      font-size: 0.7rem;
+      font-weight: 400;
+      opacity: 0.8;
+      letter-spacing: 1px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      font-weight: 500;
+    }
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: 0.2s;
+    }
+    .nav-links a:hover {
+      color: #f5b041;
+    }
+    .nav-links a.active {
+      color: #f5b041;
+      border-bottom: 2px solid #f5b041;
+      padding-bottom: 4px;
+    }
+
+    /* ----- HERO SECTION ----- */
+    .hero {
+      background: linear-gradient(135deg, #0b2b4a 0%, #1a4a6e 100%);
+      color: white;
+      padding: 60px 0 50px;
+      text-align: center;
+    }
+    .hero h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      letter-spacing: -0.5px;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      max-width: 700px;
+      margin: 0 auto 20px;
+    }
+    .hero-badges {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+      margin-top: 25px;
+    }
+    .hero-badges span {
+      background: rgba(255,255,255,0.15);
+      padding: 8px 20px;
+      border-radius: 30px;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+    .hero-badges i {
+      margin-right: 8px;
+      color: #f5b041;
+    }
+
+    /* ----- LIVE RATES SECTION ----- */
+    .rates-section {
+      padding: 50px 0;
+      background: white;
+    }
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      margin-bottom: 30px;
+    }
+    .section-header h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #0b2b4a;
+    }
+    .live-badge {
+      background: #e74c3c;
+      color: white;
+      padding: 4px 14px;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      animation: pulse 1.5s infinite;
+    }
+    @keyframes pulse {
+      0% { opacity: 1; }
+      50% { opacity: 0.5; }
+      100% { opacity: 1; }
+    }
+    .update-time {
+      font-size: 0.85rem;
+      color: #64748b;
+      margin-top: 5px;
+    }
+
+    .table-wrapper {
+      overflow-x: auto;
+      border-radius: 12px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+    }
+    thead {
+      background: #f1f5f9;
+    }
+    th {
+      padding: 16px 20px;
+      text-align: left;
+      font-weight: 600;
+      color: #1e293b;
+      border-bottom: 2px solid #e2e8f0;
+    }
+    th:last-child, td:last-child {
+      text-align: right;
+    }
+    td {
+      padding: 14px 20px;
+      border-bottom: 1px solid #eef2f6;
+    }
+    tr:last-child td {
+      border-bottom: none;
+    }
+    .currency-name {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .currency-name .code {
+      font-weight: 700;
+      color: #0b2b4a;
+    }
+    .currency-name .full {
+      color: #64748b;
+      font-size: 0.85rem;
+    }
+    .rate-zero {
+      color: #94a3b8;
+      font-style: italic;
+    }
+
+    /* ----- WHY CHOOSE WALIA ----- */
+    .why-section {
+      padding: 60px 0;
+      background: #f8fafc;
+    }
+    .why-section h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #0b2b4a;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    .why-sub {
+      text-align: center;
+      color: #475569;
+      margin-bottom: 40px;
+      font-size: 1.1rem;
+    }
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 30px;
+    }
+    .card {
+      background: white;
+      padding: 30px 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+      text-align: center;
+      transition: 0.3s;
+      border-top: 4px solid #f5b041;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    }
+    .card i {
+      font-size: 2.8rem;
+      color: #0b2b4a;
+      margin-bottom: 15px;
+    }
+    .card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+      color: #0b2b4a;
+    }
+    .card p {
+      color: #475569;
+      font-size: 0.95rem;
+    }
+
+    /* ----- GLOBAL REACH ----- */
+    .global-section {
+      padding: 60px 0;
+      background: #0b2b4a;
+      color: white;
+      text-align: center;
+    }
+    .global-section h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .global-section p {
+      max-width: 700px;
+      margin: 0 auto 30px;
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+    .global-stats {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 50px;
+    }
+    .stat-item {
+      font-size: 1.2rem;
+      font-weight: 500;
+    }
+    .stat-item strong {
+      display: block;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #f5b041;
+    }
+
+    /* ----- FOOTER ----- */
+    footer {
+      background: #0a1e30;
+      color: #94a3b8;
+      padding: 30px 0;
+      text-align: center;
+      border-top: 1px solid #1e3a5a;
+    }
+    footer small {
+      font-size: 0.85rem;
+    }
+
+    /* ----- RESPONSIVE ----- */
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2rem; }
+      .hero-badges { gap: 15px; }
+      .nav-links { gap: 16px; font-size: 0.85rem; }
+      .section-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+      .card-grid { grid-template-columns: 1fr; }
+      .global-stats { gap: 30px; }
+      .logo { font-size: 1.4rem; }
+    }
+    @media (max-width: 480px) {
+      header .container { flex-direction: column; gap: 12px; }
+      .nav-links { flex-wrap: wrap; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="container">
+    <div class="logo">
+      WALIA <span>FOREX</span>
+      <small>Bureau de Change</small>
+    </div>
+    <nav class="nav-links">
+      <a href="#">Home</a>
+      <a href="#" class="active">Rates</a>
+      <a href="#">Services</a>
+      <a href="#">About</a>
+      <a href="#">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <h1>Trusted Global Currency Exchange<br>Connecting Ethiopia With The World</h1>
+    <p>Exchange with confidence through clarity, security, and professional guidance from Ethiopia's trusted forex institution.</p>
+    <div class="hero-badges">
+      <span><i class="fas fa-globe-africa"></i> Global Reach</span>
+      <span><i class="fas fa-university"></i> NBE Licensed</span>
+      <span><i class="fas fa-shield-alt"></i> Secure Exchange</span>
+    </div>
+  </div>
+</section>
+
+<!-- LIVE RATES -->
+<section class="rates-section" id="rates">
+  <div class="container">
+    <div class="section-header">
+      <div>
+        <h2>Live Forex Rates</h2>
+        <div class="update-time"><i class="far fa-clock"></i> Updated: <span id="updateTime">just now</span></div>
+      </div>
+      <span class="live-badge"><i class="fas fa-circle"></i> LIVE</span>
+    </div>
+
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Currency</th>
+            <th>We Buy (ETB)</th>
+            <th>We Sell (ETB)</th>
+          </tr>
+        </thead>
+        <tbody id="ratesTableBody">
+          <!-- populated by JavaScript -->
+        </tbody>
+      </table>
+    </div>
+    <p style="margin-top: 12px; font-size: 0.85rem; color: #64748b; text-align: right;">
+      <i class="fas fa-info-circle"></i> Transparent buy and sell rates updated throughout the trading day.
+    </p>
+  </div>
+</section>
+
+<!-- WHY CHOOSE WALIA -->
+<section class="why-section">
+  <div class="container">
+    <h2>The Standard in Ethiopian Forex</h2>
+    <p class="why-sub">We combine international banking standards with deep local expertise to deliver an exchange experience you can trust.</p>
+    <div class="card-grid">
+      <div class="card">
+        <i class="fas fa-certificate"></i>
+        <h3>Trusted Exchange</h3>
+        <p>Fully licensed by the National Bank of Ethiopia with over 15 years of unwavering integrity and regulatory excellence.</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-chart-line"></i>
+        <h3>Competitive Rates</h3>
+        <p>Institutional-grade pricing with transparent spreads. No hidden fees — what you see is what you exchange.</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-user-tie"></i>
+        <h3>Professional Guidance</h3>
+        <p>Seasoned forex specialists provide informed counsel for every transaction, from travel money to corporate hedging.</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-lock"></i>
+        <h3>Secure Transactions</h3>
+        <p>Bank-grade security protocols, full AML compliance, and documented transactions for complete peace of mind.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GLOBAL REACH -->
+<section class="global-section">
+  <div class="container">
+    <h2>Ethiopia at the Heart of Global Finance</h2>
+    <p>Walia connects Addis Ababa to major financial corridors worldwide — every exchange passes through our gateway, converting global strength into local currency.</p>
+    <div class="global-stats">
+      <div class="stat-item"><strong>6+</strong> Corridors</div>
+      <div class="stat-item"><strong>Major</strong> Forex Pairs</div>
+      <div class="stat-item"><strong>Real-time</strong> Institutional Rates</div>
+      <div class="stat-item"><strong>ETB</strong> at the Core</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <small>&copy; 2026 Walia Forex Bureau. All rights reserved. | Licensed & Regulated in Ethiopia</small>
+  </div>
+</footer>
+
+<script>
+  // ----- RATE DATA (as of June 30, 2026 from the page) -----
+  const ratesData = [
+    { code: 'USD', name: 'United States Dollar', buy: 170.8799, sell: 174.2975 },
+    { code: 'EUR', name: 'Euro', buy: 194.1817, sell: 198.0654 },
+    { code: 'GBP', name: 'British Pound Sterling', buy: 222.3382, sell: 226.7850 },
+    { code: 'AED', name: 'United Arab Emirates Dirham', buy: 46.1182, sell: 47.0406 },
+    { code: 'CAD', name: 'Canadian Dollar', buy: 0, sell: 0 },
+    { code: 'CHF', name: 'Swiss Franc', buy: 0, sell: 0 },
+    { code: 'CNY', name: 'Chinese Yuan', buy: 0, sell: 0 },
+    { code: 'SAR', name: 'Saudi Riyal', buy: 0, sell: 0 }
+  ];
+
+  // Populate table
+  const tbody = document.getElementById('ratesTableBody');
+  function renderRates() {
+    tbody.innerHTML = '';
+    ratesData.forEach(item => {
+      const tr = document.createElement('tr');
+      const buyClass = (item.buy === 0) ? 'rate-zero' : '';
+      const sellClass = (item.sell === 0) ? 'rate-zero' : '';
+      tr.innerHTML = `
+        <td>
+          <div class="currency-name">
+            <span class="code">${item.code}</span>
+            <span class="full">${item.name}</span>
+          </div>
+        </td>
+        <td class="${buyClass}">${item.buy === 0 ? '0.0000' : item.buy.toFixed(4)}</td>
+        <td class="${sellClass}">${item.sell === 0 ? '0.0000' : item.sell.toFixed(4)}</td>
+      `;
+      tbody.appendChild(tr);
+    });
+  }
+  renderRates();
+
+  // Update timestamp with current time (Ethiopia time zone UTC+3)
+  function updateTimestamp() {
+    const now = new Date();
+    // Ethiopia is UTC+3 (no DST)
+    const options = { timeZone: 'Africa/Addis_Ababa', hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' };
+    const timeStr = now.toLocaleTimeString('en-US', options);
+    document.getElementById('updateTime').textContent = timeStr + ' (EAT)';
+  }
+  updateTimestamp();
+  // Refresh every 30 seconds to simulate "live" updates (but rates stay same)
+  setInterval(updateTimestamp, 30000);
+
+  // Optional: simulate tiny rate fluctuations for "live" feel (uncomment to enable)
+  /*
+  function jitterRates() {
+    ratesData.forEach(item => {
+      if (item.buy !== 0) {
+        const change = (Math.random() - 0.5) * 0.002; // tiny change
+        item.buy = Math.max(0.01, item.buy + change);
+        item.sell = Math.max(0.01, item.sell + change);
+      }
+    });
+    renderRates();
+  }
+  // setInterval(jitterRates, 5000);
+  */
+</script>
+
+</body>
+</html>
 
     const socialLinks = {
         igLink: social.instagram,
