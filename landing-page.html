@@ -123,14 +123,16 @@
     }
     .logo-sub { font-size:0.65rem; font-weight:400; color:var(--text-secondary); display:block; margin-top:2px; letter-spacing:0.3px; background:none; -webkit-background-clip:unset; background-clip:unset; }
 
-    .nav-links { display:flex; flex-wrap:wrap; align-items:center; gap:20px; justify-content:center; }
-    @media (max-width:860px) { .navbar { flex-direction:column; text-align:center; } .nav-links { justify-content:center; gap:18px; } }
-    @media (max-width:640px) { .nav-links { gap:12px; } .nav-links a { font-size:0.85rem; } .lang-switch { padding:3px 8px; } .lang-btn { padding:4px 10px; font-size:0.75rem; } .btn-outline-glow { padding:6px 18px; font-size:0.8rem; } }
+    /* ===== DESKTOP NAV LINKS ===== */
+    .nav-links {
+      display: flex; flex-wrap: wrap; align-items: center; gap: 20px; justify-content: center;
+    }
+    .nav-links a {
+      text-decoration: none; color: var(--text-secondary); font-weight: 500; transition: 0.2s; font-size: 0.95rem; white-space: nowrap;
+    }
+    .nav-links a:hover { color: var(--accent); text-shadow: 0 0 8px var(--accent)50; }
 
-    .nav-links a { text-decoration:none; color:var(--text-secondary); font-weight:500; transition:0.2s; font-size:0.95rem; white-space:nowrap; }
-    @media (max-width:550px) { .nav-links a { white-space:normal; font-size:0.8rem; } }
-    .nav-links a:hover { color:var(--accent); text-shadow:0 0 8px var(--accent)50; }
-
+    /* ===== LANGUAGE SWITCH ===== */
     .lang-switch { display:flex; gap:6px; background:var(--bg-glass); backdrop-filter:blur(8px); padding:5px 12px; border-radius:50px; border:1px solid var(--border-color); transition:background 0.3s, border-color 0.3s; }
     .lang-btn { background:transparent; border:none; color:var(--text-muted); font-weight:600; font-size:0.8rem; padding:5px 12px; border-radius:40px; cursor:pointer; transition:0.2s; }
     .lang-btn.active { background:var(--accent); color:#0B0F1C; box-shadow:0 0 12px var(--accent); }
@@ -142,9 +144,129 @@
     .btn-outline-glow { background:transparent; border:1px solid var(--accent); padding:7px 22px; border-radius:40px; color:var(--accent); font-weight:600; transition:0.25s; white-space:nowrap; cursor:pointer; }
     .btn-outline-glow:hover { background:var(--accent); color:#0B0F1C; box-shadow:0 0 24px var(--accent)60; }
 
-    /* ===== Hero with Flag Background (flag-icon-css) ===== */
+    /* ================================================================
+       HAMBURGER MENU BUTTON (animated + dollar sign)
+    ================================================================ */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 6px;
+      cursor: pointer;
+      padding: 8px;
+      background: var(--bg-glass);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      transition: 0.3s;
+      position: relative;
+      width: 52px;
+      height: 52px;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .hamburger:hover { border-color: var(--accent); box-shadow: 0 0 25px var(--accent)30; }
+
+    .hamburger .bar {
+      width: 28px;
+      height: 2.5px;
+      background: var(--text-primary);
+      border-radius: 10px;
+      transition: 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      position: absolute;
+    }
+    .hamburger .bar:nth-child(1) { top: 15px; }
+    .hamburger .bar:nth-child(2) { top: 24px; width: 20px; left: 50%; transform: translateX(-50%); }
+    .hamburger .bar:nth-child(3) { top: 33px; }
+
+    /* Dollar signs on the sides */
+    .hamburger .dollar-icon {
+      position: absolute;
+      font-size: 0.85rem;
+      color: var(--accent);
+      opacity: 0;
+      transition: 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      font-weight: 800;
+      pointer-events: none;
+    }
+    .hamburger .dollar-icon.left { left: 3px; top: 50%; transform: translateY(-50%) rotate(-20deg) scale(0.5); }
+    .hamburger .dollar-icon.right { right: 3px; top: 50%; transform: translateY(-50%) rotate(20deg) scale(0.5); }
+
+    /* Active (open) state - transforms into X with dollar spin */
+    .hamburger.active .bar:nth-child(1) {
+      transform: translateY(9px) rotate(45deg);
+      width: 28px;
+      background: var(--accent);
+    }
+    .hamburger.active .bar:nth-child(2) {
+      opacity: 0;
+      transform: translateX(30px) scale(0);
+    }
+    .hamburger.active .bar:nth-child(3) {
+      transform: translateY(-9px) rotate(-45deg);
+      width: 28px;
+      background: var(--accent);
+    }
+    .hamburger.active .dollar-icon {
+      opacity: 1;
+      transform: translateY(-50%) rotate(0deg) scale(1);
+    }
+    .hamburger.active .dollar-icon.left { left: 2px; }
+    .hamburger.active .dollar-icon.right { right: 2px; }
+    .hamburger.active .dollar-icon { animation: dollarSpin 0.6s ease; }
+
+    @keyframes dollarSpin {
+      0% { transform: translateY(-50%) rotate(-180deg) scale(0); }
+      100% { transform: translateY(-50%) rotate(0deg) scale(1); }
+    }
+
+    /* ===== MOBILE MENU ===== */
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      width: 100%;
+      background: var(--bg-nav);
+      backdrop-filter: blur(12px);
+      padding: 20px 0 30px;
+      gap: 14px;
+      border-top: 1px solid var(--border-color);
+      transition: 0.3s;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      text-decoration: none; color: var(--text-secondary); font-weight: 500; font-size: 1.05rem; padding: 10px 0; transition: 0.2s;
+      text-align: center;
+    }
+    .mobile-menu a:hover { color: var(--accent); }
+    .mobile-menu .mobile-actions {
+      display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 12px; padding-top: 12px;
+      border-top: 1px solid var(--border-color);
+    }
+
+    /* ===== RESPONSIVE BREAKPOINTS ===== */
+    @media (max-width: 860px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .navbar { flex-wrap: nowrap; }
+    }
+    @media (max-width: 600px) {
+      .navbar { padding: 16px 0; }
+      .container { padding: 0 16px; }
+      .navbar-wrapper { padding: 0 16px; }
+      .hamburger { width: 44px; height: 44px; }
+      .hamburger .bar { width: 22px; }
+      .hamburger .bar:nth-child(1) { top: 12px; }
+      .hamburger .bar:nth-child(2) { top: 20px; width: 16px; }
+      .hamburger .bar:nth-child(3) { top: 28px; }
+      .hamburger.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); width: 22px; }
+      .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); width: 22px; }
+      .hamburger .dollar-icon { font-size: 0.7rem; }
+      .mobile-menu a { font-size: 0.95rem; padding: 8px 0; }
+    }
+
+    /* ===== Hero with Flag Background ===== */
     .hero {
-      padding: 40px 0 30px;
+      width: 100%;
+      padding: 50px 0 60px;
       display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center;
       gap: 40px;
       position: relative; overflow: hidden; z-index:1;
@@ -156,9 +278,8 @@
     .flags-strip {
       display: flex; gap: 50px; white-space: nowrap;
       animation: scrollFlags 22s linear infinite;
-      font-size: 6.8rem; /* big flags */
+      font-size: 6.8rem;
       align-items: center;
-      border-radius: 20px;
       will-change: transform;
     }
     .flags-strip:last-child { animation-delay: -11s; }
@@ -166,10 +287,9 @@
       0% { transform: translateX(0); }
       100% { transform: translateX(-50%); }
     }
-    /* flag-icon-css overrides to make them bigger and square */
     .flags-strip .flag-icon {
       display: inline-block;
-      width: 4rem; height: 3rem; /* adjust size */
+      width: 4rem; height: 3rem;
       background-size: cover;
     }
 
@@ -185,7 +305,6 @@
       animation: titleGlow 6s ease-in-out infinite;
     }
     @keyframes titleGlow { 0%,100% { filter:drop-shadow(0 0 5px rgba(45,212,191,0.1)); } 50% { filter:drop-shadow(0 0 20px rgba(45,212,191,0.25)); } }
-    .hero-content h1 .highlight { color:var(--accent); background:none; -webkit-background-clip:unset; background-clip:unset; }
     .hero-content p { font-size:clamp(0.8rem, 2vw, 1rem); color:var(--text-secondary); max-width:500px; margin-bottom:20px; line-height:1.6; }
     .hero-stats { display:flex; flex-wrap:wrap; gap:24px; margin:20px 0 16px; }
     .stat-item h3 { font-size:clamp(1.2rem, 3.5vw, 1.8rem); color:var(--accent); animation:statPop 1.5s ease-out; }
@@ -293,11 +412,14 @@
   <!-- Full-width navbar -->
   <div class="navbar-wrapper">
     <div class="navbar">
+      <!-- Logo -->
       <div>
         <div class="logo">Mafuya <span style="color:var(--accent);">Solution</span></div>
         <span class="logo-sub">Independent Foreign Exchange Bureau</span>
       </div>
-      <div class="nav-links">
+
+      <!-- Desktop Nav Links -->
+      <div class="nav-links" id="desktopNav">
         <a href="#" data-translate="nav_why">Why Us</a>
         <a href="#" data-translate="nav_rates">Rates</a>
         <a href="#" data-translate="nav_services">Services</a>
@@ -309,11 +431,36 @@
         <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"><i class="fas fa-moon"></i></button>
         <a href="#" class="btn-outline-glow" data-translate="nav_rates_btn">View Rates</a>
       </div>
+
+      <!-- HAMBURGER BUTTON with Dollar Sign Animation -->
+      <div class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="dollar-icon left">$</span>
+        <span class="dollar-icon right">$</span>
+      </div>
+    </div>
+
+    <!-- MOBILE MENU -->
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#" data-translate="nav_why">Why Us</a>
+      <a href="#" data-translate="nav_rates">Rates</a>
+      <a href="#" data-translate="nav_services">Services</a>
+      <a href="#" data-translate="nav_contact">Contact</a>
+      <div class="mobile-actions">
+        <div class="lang-switch">
+          <button class="lang-btn active" data-lang="en">EN</button>
+          <button class="lang-btn" data-lang="am">አማርኛ</button>
+        </div>
+        <button class="theme-toggle" id="themeToggleMobile" aria-label="Toggle theme"><i class="fas fa-moon"></i></button>
+        <a href="#" class="btn-outline-glow" data-translate="nav_rates_btn">View Rates</a>
+      </div>
     </div>
   </div>
 
   <div class="container">
-    <!-- Hero with flag background (flag-icon-css) -->
+    <!-- Hero with flag background -->
     <div class="hero">
       <div class="flags-bg" id="flagsBg"></div>
 
@@ -483,19 +630,56 @@
 
     // ===== THEME TOGGLE =====
     const themeToggle = document.getElementById('themeToggle');
+    const themeToggleMobile = document.getElementById('themeToggleMobile');
     const themeIcon = themeToggle.querySelector('i');
+    const themeIconMobile = themeToggleMobile.querySelector('i');
+
     function setTheme(theme) {
       document.documentElement.dataset.theme = theme;
       localStorage.setItem('theme', theme);
-      themeIcon.className = theme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
+      const iconClass = theme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
+      themeIcon.className = iconClass;
+      themeIconMobile.className = iconClass;
     }
     themeToggle.addEventListener('click', () => {
       const current = document.documentElement.dataset.theme;
       setTheme(current === 'dark' ? 'light' : 'dark');
     });
+    themeToggleMobile.addEventListener('click', () => {
+      const current = document.documentElement.dataset.theme;
+      setTheme(current === 'dark' ? 'light' : 'dark');
+    });
     setTheme(localStorage.getItem('theme') || 'dark');
 
-    // ===== FLAG BACKGROUND (flag-icon-css) =====
+    // ===== HAMBURGER MENU - FULLY WORKING =====
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    if (hamburger && mobileMenu) {
+      hamburger.addEventListener('click', function(e) {
+        e.stopPropagation();
+        this.classList.toggle('active');
+        mobileMenu.classList.toggle('open');
+      });
+
+      // Close menu when clicking a link
+      document.querySelectorAll('.mobile-menu a').forEach(link => {
+        link.addEventListener('click', () => {
+          hamburger.classList.remove('active');
+          mobileMenu.classList.remove('open');
+        });
+      });
+
+      // Close menu when clicking outside
+      document.addEventListener('click', function(e) {
+        if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) {
+          hamburger.classList.remove('active');
+          mobileMenu.classList.remove('open');
+        }
+      });
+    }
+
+    // ===== FLAG BACKGROUND =====
     (function initFlags() {
       const countryCodes = ['et', 'us', 'gb', 'eu', 'jp', 'ca', 'ch', 'ae', 'de', 'fr', 'it', 'cn', 'br', 'au', 'ke', 'ng', 'za'];
       const container = document.getElementById('flagsBg');
