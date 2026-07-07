@@ -6,8 +6,6 @@
   <title>Mafuya Solution · Forex Exchange</title>
   <!-- Font Awesome 6 (free) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <!-- Chart.js for the forex vibe chart -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
   <style>
     * {
       margin: 0;
@@ -28,16 +26,12 @@
       padding: 0 24px;
     }
 
-    /* ===== NAVIGATION (WHITE BACKGROUND) ===== */
+    /* ----- HEADER / NAV (exactly as described) ----- */
     .navbar {
-      background: #ffffff;
-      color: #0b1a2e;
-      padding: 10px 0;
-      box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      border-bottom: 1px solid #eef2f7;
+      background: #0b1a2e;
+      color: #fff;
+      padding: 16px 0;
+      border-bottom: 2px solid #f5b342;
     }
 
     .navbar .container {
@@ -50,24 +44,26 @@
     .logo-area {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 12px;
     }
 
-    .logo-img {
-      width: 60px;
-      height: 60px;
-      border-radius: 10px;
-      object-fit: contain;
-      background: transparent;
-      flex-shrink: 0;
+    .logo-icon {
+      background: #f5b342;
+      color: #0b1a2e;
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      font-weight: 700;
     }
 
     .logo-text {
-      font-size: 1.3rem;
+      font-size: 1.7rem;
       font-weight: 700;
       letter-spacing: -0.5px;
-      color: #0b1a2e;
-      white-space: nowrap;
     }
 
     .logo-text span {
@@ -76,20 +72,18 @@
 
     .nav-links {
       display: flex;
-      gap: 24px;
+      gap: 28px;
       font-weight: 500;
       flex-wrap: wrap;
-      align-items: center;
     }
 
     .nav-links a {
-      color: #1f3a57;
+      color: #eef2f6;
       text-decoration: none;
-      font-size: 0.92rem;
+      font-size: 0.95rem;
       transition: 0.2s;
       border-bottom: 2px solid transparent;
       padding-bottom: 4px;
-      white-space: nowrap;
     }
 
     .nav-links a:hover {
@@ -99,146 +93,70 @@
 
     .hamburger {
       display: none;
-      font-size: 1.6rem;
+      font-size: 1.8rem;
       cursor: pointer;
-      color: #0b1a2e;
-      padding: 4px;
+      color: #fff;
     }
 
-    /* ===== HERO - FULL SCREEN WITH MONEY BACKGROUND ===== */
-    .hero-section {
-      height: 100vh;
-      min-height: 600px;
-      width: 100%;
-      background: 
-        linear-gradient(135deg, rgba(11, 26, 46, 0.55) 0%, rgba(31, 58, 87, 0.60) 100%),
-        url('https://images.unsplash.com/photo-1580519542036-c47de6196ba5?w=1920&q=80');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      display: flex;
-      align-items: center;
-      padding: 0;
-      margin: 0;
-      border-radius: 0;
-      position: relative;
-    }
-
-    .hero-section::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: 
-        radial-gradient(circle at 20% 50%, rgba(245, 179, 66, 0.06) 0%, transparent 50%),
-        radial-gradient(circle at 80% 50%, rgba(245, 179, 66, 0.04) 0%, transparent 50%);
-      pointer-events: none;
-    }
-
-    .hero-section .container {
-      width: 100%;
-      position: relative;
-      z-index: 2;
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 50px;
-      align-items: center;
-      height: 100%;
-      padding: 30px 0;
-    }
-
-    .hero-left {
+    /* ----- HERO ----- */
+    .hero {
+      background: linear-gradient(135deg, #0b1a2e 0%, #1f3a57 100%);
       color: white;
+      padding: 60px 0 70px;
+      margin-bottom: 40px;
+      border-radius: 0 0 48px 48px;
     }
 
-    .hero-left h1 {
-      font-size: 3.2rem;
+    .hero .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
       font-weight: 700;
-      margin-bottom: 18px;
-      line-height: 1.15;
-      letter-spacing: -0.02em;
-      text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+      margin-bottom: 16px;
     }
 
-    .hero-left h1 span {
+    .hero h1 span {
       color: #f5b342;
-      display: inline-block;
-      text-shadow: 0 2px 20px rgba(245, 179, 66, 0.3);
     }
 
-    .hero-left p {
-      font-size: 1.25rem;
-      opacity: 0.95;
-      margin-bottom: 32px;
-      max-width: 500px;
-      line-height: 1.7;
-      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+    .hero p {
+      font-size: 1.2rem;
+      max-width: 640px;
+      opacity: 0.9;
+      margin-bottom: 28px;
     }
 
-    .btn-hero {
+    .hero .btn-hero {
       background: #f5b342;
       border: none;
-      padding: 16px 48px;
+      padding: 14px 44px;
       border-radius: 60px;
       font-weight: 700;
-      font-size: 1.05rem;
+      font-size: 1rem;
       color: #0b1a2e;
       cursor: pointer;
-      transition: 0.25s;
-      box-shadow: 0 8px 24px rgba(245, 179, 66, 0.35);
+      transition: 0.2s;
+      box-shadow: 0 6px 14px rgba(245, 179, 66, 0.3);
       text-decoration: none;
       display: inline-block;
     }
 
-    .btn-hero:hover {
+    .hero .btn-hero:hover {
       background: #e6a33a;
-      transform: scale(1.03);
-      box-shadow: 0 10px 32px rgba(245, 179, 66, 0.45);
+      transform: scale(1.02);
     }
 
-    .hero-right {
-      background: rgba(255, 255, 255, 0.06);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-radius: 32px;
-      padding: 24px 24px 18px;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.3);
-    }
-
-    .hero-right h4 {
-      color: #f0f4fa;
-      font-weight: 500;
-      margin-bottom: 14px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 0.95rem;
-      letter-spacing: 0.3px;
-      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-    }
-
-    .hero-right h4 i {
-      color: #f5b342;
-    }
-
-    .chart-wrapper {
-      height: 200px;
-      width: 100%;
-      position: relative;
-    }
-
-    /* ===== REST OF THE PAGE ===== */
+    /* ----- RATES + CALCULATOR (two columns) ----- */
     .rates-section {
       display: grid;
       grid-template-columns: 1.8fr 1.2fr;
       gap: 30px;
-      margin: 50px 0;
+      margin: 20px 0 50px;
     }
 
     .card {
@@ -257,13 +175,17 @@
       align-items: center;
       gap: 12px;
     }
-    .card h3 i { color: #f5b342; }
+
+    .card h3 i {
+      color: #f5b342;
+    }
 
     .rate-grid {
       display: flex;
       flex-direction: column;
       gap: 14px;
     }
+
     .rate-item {
       display: flex;
       justify-content: space-between;
@@ -271,13 +193,31 @@
       border-bottom: 1px solid #eef2f7;
       font-weight: 500;
     }
-    .rate-item:last-child { border-bottom: none; }
-    .rate-currency i { width: 28px; color: #1f3a57; }
+
+    .rate-item:last-child {
+      border-bottom: none;
+    }
+
+    .rate-currency i {
+      width: 28px;
+      color: #1f3a57;
+    }
+
     .rate-buy { color: #0f7b3a; font-weight: 600; }
     .rate-sell { color: #b13e3e; font-weight: 600; }
 
-    .calc-group { margin: 16px 0 12px; }
-    .calc-group label { font-weight: 500; font-size: 0.9rem; display: block; margin-bottom: 6px; color: #1f3a57; }
+    .calc-group {
+      margin: 16px 0 12px;
+    }
+
+    .calc-group label {
+      font-weight: 500;
+      font-size: 0.9rem;
+      display: block;
+      margin-bottom: 6px;
+      color: #1f3a57;
+    }
+
     .calc-group input, .calc-group select {
       width: 100%;
       padding: 14px 16px;
@@ -286,11 +226,13 @@
       font-size: 1rem;
       background: #fafcfe;
     }
+
     .calc-group input:focus, .calc-group select:focus {
       border-color: #f5b342;
       outline: none;
       box-shadow: 0 0 0 3px rgba(245, 179, 66, 0.15);
     }
+
     .calc-result {
       background: #f0f5fb;
       padding: 18px 16px;
@@ -300,6 +242,7 @@
       display: flex;
       justify-content: space-between;
     }
+
     .btn {
       background: #f5b342;
       border: none;
@@ -312,7 +255,9 @@
       transition: 0.2s;
       width: 100%;
     }
+
     .btn:hover { background: #e6a33a; }
+
     .btn-outline {
       background: transparent;
       border: 1.5px solid #dce2ea;
@@ -321,14 +266,20 @@
     }
     .btn-outline:hover { background: #f0f5fb; }
 
+    /* ----- ABOUT + MISSION / VALUES (two columns) ----- */
     .about-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 40px;
       margin: 50px 0;
     }
-    .about-text h2 { font-size: 2rem; margin-bottom: 16px; }
+
+    .about-text h2 {
+      font-size: 2rem;
+      margin-bottom: 16px;
+    }
     .about-text h2 span { color: #f5b342; }
+
     .values-list {
       display: flex;
       flex-direction: column;
@@ -336,8 +287,14 @@
       margin-top: 20px;
       list-style: none;
     }
-    .values-list li { display: flex; align-items: center; gap: 14px; font-weight: 500; }
+    .values-list li {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-weight: 500;
+    }
     .values-list i { color: #f5b342; width: 26px; }
+
     .reg-badge {
       background: #eef4fa;
       padding: 24px 26px;
@@ -356,6 +313,7 @@
       font-size: 0.9rem;
     }
 
+    /* ----- SERVICES (3 columns) ----- */
     .services {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -373,6 +331,7 @@
     .service-item:hover { transform: translateY(-6px); box-shadow: 0 12px 28px rgba(0,0,0,0.03); }
     .service-item i { font-size: 2.6rem; color: #f5b342; margin-bottom: 16px; }
 
+    /* ----- BRANCHES (3 columns) ----- */
     .branches {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -388,6 +347,7 @@
     .branch-card i { color: #f5b342; margin-right: 8px; width: 24px; }
     .coming { background: #fff0ee; color: #b13e3e; padding: 2px 14px; border-radius: 60px; font-size: 0.8rem; font-weight: 500; }
 
+    /* ----- EXCHANGE RATES CTA ----- */
     .rates-cta {
       background: #0b1a2e;
       color: white;
@@ -408,6 +368,7 @@
       text-decoration: none;
     }
 
+    /* ----- CONTACT (two columns) ----- */
     .contact-wrap {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -420,6 +381,7 @@
     }
     .contact-info p { margin: 16px 0; display: flex; align-items: center; gap: 14px; }
     .contact-info i { width: 28px; color: #f5b342; }
+
     .contact-form input, .contact-form textarea {
       width: 100%;
       padding: 14px 18px;
@@ -442,6 +404,7 @@
       cursor: pointer;
     }
 
+    /* ----- FOOTER (exactly as described) ----- */
     .footer {
       background: #0b1a2e;
       color: #bcc9db;
@@ -468,203 +431,38 @@
     }
     .footer-bottom span { color: #f5b342; }
 
-    /* ===== RESPONSIVE BREAKPOINTS ===== */
-    /* Large screens (1200px+) */
-    @media (min-width: 1200px) {
-      .hero-left h1 { font-size: 3.5rem; }
-    }
-
-    /* Tablets & small laptops (768px - 1199px) */
-    @media (max-width: 1199px) {
-      .hero-left h1 { font-size: 2.8rem; }
-      .hero-grid { gap: 40px; }
-      .nav-links { gap: 20px; }
-    }
-
-    /* Tablets (768px - 991px) */
-    @media (max-width: 991px) {
-      .hero-grid { 
-        grid-template-columns: 1fr; 
-        gap: 30px;
-        padding: 40px 0;
-      }
-      .hero-section { 
-        height: auto; 
-        min-height: 100vh; 
-        padding: 40px 0;
-      }
-      .hero-left h1 { font-size: 2.5rem; }
-      .hero-left p { font-size: 1.1rem; max-width: 100%; }
-      .rates-section { 
+    /* ----- responsive ----- */
+    @media (max-width: 920px) {
+      .rates-section, .about-grid, .contact-wrap, .footer .container {
         grid-template-columns: 1fr;
-        margin: 30px 0;
       }
-      .about-grid { grid-template-columns: 1fr; gap: 30px; }
-      .services { grid-template-columns: repeat(2, 1fr); gap: 20px; }
-      .branches { grid-template-columns: repeat(2, 1fr); gap: 20px; }
-      .contact-wrap { grid-template-columns: 1fr; gap: 30px; }
-      .footer .container { 
+      .services, .branches {
         grid-template-columns: 1fr 1fr;
-        gap: 24px;
-      }
-      .rates-cta { 
-        flex-direction: column; 
-        gap: 18px; 
-        text-align: center;
-        padding: 28px 24px;
       }
     }
-
-    /* Mobile (481px - 767px) */
-    @media (max-width: 767px) {
-      .navbar { padding: 8px 0; }
-      
-      .logo-img {
-        width: 50px;
-        height: 50px;
-      }
-      .logo-text { font-size: 1.1rem; }
-      
+    @media (max-width: 640px) {
       .nav-links {
         display: none;
         width: 100%;
         flex-direction: column;
         align-items: center;
         padding: 16px 0 8px;
-        gap: 12px;
-        background: white;
-        border-radius: 0 0 16px 16px;
-        box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+        gap: 14px;
       }
       .nav-links.show { display: flex; }
-      .nav-links a { 
-        font-size: 0.9rem; 
-        padding: 6px 0;
-        white-space: normal;
-      }
       .hamburger { display: block; }
-      
-      .hero-left h1 { font-size: 2rem; }
-      .hero-left p { font-size: 1rem; }
-      .btn-hero { 
-        padding: 14px 36px; 
-        font-size: 0.95rem;
-        width: 100%;
-        text-align: center;
-      }
-      .hero-right { padding: 16px; }
-      .chart-wrapper { height: 160px; }
-      
-      .card { padding: 20px 18px; }
-      .card h3 { font-size: 1.2rem; }
-      
-      .services { grid-template-columns: 1fr; gap: 16px; }
-      .branches { grid-template-columns: 1fr; gap: 16px; }
-      
-      .rates-cta { 
-        flex-direction: column; 
-        gap: 16px; 
-        text-align: center;
-        padding: 24px 20px;
-      }
-      .rates-cta a { 
-        width: 100%; 
-        text-align: center;
-        padding: 12px 24px;
-      }
-      
-      .contact-wrap { padding: 24px 20px; }
-      .contact-info h3 { font-size: 1.5rem; }
-      
-      .footer .container { 
-        grid-template-columns: 1fr;
-        gap: 20px;
-        text-align: center;
-      }
-      .footer .social { 
-        display: flex; 
-        justify-content: center; 
-        flex-wrap: wrap;
-        gap: 8px;
-      }
-      .footer .social i { 
-        font-size: 1.6rem; 
-        margin: 0 6px;
-      }
-      .footer-bottom { font-size: 0.85rem; }
-    }
-
-    /* Small phones (320px - 480px) */
-    @media (max-width: 480px) {
-      .container { padding: 0 16px; }
-      
-      .logo-img {
-        width: 44px;
-        height: 44px;
-      }
-      .logo-text { font-size: 1rem; }
-      
-      .hero-left h1 { font-size: 1.7rem; }
-      .hero-left p { font-size: 0.9rem; }
-      .btn-hero { 
-        padding: 12px 28px; 
-        font-size: 0.9rem;
-      }
-      
-      .card { padding: 16px; }
-      .rate-item { 
-        font-size: 0.9rem; 
-        padding: 8px 4px;
-      }
-      .calc-group input, .calc-group select { 
-        padding: 12px 14px; 
-        font-size: 0.9rem;
-      }
-      .calc-result { 
-        padding: 14px; 
-        font-size: 0.9rem;
-      }
-      .btn { 
-        padding: 14px 20px; 
-        font-size: 0.9rem;
-      }
-      
-      .about-text h2 { font-size: 1.6rem; }
-      .reg-badge { padding: 18px 20px; }
-      .reg-badge .nbe-link { 
-        padding: 8px 20px; 
-        font-size: 0.8rem;
-        width: 100%;
-        text-align: center;
-      }
-      
-      .service-item { padding: 20px 16px; }
-      .service-item i { font-size: 2rem; }
-      .service-item h4 { font-size: 1rem; }
-      
-      .branch-card { padding: 18px 16px; }
-      
-      .contact-wrap { padding: 18px 16px; }
-      .contact-form input, .contact-form textarea { 
-        padding: 12px 14px; 
-        font-size: 0.9rem;
-      }
-      .contact-form button { 
-        padding: 14px; 
-        font-size: 0.9rem;
-      }
-      
-      .rates-cta strong { font-size: 1rem !important; }
-      .rates-cta div { font-size: 0.9rem; }
+      .hero h1 { font-size: 2.2rem; }
+      .services, .branches { grid-template-columns: 1fr; }
+      .rates-cta { flex-direction: column; gap: 18px; text-align: center; }
     }
   </style>
 </head>
 <body>
-  <!-- ===== NAVIGATION (WHITE BACKGROUND) ===== -->
+  <!-- ========== NAVIGATION ========== -->
   <nav class="navbar">
     <div class="container">
       <div class="logo-area">
-        <img src="Assets/images/mafuya.jpg" alt="Mafuya Logo" class="logo-img" />
+        <div class="logo-icon">M</div>
         <div class="logo-text">Mafuya<span>Solution</span></div>
       </div>
       <div class="hamburger" id="hamburger"><i class="fas fa-bars"></i></div>
@@ -672,34 +470,28 @@
         <a href="#">Home</a>
         <a href="#about">About</a>
         <a href="#laws">Laws</a>
-        <a href="#services">Service</a>
+        <a href="#services">Services</a>
         <a href="#branches">Branches</a>
         <a href="#calculator">ForexCalculator</a>
         <a href="#contact">Contact</a>
+        <a href="#"><i class="fas fa-chart-line"></i> Forex Trading</a>
       </div>
     </div>
   </nav>
 
-  <!-- ===== HERO - FULL SCREEN WITH MONEY BACKGROUND ===== -->
-  <section class="hero-section">
-    <div class="container hero-grid">
-      <div class="hero-left">
-        <h1>Your Trusted Partner in <span>Foreign Exchange</span></h1>
-        <p>Experience seamless currency exchange with competitive rates and professional service.</p>
-        <a href="#rates" class="btn-hero"><i class="fas fa-arrow-right"></i> Check Exchange Rates</a>
-      </div>
-      <div class="hero-right">
-        <h4><i class="fas fa-chart-line"></i> Forex Vibe · USD/ETB</h4>
-        <div class="chart-wrapper">
-          <canvas id="forexChart" width="400" height="200"></canvas>
-        </div>
-      </div>
+  <!-- ========== HERO ========== -->
+  <section class="hero">
+    <div class="container">
+      <h1>Your Trusted Partner in <span>Foreign Exchange</span></h1>
+      <p>Experience seamless currency exchange with competitive rates and professional service.</p>
+      <a href="#rates" class="btn-hero"><i class="fas fa-arrow-right"></i> Check Exchange Rates</a>
     </div>
   </section>
 
-  <!-- ===== LIVE RATES + CALCULATOR ===== -->
+  <!-- ========== LIVE RATES + CALCULATOR ========== -->
   <div class="container" id="rates">
     <div class="rates-section">
+      <!-- Live Rates -->
       <div class="card">
         <h3><i class="fas fa-chart-line"></i> Live Exchange Rates</h3>
         <div class="rate-grid" id="rateGrid">
@@ -710,6 +502,7 @@
         </div>
       </div>
 
+      <!-- Calculator -->
       <div class="card" id="calculator">
         <h3><i class="fas fa-calculator"></i> Forex Calculator</h3>
         <div class="calc-group">
@@ -734,7 +527,7 @@
     </div>
   </div>
 
-  <!-- ===== ABOUT, LAWS, SERVICES, BRANCHES, CONTACT ===== -->
+  <!-- ========== ABOUT + MISSION / VALUES ========== -->
   <div class="container" id="about">
     <div class="about-grid">
       <div class="about-text">
@@ -755,6 +548,7 @@
     </div>
   </div>
 
+  <!-- ========== SERVICES ========== -->
   <div class="container" id="services">
     <h2 style="font-size: 2rem; margin-top: 20px;">Our <span style="color: #f5b342;">Services</span></h2>
     <div class="services">
@@ -764,6 +558,7 @@
     </div>
   </div>
 
+  <!-- ========== BRANCHES ========== -->
   <div class="container" id="branches">
     <h2 style="font-size: 2rem; margin-top: 20px;">Our <span style="color: #f5b342;">Branches</span></h2>
     <div class="branches">
@@ -773,6 +568,7 @@
     </div>
   </div>
 
+  <!-- ========== EXCHANGE RATES CTA ========== -->
   <div class="container">
     <div class="rates-cta">
       <div><strong style="font-size: 1.2rem;">Exchange Rates</strong><br>For real-time exchange rates, please visit our forex bureau system:</div>
@@ -780,6 +576,7 @@
     </div>
   </div>
 
+  <!-- ========== CONTACT ========== -->
   <div class="container" id="contact">
     <div class="contact-wrap">
       <div class="contact-info">
@@ -800,12 +597,12 @@
     </div>
   </div>
 
-  <!-- ===== FOOTER ===== -->
+  <!-- ========== FOOTER (exact structure) ========== -->
   <footer class="footer">
     <div class="container">
       <div>
         <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
-          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23f5b342'/%3E%3Ctext x='50' y='68' font-family='Arial' font-size='52' font-weight='bold' text-anchor='middle' fill='%230b1a2e'%3EM%3C/text%3E%3C/svg%3E" alt="M" style="width:36px; height:36px; border-radius:8px;" />
+          <div class="logo-icon" style="background: #f5b342; color: #0b1a2e; width: 40px; height: 40px; font-size: 1.2rem;">M</div>
           <span style="color: white; font-weight: 700; font-size: 1.3rem;">Mafuya<span style="color: #f5b342;">Solution</span></span>
         </div>
         <p style="font-size: 0.9rem;">Your trusted partner for all foreign exchange needs.</p>
@@ -839,16 +636,18 @@
     </div>
   </footer>
 
-  <!-- ===== JAVASCRIPT ===== -->
+  <!-- ========== JAVASCRIPT ========== -->
   <script>
     (function() {
-      // ----- RATES -----
+      // ---------- RATES ----------
       const rateData = {
         USD: { buy: 56.85, sell: 57.70 },
         EUR: { buy: 61.20, sell: 62.10 },
         GBP: { buy: 71.40, sell: 72.55 }
       };
+
       const rateGrid = document.getElementById('rateGrid');
+
       function renderRates() {
         let html = '';
         for (const [code, rates] of Object.entries(rateData)) {
@@ -863,21 +662,26 @@
       }
       renderRates();
 
-      // ----- CALCULATOR -----
+      // ---------- CALCULATOR ----------
       const amountInput = document.getElementById('amountInput');
       const currencySelect = document.getElementById('currencySelect');
       const calcResult = document.getElementById('calcResult');
       const calcBtn = document.getElementById('calcBtn');
       const resetBtn = document.getElementById('resetCalcBtn');
+
       function calculate() {
         const amount = parseFloat(amountInput.value);
-        if (isNaN(amount) || amount < 0) { calcResult.textContent = 'Enter valid amount'; return; }
+        if (isNaN(amount) || amount < 0) {
+          calcResult.textContent = 'Enter valid amount';
+          return;
+        }
         const currency = currencySelect.value;
         const rate = rateData[currency];
         if (!rate) { calcResult.textContent = 'Rate unavailable'; return; }
         const foreign = amount / rate.sell;
         calcResult.textContent = `${foreign.toFixed(2)} ${currency}`;
       }
+
       calcBtn.addEventListener('click', calculate);
       resetBtn.addEventListener('click', function() {
         amountInput.value = '10000';
@@ -888,39 +692,7 @@
       currencySelect.addEventListener('change', calculate);
       setTimeout(calculate, 100);
 
-      // ----- CHART (Forex vibe) -----
-      const ctx = document.getElementById('forexChart').getContext('2d');
-      const labels = ['10:00', '10:05', '10:10', '10:15', '10:20', '10:25', '10:30'];
-      const dataPoints = [57.2, 57.5, 57.1, 57.8, 58.0, 57.6, 57.9];
-      new Chart(ctx, {
-        type: 'line',
-        data: {
-          labels: labels,
-          datasets: [{
-            label: 'USD/ETB',
-            data: dataPoints,
-            borderColor: '#f5b342',
-            backgroundColor: 'rgba(245, 179, 66, 0.08)',
-            borderWidth: 3,
-            pointBackgroundColor: '#f5b342',
-            pointBorderColor: '#fff',
-            pointRadius: 3,
-            tension: 0.2,
-            fill: true,
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: { legend: { display: false } },
-          scales: {
-            y: { grid: { color: 'rgba(255,255,255,0.08)' }, ticks: { color: '#cbd5e1', stepSize: 0.5 } },
-            x: { grid: { display: false }, ticks: { color: '#94a3b8', font: { size: 9 } } }
-          }
-        }
-      });
-
-      // ----- HAMBURGER -----
+      // ---------- HAMBURGER ----------
       const hamburger = document.getElementById('hamburger');
       const navLinks = document.getElementById('navLinks');
       hamburger.addEventListener('click', (e) => {
@@ -934,7 +706,7 @@
         if (!e.target.closest('.navbar')) navLinks.classList.remove('show');
       });
 
-      // ----- RATE SIMULATION -----
+      // ---------- RATE SIMULATION (refresh) ----------
       setInterval(() => {
         for (let key of Object.keys(rateData)) {
           const shift = (Math.random() * 0.3) - 0.15;
@@ -945,7 +717,7 @@
         calculate();
       }, 30000);
 
-      // smooth scroll
+      // smooth anchor scroll
       document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
           const targetId = this.getAttribute('href');
