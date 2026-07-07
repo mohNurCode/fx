@@ -43,6 +43,66 @@
       padding: 0 16px;
     }
 
+    /* ===== SCROLL ANIMATIONS ===== */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .fade-left {
+      opacity: 0;
+      transform: translateX(-40px);
+      transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .fade-left.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .fade-right {
+      opacity: 0;
+      transform: translateX(40px);
+      transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .fade-right.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .scale-up {
+      opacity: 0;
+      transform: scale(0.9);
+      transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .scale-up.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .stagger-children > * {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .stagger-children.visible > *:nth-child(1) { transition-delay: 0.05s; }
+    .stagger-children.visible > *:nth-child(2) { transition-delay: 0.15s; }
+    .stagger-children.visible > *:nth-child(3) { transition-delay: 0.25s; }
+
+    .stagger-children.visible > * {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     /* ===== NAVIGATION ===== */
     .navbar {
       background: #ffffff;
@@ -209,6 +269,7 @@
       border: 1px solid rgba(255, 255, 255, 0.12);
       box-shadow: 0 16px 48px rgba(0, 0, 0, 0.25);
       width: 100%;
+      overflow: hidden;
     }
 
     .hero-right h4 {
@@ -226,9 +287,15 @@
     }
 
     .chart-wrapper {
-      height: 180px;
       width: 100%;
+      height: 180px;
       position: relative;
+      overflow: hidden;
+    }
+
+    .chart-wrapper canvas {
+      width: 100% !important;
+      height: 100% !important;
     }
 
     /* ===== REST OF PAGE ===== */
@@ -476,7 +543,7 @@
     .footer-bottom span { color: #f5b342; }
 
     /* ============================================================ */
-    /* ===== RESPONSIVE BREAKPOINTS - TESTED & WORKING ===== */
+    /* ===== RESPONSIVE BREAKPOINTS ===== */
     /* ============================================================ */
 
     /* TABLETS (768px - 991px) */
@@ -581,6 +648,8 @@
       }
       .chart-wrapper {
         height: 150px;
+        width: 100%;
+        overflow: hidden;
       }
       
       .card {
@@ -670,6 +739,8 @@
       }
       .chart-wrapper {
         height: 130px;
+        width: 100%;
+        overflow: hidden;
       }
       .hero-right h4 {
         font-size: 0.8rem;
@@ -805,6 +876,9 @@
         padding: 8px 20px;
         font-size: 0.8rem;
       }
+      .chart-wrapper {
+        height: 110px;
+      }
       
       .card {
         padding: 12px 10px;
@@ -845,12 +919,12 @@
   <!-- ===== HERO ===== -->
   <section class="hero-section">
     <div class="container hero-grid">
-      <div class="hero-left">
+      <div class="hero-left fade-up">
         <h1>Your Trusted Partner in <span>Foreign Exchange</span></h1>
         <p>Experience seamless currency exchange with competitive rates and professional service.</p>
         <a href="#rates" class="btn-hero"><i class="fas fa-arrow-right"></i> Check Exchange Rates</a>
       </div>
-      <div class="hero-right">
+      <div class="hero-right fade-right">
         <h4><i class="fas fa-chart-line"></i> Forex Vibe · USD/ETB</h4>
         <div class="chart-wrapper">
           <canvas id="forexChart" width="400" height="200"></canvas>
@@ -862,7 +936,7 @@
   <!-- ===== LIVE RATES + CALCULATOR ===== -->
   <div class="container" id="rates">
     <div class="rates-section">
-      <div class="card">
+      <div class="card fade-up">
         <h3><i class="fas fa-chart-line"></i> Live Exchange Rates</h3>
         <div class="rate-grid" id="rateGrid">
           <!-- JS will populate -->
@@ -872,7 +946,7 @@
         </div>
       </div>
 
-      <div class="card" id="calculator">
+      <div class="card fade-up" id="calculator">
         <h3><i class="fas fa-calculator"></i> Forex Calculator</h3>
         <div class="calc-group">
           <label for="amountInput">Amount (ETB)</label>
@@ -899,7 +973,7 @@
   <!-- ===== ABOUT, LAWS, SERVICES, BRANCHES, CONTACT ===== -->
   <div class="container" id="about">
     <div class="about-grid">
-      <div class="about-text">
+      <div class="about-text fade-left">
         <h2>About <span>Mafuya Solution</span></h2>
         <h4 style="margin-top: 4px; color: #1f3a57;">About Us</h4>
         <p style="margin: 10px 0 4px;"><strong>Our Mission</strong><br>At Mafuya Solution, we strive to provide reliable and efficient foreign exchange services to our valued customers. With years of experience, we ensure competitive rates and exceptional service.</p>
@@ -909,7 +983,7 @@
           <li><i class="fas fa-user-tie"></i> Professional expertise</li>
         </ul>
       </div>
-      <div class="reg-badge" id="laws">
+      <div class="reg-badge fade-right" id="laws">
         <h4 style="display: flex; gap: 8px; margin-bottom: 8px;"><i class="fas fa-gavel" style="color: #f5b342;"></i> Forex Laws & Regulations</h4>
         <p>We operate in full compliance with the National Bank of Ethiopia's forex regulations. Stay informed about the latest forex laws and guidelines governing currency exchange in Ethiopia.</p>
         <a href="#" class="nbe-link"><i class="fas fa-external-link-alt"></i> Visit NBE Website</a>
@@ -919,7 +993,7 @@
 
   <div class="container" id="services">
     <h2 style="font-size: 1.8rem; margin-top: 16px;">Our <span style="color: #f5b342;">Services</span></h2>
-    <div class="services">
+    <div class="services stagger-children">
       <div class="service-item"><i class="fas fa-exchange-alt"></i><h4>Currency Exchange</h4><p>Exchange major world currencies at competitive rates</p></div>
       <div class="service-item"><i class="fas fa-plane"></i><h4>Travel Currency</h4><p>Special rates for travelers and businesses</p></div>
       <div class="service-item"><i class="fas fa-building"></i><h4>Corporate FX</h4><p>Tailored solutions for companies</p></div>
@@ -928,7 +1002,7 @@
 
   <div class="container" id="branches">
     <h2 style="font-size: 1.8rem; margin-top: 16px;">Our <span style="color: #f5b342;">Branches</span></h2>
-    <div class="branches">
+    <div class="branches stagger-children">
       <div class="branch-card"><i class="fas fa-map-pin"></i> <strong>Beherawi Branch</strong><br>Bole Road, Addis Ababa<br><i class="fas fa-phone"></i> +251 90 825 1111</div>
       <div class="branch-card"><i class="fas fa-map-pin"></i> <strong>Merkato</strong> <span class="coming">Coming Soon</span><br>Addis Ababa<br><i class="fas fa-phone"></i> +251 90 825 1111</div>
       <div class="branch-card"><i class="fas fa-map-pin"></i> <strong>Piassa</strong> <span class="coming">Coming Soon</span><br>Addis Ababa<br><i class="fas fa-phone"></i> +251 90 825 1111</div>
@@ -936,7 +1010,7 @@
   </div>
 
   <div class="container">
-    <div class="rates-cta">
+    <div class="rates-cta scale-up">
       <div><strong style="font-size: 1.1rem;">Exchange Rates</strong><br>For real-time exchange rates, please visit our forex bureau system:</div>
       <a href="#"><i class="fas fa-arrow-right"></i> Check Live Rates</a>
     </div>
@@ -944,7 +1018,7 @@
 
   <div class="container" id="contact">
     <div class="contact-wrap">
-      <div class="contact-info">
+      <div class="contact-info fade-left">
         <h3 style="font-size: 1.6rem; margin-bottom: 14px;"><i class="fas fa-headset" style="color: #f5b342;"></i> Contact Us</h3>
         <p><i class="fas fa-phone-alt"></i> +251 90 825 1111</p>
         <p><i class="fas fa-envelope"></i> info@mafuyasolution.com</p>
@@ -953,7 +1027,7 @@
           <i class="fab fa-telegram"></i> <i class="fab fa-whatsapp"></i> <i class="fab fa-facebook"></i>
         </div>
       </div>
-      <div class="contact-form">
+      <div class="contact-form fade-right">
         <input type="text" placeholder="Name" value="Your name">
         <input type="email" placeholder="Email" value="Your email">
         <textarea placeholder="Message">Your message</textarea>
@@ -1050,11 +1124,28 @@
       currencySelect.addEventListener('change', calculate);
       setTimeout(calculate, 100);
 
-      // ----- CHART -----
-      const ctx = document.getElementById('forexChart').getContext('2d');
+      // ----- CHART - FIXED FOR RESPONSIVE -----
+      const canvas = document.getElementById('forexChart');
+      const ctx = canvas.getContext('2d');
+      
+      // Set initial size
+      function resizeChart() {
+        const wrapper = canvas.parentElement;
+        const wrapperWidth = wrapper.clientWidth;
+        const wrapperHeight = wrapper.clientHeight || 180;
+        
+        canvas.style.width = '100%';
+        canvas.style.height = '100%';
+        canvas.width = wrapperWidth * 2;
+        canvas.height = wrapperHeight * 2;
+      }
+      
+      resizeChart();
+      
       const labels = ['10:00', '10:05', '10:10', '10:15', '10:20', '10:25', '10:30'];
       const dataPoints = [57.2, 57.5, 57.1, 57.8, 58.0, 57.6, 57.9];
-      new Chart(ctx, {
+      
+      let chart = new Chart(ctx, {
         type: 'line',
         data: {
           labels: labels,
@@ -1088,6 +1179,40 @@
         }
       });
 
+      // Re-resize chart on window resize
+      let resizeTimeout;
+      window.addEventListener('resize', function() {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+          resizeChart();
+          chart.resize();
+        }, 250);
+      });
+
+      // ----- SCROLL ANIMATIONS -----
+      const animateElements = document.querySelectorAll('.fade-up, .fade-left, .fade-right, .scale-up, .stagger-children');
+      
+      const observerOptions = {
+        threshold: 0.15,
+        rootMargin: '0px 0px -50px 0px'
+      };
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            // For stagger children, also add visible to parent
+            if (entry.target.classList.contains('stagger-children')) {
+              entry.target.classList.add('visible');
+            }
+          }
+        });
+      }, observerOptions);
+      
+      animateElements.forEach(el => {
+        observer.observe(el);
+      });
+
       // ----- HAMBURGER -----
       const hamburger = document.getElementById('hamburger');
       const navLinks = document.getElementById('navLinks');
@@ -1102,7 +1227,6 @@
         }
       });
       
-      // Close menu when clicking a link
       navLinks.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', () => {
           navLinks.classList.remove('show');
@@ -1111,7 +1235,6 @@
         });
       });
       
-      // Close menu when clicking outside
       document.addEventListener('click', (e) => {
         if (!e.target.closest('.navbar')) {
           navLinks.classList.remove('show');
