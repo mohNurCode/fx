@@ -125,21 +125,21 @@
     .logo-area {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
       flex-shrink: 0;
     }
 
     .logo-img {
-      width: 48px;
-      height: 48px;
-      border-radius: 8px;
+      width: 55px;
+      height: 55px;
+      border-radius: 10px;
       object-fit: contain;
       background: transparent;
       flex-shrink: 0;
     }
 
     .logo-text {
-      font-size: 1.2rem;
+      font-size: 1.4rem;
       font-weight: 700;
       color: #0b1a2e;
       white-space: nowrap;
@@ -592,15 +592,21 @@
     /* MOBILE (481px - 767px) */
     @media screen and (max-width: 767px) {
       .navbar {
-        padding: 6px 0;
+        padding: 10px 0;
       }
       
+      /* ===== INCREASED LOGO SIZE ON MOBILE ===== */
       .logo-img {
-        width: 42px;
-        height: 42px;
+        width: 60px;
+        height: 60px;
+        border-radius: 12px;
       }
       .logo-text {
-        font-size: 1rem;
+        font-size: 1.5rem;
+        font-weight: 700;
+      }
+      .logo-area {
+        gap: 12px;
       }
       
       .nav-links {
@@ -626,6 +632,7 @@
       }
       .hamburger {
         display: block;
+        font-size: 1.8rem;
       }
       
       .hero-section {
@@ -633,7 +640,7 @@
         min-height: auto;
       }
       .hero-left h1 {
-        font-size: 2rem;
+        font-size: 2.2rem;
       }
       .hero-left p {
         font-size: 1rem;
@@ -713,37 +720,40 @@
         padding: 0 12px;
       }
       
+      /* ===== EVEN LARGER ON SMALL PHONES ===== */
       .logo-img {
-        width: 36px;
-        height: 36px;
+        width: 55px;
+        height: 55px;
+        border-radius: 12px;
       }
       .logo-text {
-        font-size: 0.85rem;
+        font-size: 1.3rem;
+        font-weight: 700;
       }
       .logo-area {
-        gap: 6px;
+        gap: 10px;
       }
       
       .hero-left h1 {
-        font-size: 1.6rem;
+        font-size: 1.8rem;
       }
       .hero-left p {
-        font-size: 0.9rem;
+        font-size: 0.95rem;
       }
       .btn-hero {
-        padding: 10px 24px;
-        font-size: 0.85rem;
+        padding: 12px 28px;
+        font-size: 0.9rem;
       }
       .hero-right {
         padding: 12px;
       }
       .chart-wrapper {
-        height: 130px;
+        height: 140px;
         width: 100%;
         overflow: hidden;
       }
       .hero-right h4 {
-        font-size: 0.8rem;
+        font-size: 0.85rem;
       }
       
       .card {
@@ -754,7 +764,7 @@
         font-size: 1rem;
       }
       .rate-item {
-        font-size: 0.8rem;
+        font-size: 0.85rem;
         padding: 8px 2px;
         flex-direction: column;
         align-items: flex-start;
@@ -777,7 +787,7 @@
       }
       
       .about-text h2 {
-        font-size: 1.4rem;
+        font-size: 1.5rem;
       }
       .reg-badge {
         padding: 16px 16px;
@@ -793,10 +803,10 @@
       }
       
       .service-item {
-        padding: 16px 14px;
+        padding: 18px 16px;
       }
       .service-item i {
-        font-size: 1.8rem;
+        font-size: 2rem;
       }
       .service-item h4 {
         font-size: 1rem;
@@ -830,7 +840,7 @@
         margin: 10px 0;
       }
       .contact-info h3 {
-        font-size: 1.2rem;
+        font-size: 1.3rem;
       }
       .contact-form input, .contact-form textarea {
         padding: 10px 14px;
@@ -856,35 +866,37 @@
     /* EXTRA SMALL (under 360px) */
     @media screen and (max-width: 360px) {
       .logo-img {
-        width: 32px;
-        height: 32px;
+        width: 48px;
+        height: 48px;
+        border-radius: 10px;
       }
       .logo-text {
-        font-size: 0.75rem;
+        font-size: 1.1rem;
+        font-weight: 700;
       }
       .logo-area {
-        gap: 4px;
+        gap: 8px;
       }
       
       .hero-left h1 {
-        font-size: 1.4rem;
+        font-size: 1.5rem;
       }
       .hero-left p {
-        font-size: 0.8rem;
+        font-size: 0.85rem;
       }
       .btn-hero {
-        padding: 8px 20px;
-        font-size: 0.8rem;
+        padding: 10px 24px;
+        font-size: 0.85rem;
       }
       .chart-wrapper {
-        height: 110px;
+        height: 120px;
       }
       
       .card {
         padding: 12px 10px;
       }
       .rate-item {
-        font-size: 0.75rem;
+        font-size: 0.8rem;
       }
       
       .container {
@@ -1201,7 +1213,6 @@
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             entry.target.classList.add('visible');
-            // For stagger children, also add visible to parent
             if (entry.target.classList.contains('stagger-children')) {
               entry.target.classList.add('visible');
             }
